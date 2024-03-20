@@ -1,0 +1,44 @@
+<header class="headerMobile">
+    <div class="headerMobile_left">
+        <img src="/images/hrsri-right-logo.png" alt="">
+    </div>
+    <div class="headerMobile_right" onclick="showMobileNavBar()">
+        <div class="navAction1"></div>
+        <div class="navAction2"></div>
+        <div class="navAction3"></div>
+    </div>
+    
+  </header>
+  <header class="headerDesktop">
+    <div class="headerContentBox">
+        <a class="titleImage" href="http://www.ucmerced.edu/" target="_blank" id="homeLink">
+            <img src="../../../assets/images/logo.png" alt="UC Merced" width="206px" height="58px">
+        </a>
+        <div class="actions">
+            <div class="headerActions"><a href="/" class="active">Home</a>
+            </div>
+            <div class="headerActions"><a href="/start">Before you Begin</a></div>
+            <!-- <div class="headerActions" onclick="myFunction()"><a class="link" href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">
+                Data Portal</a></div> -->
+            <div class="dropdown headerActions" style="cursor: pointer" onclick="myFunction()">
+                <a class="headerActions dropbtn flexDir">
+                    Data Portal <div class="flexDir">
+                        <p class="arrow1"></p>
+                        <p class="arrow2"></p>
+                    </div>
+                </a>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="/app">Chronic Disease</a>
+                    <a href="/app">Infectious Disease</a>
+                    <a href="/app">Climate Change</a>
+                    <a href="/app">Health Care Access</a>
+                </div>
+            </div>
+            <div class="headerActions"><a href="/faq">FAQ</a></div>
+            <div class=" rightImg"><img class="imgLogo" src="../../../assets/images/right-logo.png" alt="UC Merced Health Sciences Reseach Institute"></div>
+  
+  
+        </div>
+  
+    </div>
+  </header>

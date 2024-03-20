@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+html,
+body {
+    height: 100%;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+    display: block;
+}
+body {
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    line-height: 15pt;
+    font-size: 10pt;
+    background-image: url(/images/bg.gif);
+    color: #383838;
+    margin: 0;
+
+}
+
+a {
+    outline: none;
+    color: #4e76a6 !important;
+    text-decoration: underline;
+}/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+    color:#d94d1a;
+    background-color:#d94d1a ;
+  }
