@@ -15,19 +15,19 @@
             <img src="../../../assets/images/logo.png" alt="UC Merced" width="206px" height="58px">
         </a>
         <div class="actions">
-            <div class="headerActions"><a href="/" class="active">Home</a>
+            <div class="headerActions"><a href="/home" class="active">Home</a>
             </div>
             <div class="headerActions"><a href="/start">Before you Begin</a></div>
             <!-- <div class="headerActions" onclick="myFunction()"><a class="link" href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">
                 Data Portal</a></div> -->
-            <div class="dropdown headerActions" style="cursor: pointer" onclick="myFunction()">
+            <div class="dropdown headerActions" style="cursor: pointer" (click)="div1Function()">
                 <a class="headerActions dropbtn flexDir">
                     Data Portal <div class="flexDir">
                         <p class="arrow1"></p>
                         <p class="arrow2"></p>
                     </div>
                 </a>
-                <div id="myDropdown" class="dropdown-content">
+                <div id="myDropdown" class="dropdown-content" *ngIf="div1">
                     <a href="/app">Chronic Disease</a>
                     <a href="/app">Infectious Disease</a>
                     <a href="/app">Climate Change</a>
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="headerActions"><a href="/faq">FAQ</a></div>
-            <div class=" rightImg"><img class="imgLogo" src="../../../assets/images/right-logo.png" alt="UC Merced Health Sciences Reseach Institute"></div>
+            <div class=" rightImg"><img class="imgLogo" src="../../../assets/images/logo2.png" alt="UC Merced Health Sciences Reseach Institute"></div>
   
   
         </div>

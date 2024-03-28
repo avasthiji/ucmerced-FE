@@ -1,0 +1,461 @@
+<article class="bodyLeftMargin" data-close-all-search-dialogs="">
+    <div class="infoBox">
+        <i class="fa fa-futboll-0"></i>
+        <p class="infoTxt">You have arrived at a website that allows you to estimate the cost of chronic diseases in
+            each county or region in California! The project that led to the initial generation of this data was
+            funded by the Chronic Disease Control Branch at the California Department of Public Health using
+            estimates from the Center for Disease Control and Prevention’s (CDC) Chronic Disease Cost Calculator,
+            the California Health Interview Survey (CHIS), and a number of other sources (see the FAQ page). The
+            site was developed by UC Merced with funding from the California Healthcare Foundation.</p>
+    </div>
+    <div class="appContent">
+        <div class=radio-buttons>
+            <mat-radio-group class="example-radio-group" [(ngModel)]="selectedSearch">
+                <mat-radio-button class="example-radio-button" *ngFor="let search of searchOptions"
+                    [value]="search.key">
+                    {{search.value}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="appTitle">Economic Burden of Chronic Disease in Californias</div>
+
+        <hr class="underLine appTitle">
+
+        <div class="ng-scope">
+            <div style="width:70%; margin:0 auto">
+                <div class="searchClass">Search</div>
+                <div class="lableContent">
+                    <div class="mandatoryLabel">* = Mandatory Required Fields</div>
+                    <div class="clearLable" onclick="doReset()">
+                        <img src="../../assets/images/reload.png" width="auto" height="20px"> Clear selection
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="width: 70%;">
+            <div class="form-group centre_div">
+                <div class="col-md-12">
+                    <label class="label-font-primary mb-1">*ETHNICITY</label>
+                        <mat-form-field appearance="fill" (click)="openDialog('ethnicity')">
+                            <input matInput [(ngModel)]="selectedEthnicity" disabled>
+                        </mat-form-field>
+                        <mat-chip-list *ngIf="selectedEthnicity">
+                            <!-- <mat-chip *ngFor="let ethnicity of selectedEthnicity">{{ ethnicity }}</mat-chip> -->
+                          </mat-chip-list>
+                    <!-- <mat-form-field>
+                        <mat-select multiple [(ngModel)]="selectedEthnicity">
+                            <mat-option *ngFor="let region of ethnicityList" [value]="region.id">
+                                {{region.ethnicityName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                </div>
+        
+                <div class="col-md-12">
+                    <label class="label-font-primary mb-1">*regions</label>
+                    <mat-form-field appearance="fill" (click)="openDialog('region')">
+                        <input matInput [(ngModel)]="selectedRegions" disabled>
+                    </mat-form-field>
+                    <mat-chip-list *ngIf="selectedRegions">
+                        <mat-chip>{{ selectedRegions }}</mat-chip>
+                      </mat-chip-list>
+                    <!-- <mat-form-field>
+                        <mat-select multiple (selectionChange)="onRegionSelectionChange($event)"
+                            [(ngModel)]="selectedRegions">
+                            <mat-option *ngFor="let region of regionList" [value]="region.id">
+                                {{region.regionName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                </div>
+                <div class="col-md-12">
+                    <label class="label-font-primary mb-1">*counties</label>
+                    <mat-form-field appearance="fill" (click)="openDialog('counties')">
+                        <input matInput [(ngModel)]="selectedCounties" disabled>
+                    </mat-form-field>
+                    <mat-chip-list *ngIf="selectedCounties">
+                        <mat-chip>{{ selectedCounties }}</mat-chip>
+                      </mat-chip-list>
+                    <!-- <mat-form-field>
+                        <mat-select multiple [(ngModel)]="selectedCounties">
+                            <mat-option *ngFor="let region of countiesList" [value]="region.id">
+                                {{region.countyName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                </div>
+                <div class="col-md-12">
+                    <label class="label-font-primary mb-1">*disease</label>
+                    <mat-form-field appearance="fill" (click)="openDialog('disease')">
+                        <input matInput [(ngModel)]="selectedDiseases" disabled>
+                    </mat-form-field>
+                    <mat-chip-list *ngIf="selectedDiseases">
+                        <mat-chip>{{ selectedDiseases }}</mat-chip>
+                      </mat-chip-list>
+                    <!-- <mat-form-field>
+                        <mat-select multiple [(ngModel)]="selectedDiseases">
+                            <mat-select-trigger>
+                                select diseaseList
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let region of diseaseList" [value]="region.id">
+                                {{region.diseaseName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field> -->
+                </div>
+                <div class="row col-md-12">
+                    <div class="col-md-4 gender-check">
+                        <label class="label-font-primary mb-1 label-ender">*Gender</label>
+                        <mat-checkbox class="gender_check_box gender_1_padding" [(ngModel)]="isMaleChecked">Male</mat-checkbox>
+                        <mat-checkbox class="gender_check_box gender_2_padding" [(ngModel)]="isFemaleChecked">Female</mat-checkbox>
+                    </div>
+                    <div class="row col-md-6 age-fill">
+                        <div class="col-sm-3">
+                            <label class="label-font-two mb-1">Start</label>
+                            <mat-form-field class="age_box" appearance="fill">
+                                <input matInput [(ngModel)]="startAge">
+                            </mat-form-field>
+                            <mat-chip-list *ngIf="startAge">
+                                <mat-chip>{{ startAge }}</mat-chip>
+                              </mat-chip-list>
+                        </div>  
+                        <hr style="width: 112px;margin-top: 55px;margin-left: 34px;">
+                        <div class="col-sm-3">
+                            <label class="label-font-two mb-1">End</label>
+                            <mat-form-field appearance="fill" class="age_box">
+                                <input matInput [(ngModel)]="endAge" max="80">
+                            </mat-form-field>
+                            <mat-chip-list *ngIf="endAge">
+                                <mat-chip>{{ endAge }}</mat-chip>
+                              </mat-chip-list>
+                        </div>  
+                    </div>
+                </div>
+                <button type="submit" (click)="utilityCost()" class="search-btn-one" *ngIf="selectedSearch == 1">Search</button>
+                <h4 class="program-detail-heading">Program Details</h4>
+                <div class="container program" *ngIf="selectedSearch == 2">
+                    <!-- <div class="vl"></div> -->
+                    <form [formGroup]="roiForm">
+                        <div class="main-container">
+                        <div class="container">
+                        <!-- <div class="row mb-5 align-items-start"> -->
+                            <div class="grid ">
+                                <label class="label-font mb-1 text-end">Size of Target group</label>
+                                <input type="text" placeholder="e.g: 1000" class="form-control big-input" formControlName="sizeOfTargetGroup">
+                            </div>
+                            <div class="grid">
+                                <label class="label-font mb-1 text-end">Initial program costs</label>
+                                <input type="text" placeholder="e.g: 1000" class="form-control big-input" formControlName="initialProgramCosts">
+                            </div>
+                            <div class="grid">
+                                <div class="label-font mb-1 text-end">Anticipated effectiveness <br>of program</div>
+                                <input type="text" placeholder="e.g: 20" class="form-control adaptive small-input" formControlName="anticipatedEffectivenessOfProgram">
+                                <!-- <h6 class="help-text">% Reduction</h6> -->
+                            </div>
+                            <div class="grid">
+                                <label class="label-font mb-1 text-end">Ongoing program costs</label>
+                                <input type="text" placeholder="e.g: 1000" class="form-control big-input" formControlName="ongoingProgramCosts">
+                            </div>
+                            <div class="grid">
+                                <label class="label-font mb-1 text-end">Expected timeframes<br> for results</label>
+                                <input type="text" placeholder="e.g: 10" class="form-control adaptive small-input" formControlName="expectedTimeframesForResults">
+                                <!-- <h6 class="help-text">Years</h6> -->
+                            </div>
+                            <div class="grid">
+                                <label class="label-font mb-1 text-end">Discount rate</label>
+                                <input type="text" placeholder="e.g: 20" class="form-control small-input " formControlName="discountRate">
+                                <!-- <h6 class="help-text">%</h6> -->
+                            </div>
+                            <div class="grid">
+                                <label class="label-font mb-1 text-end">Expected timeframes<br> for ROI</label>
+                                <input type="text" placeholder="e.g: 10" class="form-control adaptive small-input" formControlName="expectedTimeframesForROI">
+                                <!-- <h6 class="help-text">Years</h6> -->
+                            </div>
+                        <!-- </div> -->
+                        <div class="grid">
+                            <label class="label-font mb-1 text-end">Program duration</label>
+                            <input type="text" placeholder="e.g: 10" class="form-control small-input" formControlName="programDuration small-input">
+                            <!-- <h6 class="help-text">Years</h6> -->
+                        </div>
+                            
+                            <div class="grid">
+                                <label class="label-font mb-1 text-end">Value of QALY</label>
+                                <input type="text" placeholder="e.g: 50000" class="form-control big-input" formControlName="valueOfQALY">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                        <div class="calculate-button">
+                          <button type="submit" class="btn btn-primary calc-button" (click)="roiCalcuator">Calculate</button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Results -->
+    <div class="result-table">
+    <div *ngIf="tabs.length > 0 && selectedSearch == 2" >
+        <mat-tab-group  (selectedTabChange)="setActiveTab($event)" >
+            <mat-tab *ngFor="let tab of tabs; let index = index " [ngClass]="{'active-tab': tab === activeTab}"
+           [label]="tab" >
+                <div *ngIf="tab !=='Total'">
+                    <div *ngFor="let title of resultsData[tab] | keyvalue">
+                        <h5 class="title-heading">{{title.key}}</h5>
+                        <div *ngFor="let item of getValue(title.value) | keyvalue">
+                            {{item.key}}
+                            <div *ngFor="let innerItem of getValue(item.value) | keyvalue">
+                                <span *ngIf="innerItem.key !== 'ageRange'">{{innerItem.key}}--{{innerItem.value}}</span>
+                                <div *ngIf="innerItem.key == 'ageRange'">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col" *ngFor="let header of getTableHeadings(innerItem)">
+                                                    {{header}}</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let cellValue of getTableRecords(innerItem)">
+                                                <td>{{cellValue.age}}</td>
+                                                <td>{{cellValue.numberOfPeopleWithProgram}}</td>
+                                                <td>{{cellValue.numberOfPeopleWithOutProgram}}</td>
+                                                <td>{{cellValue.investmentPerPerson}}</td>
+
+                                                <td>{{cellValue.difference}}</td>
+                                                <td>{{cellValue.costSavingPerYear}}</td>
+                                                <td>{{cellValue.discountedCostSavingsPerYear}}</td>
+
+                                                <td>{{cellValue.totalCost}}</td>
+                                                <td>{{cellValue.utilityCost}}</td>
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div *ngIf="tab =='Total'">
+                    <div *ngFor="let title of resultsData[tab] | keyvalue">
+                        <h5 class="table-title">{{title.key}}</h5>
+                        <div *ngFor="let innerItem of getValue(title.value) | keyvalue">
+                            <span *ngIf="innerItem.key !== 'ageRange'">{{innerItem.key}}--{{innerItem.value}}</span>
+                            <div *ngIf="innerItem.key == 'ageRange'">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col" *ngFor="let header of getTableHeadings(innerItem)">
+                                                {{header}}</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let cellValue of getTableRecords(innerItem)">
+                                            <td>{{cellValue.age}}</td>
+                                            <td>{{cellValue.numberOfPeopleWithProgram}}</td>
+                                            <td>{{cellValue.numberOfPeopleWithOutProgram}}</td>
+                                            <td>{{cellValue.investmentPerPerson}}</td>
+
+                                            <td>{{cellValue.difference}}</td>
+                                            <td>{{cellValue.costSavingPerYear}}</td>
+                                            <td>{{cellValue.discountedCostSavingsPerYear}}</td>
+
+                                            <td>{{cellValue.totalCost}}</td>
+                                            <td>{{cellValue.utilityCost}}</td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+    <div *ngIf="selectedSearch == 1">
+        <mat-tab-group>
+            <mat-tab *ngFor=" let tab of tabs; let index=index" [label]="tab">
+                <div *ngIf="tab =='Totals'">
+                    <div *ngFor="let title of utilityCostData[tab] | keyvalue">
+
+                        <div *ngIf="title.key == 'totals'">
+                            <div *ngFor="let innerTitle of getTableRecords(title)">
+                                <ul>
+                                    <li>Total Costs = {{innerTitle.costs}}</li>
+                                    <li>Total Cases = {{innerTitle.cases}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div *ngIf="title.key == 'regions'">
+                            <div *ngFor="let innerTitle of getTableRecords(title)">
+                                <div *ngFor="let inValue of innerTitle | keyvalue">
+                                    <h5 class="title-key-heading">{{inValue.key}}</h5>
+                                    <div *ngFor="let inValue of getTableRecords(inValue)">
+                                        <ul>
+                                            <li>Total Costs = {{inValue.costs}}</li>
+                                            <li>Total Cases = {{inValue.cases}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div *ngIf="title.key == 'counties'">
+                            <span class="title-heading">{{title.key}}</span>
+                            <div *ngFor="let innerTitle of getTableRecords(title)">
+                                <div *ngFor="let inValue of innerTitle | keyvalue">
+                                    <h5 class="title-key-heading">{{inValue.key}}</h5>
+                                    <div *ngFor="let inValue of getTableRecords(inValue) | keyvalue">
+                                        <div *ngIf="inValue.key !== 'data'">
+                                            <div *ngFor="let item of getTableRecords(inValue)">
+                                                <ul>
+                                                    <li>Total Costs = {{item.costs}}</li>
+                                                    <li>Total Cases = {{item.cases}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="inValue.key == 'data'">
+                                            <table class="table">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col" class="text-uppercase"
+                                                            *ngFor="let header of getTableHeadings(inValue)">
+                                                            {{header}} </th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let cellValue of getTableRecords(inValue); let i = index"
+                                                    [ngClass]="{'even-row': i % 2 === 0}" class="text-uppercase"
+                                                   >
+                                                        <td>{{cellValue.cases}}</td>
+                                                        <td>{{cellValue.ethnicity}}</td>
+                                                        <td>{{cellValue.groupName}}</td>
+                                                        <td>{{cellValue.sex}}</td>
+
+                                                        <td>{{cellValue.regionName}}</td>
+                                                        <td>{{cellValue.diseaseName}}</td>
+                                                        <td>{{cellValue.countyName}}</td>
+
+                                                        <td>{{cellValue.costs}}</td>
+                                                        <td>{{cellValue.prevalenceRate}}</td>
+                                                        <td>{{cellValue.population}}</td>
+
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="tab =='diseases'">
+                    <mat-tab-group>
+                        <mat-tab *ngFor=" let tab of allDiseasesName; let index=index" [label]="tab">
+                            <div *ngFor="let item of getDiseaseValue(tab) | keyvalue">
+                                <div *ngFor="let item of getTableRecords(item) | keyvalue"></div>
+                                <span *ngIf="item.key == 'name'">
+                                    <h5>{{item.key}}--{{item.value}}</h5>
+                                </span>
+                                <div *ngIf="item.key == 'totals'">
+                                    <div *ngFor="let innerTitle of getTableRecords(item)">
+                                        <ul>
+                                            <li>Total Costs = {{innerTitle.costs}}</li>
+                                            <li>Total Cases = {{innerTitle.cases}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div *ngIf="item.key == 'regions'">
+                                    <div *ngFor="let innerTitle of getTableRecords(item)">
+                                        <div *ngFor="let inValue of innerTitle | keyvalue">
+                                            <h5 class="title-key-heading">{{inValue.key}}</h5>
+                                            <div *ngFor="let inValue of getTableRecords(inValue)">
+                                                <ul>
+                                                    <li>Total Costs = {{inValue.costs}}</li>
+                                                    <li>Total Cases = {{inValue.cases}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+        
+        
+                                    </div>
+                                </div>
+                                <div *ngIf="item.key == 'counties'">
+                                    <div *ngFor="let innerTitle of getTableRecords(item)">
+                                        <div *ngFor="let inValue of innerTitle | keyvalue">
+                                            <h5 class="title-key-heading">{{inValue.key}}</h5>
+                                            <div *ngFor="let inValue of getTableRecords(inValue) | keyvalue">
+                                                <div *ngIf="inValue.key !== 'data'">
+                                                    <div *ngFor="let item of getTableRecords(inValue)">
+                                                        <ul>
+                                                            <li>Total Costs = {{item.costs}}</li>
+                                                            <li>Total Cases = {{item.cases}}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="inValue.key == 'data'">
+                                                    <table class="table">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th scope="col"
+                                                                    *ngFor="let header of getTableHeadings(inValue)">
+                                                                    {{header}}</th>
+        
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let cellValue of getTableRecords(inValue);">
+                                                           
+                                                                <td>{{cellValue.cases}}</td>
+                                                                <td>{{cellValue.ethnicity}}</td>
+                                                                <td>{{cellValue.groupName}}</td>
+                                                                <td>{{cellValue.sex}}</td>
+        
+                                                                <td>{{cellValue.regionName}}</td>
+                                                                <td>{{cellValue.diseaseName}}</td>
+                                                                <td>{{cellValue.countyName}}</td>
+        
+                                                                <td>{{cellValue.costs}}</td>
+                                                                <td>{{cellValue.prevalenceRate}}</td>
+                                                                <td>{{cellValue.population}}</td>
+        
+        
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+        
+                                            </div>
+                                        </div>
+        
+        
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </mat-tab></mat-tab-group>
+    </div>
+</div>
+
+</article>

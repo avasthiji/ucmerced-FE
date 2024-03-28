@@ -29,7 +29,7 @@ justify-content: space-between;
 }
 
 .bg-warning {
-    background-color: #fcf8e3;
+    background-color: #fcf8e3 !important;
 }
 aside {
     top: 10px;
@@ -43,7 +43,7 @@ aside {
     opacity: 1;
     padding: 20px;
     position: inherit !important;
-margin-top: 10px;
+    margin-top: 10px;
 }
 
 .overviewTxt {
@@ -78,8 +78,8 @@ margin-top: 10px;
 }
 
 .cardTitle {
-    font-weight: 800;
-    font-family: 'Open Sans', sans-serif;
+    font-weight: 800 !important;
+    font-family: 'Open Sans', sans-serif !important;
     color: #005487;
     font-size: 12pt;
 }
@@ -108,6 +108,19 @@ border-color: transparent;
 }
 .portalBtn a{
     text-decoration: none;
+    text-transform: uppercase;
+}
+
+.openPortal {
+    text-transform: uppercase;
+    text-align: left;
+    font: normal normal bold 16px / 21px Open Sans;
+    letter-spacing: 0px;
+    color: #002856;
+    text-transform: uppercase;
+    opacity: 1;
+    text-decoration: none !important;
+    font-weight: 700;
 }
 
 .aboutUsTitle {
@@ -163,4 +176,24 @@ margin-bottom: 10px !important;
 }
 .right-side{
     margin-left:20px;
+}
+
+@media only screen and (max-width: 768px){
+    .bodyLeftMargin {
+        margin: 4px;
+        width:31%;
+    }
+
+    .cardContainer{
+        display: block;
+    }
+
+    .leftSide{
+        width: 151%;
+    }
+
+    .right-side{
+        left: 0;
+        top:164%
+    }
 }

@@ -2,21 +2,23 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './app/components/home/home.component';
 import { BeforeYouBeginComponent } from './app/components/before-you-begin/before-you-begin.component';
 import { FaqComponent } from './app/components/faq/faq.component';
-import { ChronicDiseaseComponent } from './app/chronic-disease/chronic-disease.component';
+import { ChronicDiseaseComponent } from './app/components/chronic-disease/chronic-disease.component';
 
 export const appRoutes: Routes = [
-
+    {
+        path: '', component: ChronicDiseaseComponent
+    },
     {
         path: 'home', component: HomeComponent
     },
     {
-        path: 'before-you-begin', component: BeforeYouBeginComponent
+        path: 'start', component: BeforeYouBeginComponent
     },
     {
         path: 'faq', component: FaqComponent
     },
     {
-        path: 'chronic-disease', component: ChronicDiseaseComponent
+        path: 'app', component: ChronicDiseaseComponent
     }
 
 ]

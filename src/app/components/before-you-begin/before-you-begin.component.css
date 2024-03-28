@@ -29,3 +29,15 @@
         font: normal normal normal 18px/25px Open Sans;
         font-size:12pt;
     }   
+
+
+@media only screen and (max-width: 768px){
+    .bodyLeftMargin {
+        margin: 4px;
+        width:50%;
+    }
+    .startTitle{
+        width: min-content;
+        font-size: 54px !important;
+    }
+}

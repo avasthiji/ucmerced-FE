@@ -190,7 +190,7 @@ font-weight: 600 !important;
     color: #DAA900 !important;
 }
 .dropdown-content {
-    display: none;
+    display: block;
     flex-direction: column;
     position: absolute;
     overflow: auto;
@@ -202,7 +202,7 @@ font-weight: 600 !important;
     opacity: 0.8;
     width: 180px;
     padding: 20px 5px;
-    margin-top: 92px;
+    margin-top: 15px;
     right: 0px;
     
 }
@@ -245,6 +245,7 @@ font-weight: 600 !important;
     height: 10px;
     margin-right: 4px !important;
     margin-left: 4px;
+    margin-top: 10px;
     background-color: white !important;
     transform: rotate(-45deg)
 }
@@ -252,6 +253,7 @@ font-weight: 600 !important;
 .arrow2 {
     width: 2px;
     height: 10px;
+    margin-top: 10px;
     background-color: white !important;
     transform: rotate(45deg);
 }
@@ -273,6 +275,11 @@ font-weight: 600 !important;
 .imgLogo{
     width: 100%;
 }
+
+.logoimg {
+    width: 19%;
+    margin-left: -166px;
+}
 .mobileNavBar{
     display: none !important
 }
@@ -288,17 +295,4 @@ font-weight: 600 !important;
     display: flex;
     flex-direction: row;
     display: none !important
-}
-.dropdown-content a {
-    text-align: left;
-    display: inline-block;
-    font: normal normal normal 12px/18px Open Sans !important;
-    letter-spacing: 0px;
-    color: #FFFFFF !important;
-    text-transform: uppercase;
-    opacity: 1;
-    margin:10px;
-    text-decoration: none;
-    font-size: 12px !important;
-    font-family: Open Sans !important;
 }

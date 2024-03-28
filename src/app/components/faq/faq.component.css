@@ -1,0 +1,121 @@
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=Bebas+Neue:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+
+.bodyLeftMargin{
+    margin: 0 auto;
+    width: 80%;
+    padding: 0 !important;
+}
+
+.FAQtitle{
+    text-align: left;
+    font: normal normal 54px/66px Bebas Neue;
+    letter-spacing: 0px;
+    color: #002856;
+    opacity: 1;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+a.faqTitle{
+    text-align: left;
+    font: normal normal normal 18px/25px Open Sans;
+    letter-spacing: 0px;
+    color: black !important;
+    opacity: 1;
+    text-decoration: none !important;
+    font-size:12pt !important;
+}
+section p{
+    text-align: left;
+    font: normal normal normal 18px/25px Open Sans;
+    letter-spacing: 0px;
+    color: black !important;
+    opacity: 1;
+    text-decoration: none !important;
+    font-size:12pt !important;
+}
+section ol{
+    text-align: left;
+    font: normal normal normal 18px/25px Open Sans;
+    letter-spacing: 0px;
+    color: black !important;
+    opacity: 1;
+    text-decoration: none !important;
+    font-size:12pt !important;
+}
+.main-content {
+    width: 100%;
+}
+
+.description-title {
+    padding-left: 10px;
+    line-height: 55px;
+    transition: 0.5s;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    text-align: left;
+    font: normal normal normal 18px/25px Open Sans;
+    letter-spacing: 0px;
+    color: black !important;
+    opacity: 1;
+    text-decoration: none !important;
+    font-size:12pt !important;
+    height: 40px;
+    padding-top: 7px;
+}
+.description-title:hover{
+    background-color: rgb(65, 65, 65);
+    cursor: pointer;
+}
+.expand-collapse{
+    float: right;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 900;
+    margin-top: -3px !important;
+}
+.description {
+font-size: 18px;
+color: black;
+max-height: 0;
+overflow: hidden;
+margin-left: 0px;
+transition: max-height 0.2s ease-out;
+}
+p {
+    margin-top: 4px;
+}
+.question{
+    color: rgb(138, 9, 9);
+}
+@media only screen and (max-width: 768px){
+    section {
+        padding: 20px !important;
+    }
+    .FAQtitle{
+        padding: 10px;
+        font-size: 20px;
+    }
+    .description-title{
+        font-size: 8pt !important;
+    }
+    ::ng-deep .mat-expansion-panel-header   {
+        padding: unset !important;
+        background-color: #efefef !important;
+        padding-bottom: 10px !important;
+    }
+
+    ::ng-deep .mat-expansion-panel-body {
+        padding: 0 0 0 8px !important;
+    }
+    ::ng-deep .mat-expansion-indicator::after{
+        margin-left: -5px !important;
+    }
+
+}
+::ng-deep .mat-expansion-panel-header   {
+    background-color: #efefef !important;
+    padding-bottom: 10px !important;
+}

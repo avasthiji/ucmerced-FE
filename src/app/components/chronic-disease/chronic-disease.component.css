@@ -1,0 +1,350 @@
+.infoBox {
+    margin-top: 10px;
+    background: #FFBF3C40 0% 0% no-repeat padding-box !important;
+    border: 1px solid #FFBF3C !important;
+    opacity: 1 !important;
+    padding: 25px !important;
+    margin-bottom: 20px;
+    margin-left: 130px;
+    width: 75%;
+}
+.centre_div {
+    text-align: center;
+}
+
+.infoTxt {
+    text-align: left;
+    font: normal normal normal 14px/20px Open Sans;
+    letter-spacing: 0px;
+    opacity: 1;
+}
+.searchClass {
+    text-align: left;
+    font: normal normal 42px / 60px Bebas Neue;
+    letter-spacing: 0px;
+    color: #002856;
+    opacity: 1;
+    text-transform: uppercase;
+}
+.appTitle {
+    text-align: left;
+    font: normal normal 32px / 40px Bebas Neue;
+    letter-spacing: 0px;
+    color: #002856;
+    opacity: 1;
+    text-transform: uppercase;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.underLine {
+    border: 1px solid #FFBF3C;
+    opacity: 1;
+}
+.lableContent{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:15px
+}
+
+img{
+    vertical-align: middle;
+}
+
+.mandatoryLabel {
+    text-align: center;
+    font: normal normal bold 18px / 24px Open Sans;
+    letter-spacing: 0px;
+    color: #5B5B5B;
+    text-transform: uppercase;
+    opacity: 1;
+}
+
+.clearLable {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #002856;
+    text-transform: uppercase;
+    opacity: 1;
+}    
+.radio-buttons{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.label-font {
+    font-weight: 600;
+    color: #002856;
+    text-transform: uppercase;
+    /* white-space: nowrap; */
+    margin-top:10px;
+    height: 4px;
+    font-size: small;
+}
+
+::ng-deep .mat-form-field {
+    opacity: 1;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .mat-form-field-flex{
+    box-shadow: inset 0px 3px 6px #00000029;
+    background: #EFEFEF 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+}
+
+::ng-deep .mat-checkbox-frame{
+    border-radius: 5px !important;
+}
+
+::ng-deep .mat-checkbox-inner-container{
+    background-color: #EFEFEF;
+}
+
+
+/* .mat-form-field-appearance-fill .mat-form-field-flex {
+
+} */
+
+::ng-deep .mat-form-field-appearance-fill.mat-form-field-disabled .mat-form-field-flex {
+    background-color: #EFEFEF;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 11px !important;
+}
+
+.gender_check_box {
+    display: block;
+    margin-top: 32px;
+}
+.gender_1_padding{
+    margin-left: -6%;
+}
+
+.gender_2_padding{
+    margin-left: 14px;
+}
+
+.age_box{
+    width: 120px;
+}
+
+.age-fill{
+    margin-left: 120px;
+}
+
+.program-detail-heading {
+    font-size: 26px;
+    font-weight: 500;
+    text-align: left;
+    color: #002856;
+    padding-top: 10px;
+    letter-spacing: 0px;
+    font: normal normal 42px / 60px Bebas Neue;
+}
+
+.program-detail-back {
+    background-color: #EFEFEF;
+    border-radius: 12px;
+    width: 922px;
+}
+
+.label-font-primary {   
+    font-weight: 600;
+    letter-spacing: 0px;
+    color: #002856;
+    text-transform: uppercase;
+    display: flex;
+}
+
+.label-font-two {   
+    font-weight: 600;
+    color: #002856;
+    text-transform: uppercase;
+    display: flex;
+}
+
+.search-btn-one{
+    background: #FFBF3C 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    width: 150px;
+    height: 48px;
+    margin-top: 14px;
+    margin-bottom: 10px;
+    margin-left: 550px;
+    color: #002856;
+    font: normal normal bold 20px / 27px Open Sans;
+    text-transform: uppercase;
+}
+
+.program-form-one{
+    display: inline-block;
+    /* width: 47%; */
+    /* margin-left: 4px; */
+}
+
+.program-form-two{
+    /* margin-left: 39px; */
+    display: inline-block;
+    /* width: 39%; */
+}
+
+.program-form-three{
+    /* margin-left: 56%; */
+    display: inline-block;
+}
+
+.gender-check {
+    display: contents;
+}
+
+.vl {
+    border-left: 1px solid grey;
+    height: 383px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 175%;
+  }
+
+  .adaptive{
+    width: 50%;
+  }
+
+  .adaptive-div{
+    margin-left: 26px;
+  }
+  .adaptive-div-result{
+    margin-left: -9px;
+  }
+
+  .discount-margin{
+    margin-left: 66px;
+  }
+
+  .duration-margin{
+    margin-left: 79px;
+  }
+
+  .proram-costt{
+    margin-left: 21px;
+  }
+
+  .size-margin{
+    margin-left: -6px;
+  }
+
+  .initla-margin{
+    margin-left: 52px;
+  }
+
+  .help-text{
+    white-space: nowrap;
+    margin-top: 8px;
+    font-size: smaller;
+    padding-left: 8px;
+  }
+  .calculate-button{
+    background-color: #005487;
+    display: flex;
+    justify-content: end;
+  }
+
+  .label-ender{
+    margin-left: 13px;
+  }
+  .container{
+  display: grid;
+  padding: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Two columns per line */
+
+}
+  .grid{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  }
+  .big-input{
+    width: 40%;
+  }
+  .small-input{
+    width: 20%;
+  }
+.text-for-program{
+    font-size: small;
+}
+.main-container{
+    padding: 20px;
+}
+.program{
+    background-color: #EFEFEF;
+    border-radius: 12px;
+}
+.calc-button{
+    background: #FFBF3C 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    width: 150px;
+    height: 48px;
+    margin-top: 14px;
+    margin-bottom: 10px;
+    color: #002856;
+    font: normal normal bold 20px / 27px Open Sans;
+    text-transform: uppercase;
+    margin-right: 5px;
+}
+@media (max-width: 576px) {
+    .program {
+        width: max-content; /* or any other display property suitable for mobile view */
+        /* Add any other styles specific to mobile view */
+    }}
+
+.table-title{
+    background-color: #002856 !important;
+    color: white    
+}
+.selected {
+    background-color: blue; 
+    color: white;
+  }
+.title-heading{
+    color: #002856;
+    font: normal normal 42px / 60px Bebas Neue;
+}
+.title-key-heading{
+    color: #002856;
+    font: normal normal 30px / 50px Bebas Neue;
+}
+::ng-deep .mat-tab-label{
+    text-transform: uppercase;
+    background-color: grey;
+    border-radius: 10px 10px 0px 0px ;
+
+}
+::ng-deep .mat-tab-label-active {
+    background-color: #002856 ;
+    color: white ;
+    border-radius: 10px 10px 0px 0px;
+    opacity: 1;
+  }
+
+.result-table{
+    margin: 0 16%;
+}
+.even-row {
+    background-color: #EFEFEF; /* Grey background color for even rows */
+  }
+  tr:nth-child(even) {
+    background-color: red/* Grey background color for even rows */
+  }
+  .table tbody tr:nth-of-type(even) td {
+    background-color: #EFEFEF;
+  }
