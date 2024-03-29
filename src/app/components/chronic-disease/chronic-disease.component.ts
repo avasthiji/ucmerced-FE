@@ -23,10 +23,10 @@ export class ChronicDiseaseComponent implements OnInit {
     selectedSearch = 1
     isMaleChecked: boolean = false
     isFemaleChecked: boolean = false
-    selectedRegions: number[] = [];
+    selectedRegions: any[] = [];
     selectedEthnicity: any= []
-    selectedDiseases: number[] = []
-    selectedCounties: number[] = []
+    selectedDiseases:any[] = []
+    selectedCounties: any[] = []
     endAge = 0
     startAge = 0
     diseaseList: any = [
@@ -7432,10 +7432,19 @@ export class ChronicDiseaseComponent implements OnInit {
           }
         });
         dialogRef.afterClosed().subscribe((selectedItems: any) => {
-           console.log(selectedItems)
-                // Assuming selectedItems contains strings representing selected items
-                this.selectedEthnicity = selectedItems.map((item: { name: any; }) => item.name);
-                console.log(this.selectedEthnicity.name)
+           if(  messagetype = 'ETHNICITY'){
+            this.selectedEthnicity = selectedItems;
+           }
+           else if(messagetype = 'REGIONS'){
+            
+            this.selectedRegions = selectedItems
+        }else if( messagetype = 'COUNTIES'){
+           
+            dataListtype = this.countiesList2
+        }else if(messagetype = 'DISEASES'){
+            
+            this.selectedDiseases = selectedItems
+        }
               
         });
     }

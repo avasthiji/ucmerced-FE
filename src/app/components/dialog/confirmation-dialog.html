@@ -11,7 +11,7 @@
 </mat-dialog-content>
 <div class="row max-row" >
             <div class="col-6" *ngFor="let data of dataList">
-                <mat-checkbox class="font-style-check">{{data.name}}</mat-checkbox>
+                <mat-checkbox class="font-style-check" (click)="selectData(data)">{{data.name}}</mat-checkbox>
             <!-- <mat-radio-group class="example-radio-group"> -->
                 <!-- <mat-radio-button class="example-radio-button" *ngFor="let data of dataList" -->
                     <!-- [value]="data"> -->
