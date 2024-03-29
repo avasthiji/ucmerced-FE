@@ -7432,19 +7432,20 @@ export class ChronicDiseaseComponent implements OnInit {
           }
         });
         dialogRef.afterClosed().subscribe((selectedItems: any) => {
-           if(  messagetype = 'ETHNICITY'){
-            this.selectedEthnicity = selectedItems;
-           }
-           else if(messagetype = 'REGIONS'){
-            
-            this.selectedRegions = selectedItems
-        }else if( messagetype = 'COUNTIES'){
-           
-            dataListtype = this.countiesList2
-        }else if(messagetype = 'DISEASES'){
-            
-            this.selectedDiseases = selectedItems
-        }
+            console.log(messagetype)
+            if (messagetype = 'ETHNICITY') {
+                this.selectedEthnicity = selectedItems;
+            }
+            else if (messagetype = 'REGIONS') {
+
+                this.selectedRegions = selectedItems
+            } else if (messagetype = 'COUNTIES') {
+
+                dataListtype = this.countiesList2
+            } else if (messagetype = 'DISEASES') {
+
+                this.selectedDiseases = selectedItems
+            }
               
         });
     }
@@ -7468,7 +7469,11 @@ export class ChronicDiseaseComponent implements OnInit {
         //     //this.createUtilityData(res)
         //     this.createUtilityData(this.dummyData)
         // })
-        this.createUtilityData(this.dummyData)
+        console.log(this.selectedRegions)
+        console.log(this.selectedCounties)
+        console.log(this.selectedEthnicity)
+        console.log(this.selectedDiseases)
+        //this.createUtilityData(this.dummyData)
     }
     createUtilityData(data: {
         diseases: [],
