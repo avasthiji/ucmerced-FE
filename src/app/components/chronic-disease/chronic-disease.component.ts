@@ -7408,9 +7408,14 @@ export class ChronicDiseaseComponent implements OnInit {
         console.log(tab)
         this.activeTab = tab;
       }
+      removeEthnicity(ethnicityToRemove: any): void {
+        console.log(ethnicityToRemove)
+        this.selectedEthnicity = this.selectedEthnicity.filter((selectedEthnicity: any) => selectedEthnicity !== ethnicityToRemove);
+      }
      openDialog(data:any) {
        
         var messagetype = ''
+        var selectedItems;
         var dataListtype = this.ethnicityList2
         if(data == 'ethnicity'){
             messagetype = 'ETHNICITY'
@@ -7424,6 +7429,7 @@ export class ChronicDiseaseComponent implements OnInit {
         }else if(data == 'disease'){
             messagetype = 'DISEASES'
             dataListtype = this.diseaseList2
+            
         }
         const dialogRef = this.dialog.open(ConfirmationDialog,{
           data:{
@@ -7433,23 +7439,34 @@ export class ChronicDiseaseComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe((selectedItems: any) => {
             console.log(messagetype)
-            if (messagetype = 'ETHNICITY') {
+            if (messagetype == 'ETHNICITY') {
                 this.selectedEthnicity = selectedItems;
             }
-            else if (messagetype = 'REGIONS') {
+            else if (messagetype == 'REGIONS') {
 
                 this.selectedRegions = selectedItems
-            } else if (messagetype = 'COUNTIES') {
+            } else if (messagetype == 'COUNTIES') {
 
-                dataListtype = this.countiesList2
-            } else if (messagetype = 'DISEASES') {
-
+                // dataListtype = this.countiesList2
+                this.selectedCounties = selectedItems
+            } else if (messagetype == 'DISEASES') {
+                console.log(selectedItems)
                 this.selectedDiseases = selectedItems
+                console.log(this.selectedDiseases)
             }
               
         });
     }
-
+    removeItemFromArray(item: any, array: any[]): void {
+        const index = array.indexOf(item);
+        if (index !== -1) {
+          array.splice(index, 1);
+        }
+      }
+    removeItem(event: Event,item: any, array: any[]): void {
+        event.stopPropagation(); // Prevent propagation of the click event
+        this.removeItemFromArray(item, array);
+      }
     ngOnInit(): void {
     }
 

@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogRef, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {ConfirmationDialog} from './components/dialog/confirmation-dialog.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {ConfirmationDialog} from './components/dialog/confirmation-dialog.compon
     HttpClientModule,
     MatTabsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],

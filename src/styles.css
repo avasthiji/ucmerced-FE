@@ -45,3 +45,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     /* Set the color of the inner circle when checked */
     border-color: blue; /* Change to your desired color */
   }
+  .mat-checkbox-checked .mat-checkbox-background {
+    background-color: blue !important;
+  }

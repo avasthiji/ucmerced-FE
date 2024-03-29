@@ -36,40 +36,36 @@
             <div class="form-group centre_div">
                 <div class="col-md-12">
                     <label class="label-font-primary mb-1">*ETHNICITY</label>
-                        <mat-form-field appearance="fill" (click)="openDialog('ethnicity')">
-                            <input matInput disabled>
-                            <mat-chip-list *ngIf="selectedEthnicity.length > 0">
-                                <mat-chip *ngFor="let ethnicity of selectedEthnicity">{{ ethnicity.name }}</mat-chip>
-                              </mat-chip-list>
-                        </mat-form-field>
+                    <div class="dialog" (click)="openDialog('ethnicity')">
+                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let ethnicity of selectedEthnicity">{{ethnicity.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,ethnicity,selectedEthnicity)" >cancel</mat-icon></span>
+                      </div>
                 </div>
         
                 <div class="col-md-12">
-                    <label class="label-font-primary mb-1">*regions</label>
-                    <mat-form-field appearance="fill" (click)="openDialog('region')">
-                        <input matInput disabled>
-                        <mat-chip-list *ngIf="selectedRegions.length > 0">
-                            <mat-chip *ngFor="let region of selectedRegions">{{ region.name }}</mat-chip>
-                          </mat-chip-list>
-                    </mat-form-field>
+                    <label class="label-font-primary mb-1">*Region</label>
+                    <div class="dialog" (click)="openDialog('region')">
+                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let region of selectedRegions">{{region.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,region,selectedRegions)" >cancel</mat-icon></span>
+                    
+                      </div>
+            
                 </div>
                 <div class="col-md-12">
                     <label class="label-font-primary mb-1">*counties</label>
-                    <mat-form-field appearance="fill" (click)="openDialog('counties')">
-                        <input matInput disabled>
-                        <mat-chip-list *ngIf="selectedCounties.length > 0">
-                            <mat-chip *ngFor="let county of selectedCounties">{{ county.name }}</mat-chip>
-                          </mat-chip-list>
-                    </mat-form-field>
+                    <div class="dialog" (click)="openDialog('counties')">
+                        <mat-chip-listbox aria-label="region selection">
+                          <mat-chip-option *ngFor="let county of selectedCounties" [color]="county.color" [selected]="county.selected" (remove)="removeEthnicity(county)">
+                            {{ county.name }}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                          </mat-chip-option>
+                        </mat-chip-listbox>
+                      </div>
                 </div>
                 <div class="col-md-12">
                     <label class="label-font-primary mb-1">*disease</label>
-                    <mat-form-field appearance="fill" (click)="openDialog('disease')">
-                        <input matInput disabled>
-                        <mat-chip-list *ngIf="selectedDiseases.length > 0">
-                            <mat-chip *ngFor="let disease of selectedDiseases">{{ disease.name }}</mat-chip>
-                          </mat-chip-list>
-                    </mat-form-field>
+                    <div class="dialog" (click)="openDialog('disease')">
+                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let disease of selectedDiseases">{{disease.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,disease,selectedDiseases)" >cancel</mat-icon></span>
+                    
+                      </div>
                 </div>
                 <div class="row col-md-12">
                     <div class="col-md-4 gender-check">
