@@ -45,5 +45,16 @@ export class ConfirmationDialog {
     console.log(this.selectedOptions)
     this.dialogRef.close(this.selectedOptions);
   }
-
+  slectAll(){
+    this.dataList.forEach(ele=>{
+      ele.checked = true
+    })
+    this.selectedOptions = this.dataList.filter((obj: { checked: boolean; })=> obj.checked == true)
+  }
+  clearAll(){
+    this.dataList.forEach(ele=>{
+      ele.checked = false
+    })
+    this.selectedOptions = this.dataList.filter((obj: { checked: boolean; })=> obj.checked == true)
+  }
 }

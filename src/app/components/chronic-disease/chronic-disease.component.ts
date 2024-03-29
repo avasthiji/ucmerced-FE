@@ -7445,6 +7445,7 @@ export class ChronicDiseaseComponent implements OnInit {
             
         }
         const dialogRef = this.dialog.open(ConfirmationDialog,{
+            maxHeight: "90vh",
           data:{
             message: messagetype,
             dataList:dataListtype,
@@ -7459,12 +7460,9 @@ export class ChronicDiseaseComponent implements OnInit {
                 this.selectedRegions = selectedItems
                 this.onRegionSelectionChange(this.selectedRegions)
             } else if (messagetype == 'COUNTIES') {
-
-                this.selectedCounties = this.countiesList2
-            } else if (messagetype == 'DISEASES') {
-
-                // dataListtype = this.countiesList2
                 this.selectedCounties = selectedItems
+            } else if (messagetype == 'DISEASES') {
+                this.selectedDiseases = selectedItems
             } 
             
             // else if (messagetype == 'DISEASES') {
@@ -7478,15 +7476,19 @@ export class ChronicDiseaseComponent implements OnInit {
             console.log(this.selectedDiseases,"ds")
         });
     }
-    removeItemFromArray(item: any, array: any[]): void {
+    removeItemFromArray(item: any, array: any[],arrayName=''): void {
         const index = array.indexOf(item);
         if (index !== -1) {
           array.splice(index, 1);
         }
+        if(arrayName === 'region'){
+            this.onRegionSelectionChange(array)
+        }
+        console.log(array)
       }
-    removeItem(event: Event,item: any, array: any[]): void {
+    removeItem(event: Event,item: any, array: any[],arrayName = ''): void {
         event.stopPropagation(); // Prevent propagation of the click event
-        this.removeItemFromArray(item, array);
+        this.removeItemFromArray(item, array,arrayName);
       }
     ngOnInit(): void {
     }
@@ -7497,7 +7499,7 @@ export class ChronicDiseaseComponent implements OnInit {
         // Handle the selection change event here
       let arrayOfArrays: any[] = []
         selectedRegion.forEach((ele)=>{
-            const selectedCounty =  this.countiesList.filter((obj: { region: { id: any; }; })=> obj.region.id === ele.id)
+            const selectedCounty =  this.countiesList2.filter((obj: { region: { id: any; }; })=> obj.region.id === ele.id)
             arrayOfArrays.push(selectedCounty)
            this.selectedCounties = [].concat(...arrayOfArrays);
         })
@@ -7507,34 +7509,34 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     utilityCost() {
        
-    
-        const region = this.selectedRegions.map((obj)=> obj.id)
-        const county = this.selectedCounties.map((obj)=> obj.id)
-        const ethnicity = this.selectedEthnicity.map((obj: { id: any; })=> obj.id)
-        const disease = this.selectedDiseases.map((obj)=> obj.id)
+        this.createUtilityData(this.dummyData)
+    //     const region = this.selectedRegions.map((obj)=> obj.id)
+    //     const county = this.selectedCounties.map((obj)=> obj.id)
+    //     const ethnicity = this.selectedEthnicity.map((obj: { id: any; })=> obj.id)
+    //     const disease = this.selectedDiseases.map((obj)=> obj.id)
        
-       const sex = []
-        if(this.isFemaleChecked){
-            sex.push('Female')
-       }
-       if(this.isMaleChecked){
-        sex.push('Male')
-       }
-        let data = {
-            "region": region.join(","),
-            "county": county.join(","),
-            "disease": disease.join(","),
-            "ethnicity": ethnicity.join(","),
-            "ageGroup": `${this.startAge}-${this.endAge}`,
-            "sex": sex.join(","),
-        }
-        console.log(data)
-        this.calculatorService.utilityCost(data).subscribe(res=>{
-            console.log(res)
-            this.createUtilityData(res)
-            //this.createUtilityData(this.dummyData)
-        })
-        //this.createUtilityData(this.dummyData)
+    //    const sex = []
+    //     if(this.isFemaleChecked){
+    //         sex.push('Female')
+    //    }
+    //    if(this.isMaleChecked){
+    //     sex.push('Male')
+    //    }
+    //     let data = {
+    //         "region": region.join(","),
+    //         "county": county.join(","),
+    //         "disease": disease.join(","),
+    //         "ethnicity": ethnicity.join(","),
+    //         "ageGroup": `${this.startAge}-${this.endAge}`,
+    //         "sex": sex.join(","),
+    //     }
+    //     console.log(data)
+    //     this.calculatorService.utilityCost(data).subscribe(res=>{
+    //         console.log(res)
+    //         this.createUtilityData(res)
+    //         //this.createUtilityData(this.dummyData)
+    //     })
+        
     }
     createUtilityData(data: any) {
         this.tabs = Object.keys(data);

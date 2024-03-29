@@ -16,7 +16,6 @@
 }
 .max-row{
     max-width: 675px;
-    height: auto;
 }
 ::ng-deep .mat-dialog-container{
     background: #FFFFFF 0% 0% no-repeat padding-box;

@@ -48,7 +48,7 @@
                     <label class="label-font-primary mb-1">*Region</label>
                     <div class="outer-container" (click)="openDialog('region')">
                         <div class="dialog">
-                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let region of selectedRegions">{{region.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,region,selectedRegions)" >cancel</mat-icon></span></div>
+                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let region of selectedRegions">{{region.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,region,selectedRegions,'region')" >cancel</mat-icon></span></div>
                         <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>  
                     
                       </div>
@@ -57,8 +57,8 @@
                 <div class="col-md-12 mb-4">
                     <label class="label-font-primary mb-1">*counties</label>
                     <div class="outer-container" (click)="openDialog('counties')">
-                        <div class="dialog">
-                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let county of selectedCounties">{{county.countyName}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,county,selectedCounties)" >cancel</mat-icon></span></div>
+                        <div class="dialog" style="flex-wrap: wrap;">
+                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let county of selectedCounties">{{county.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,county,selectedCounties)" >cancel</mat-icon></span></div>
                         <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>  
 
                       </div>
