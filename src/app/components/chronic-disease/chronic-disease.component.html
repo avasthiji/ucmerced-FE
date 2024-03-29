@@ -22,7 +22,7 @@
         <hr class="underLine appTitle">
 
         <div class="ng-scope">
-            <div style="width:70%; margin:0 auto">
+            <div>
                 <div class="searchClass">Search</div>
                 <div class="lableContent">
                     <div class="mandatoryLabel">* = Mandatory Required Fields</div>
@@ -32,9 +32,9 @@
                 </div>
             </div>
         </div>
-        <div class="container" style="width: 70%;">
+        <div class="container-chronic">
             <div class="form-group centre_div">
-                <div class="col-md-12">
+                <div class="col-md-12 mb-4">
                     <label class="label-font-primary mb-1">*ETHNICITY</label>
                     <div class="outer-container" (click)="openDialog('ethnicity')">
                         <div class="dialog">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
         
-                <div class="col-md-12">
+                <div class="col-md-12 mb-4">
                     <label class="label-font-primary mb-1">*Region</label>
                     <div class="outer-container" (click)="openDialog('region')">
                         <div class="dialog">
@@ -54,7 +54,7 @@
                       </div>
             
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 mb-4">
                     <label class="label-font-primary mb-1">*counties</label>
                     <div class="outer-container" (click)="openDialog('counties')">
                         <div class="dialog">
@@ -63,7 +63,7 @@
 
                       </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 mb-4">
                     <label class="label-font-primary mb-1">*disease</label>
                     <div class="outer-container" (click)="openDialog('disease')">
                         <div class="dialog">
@@ -71,44 +71,38 @@
                         <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>                     
                       </div>
                 </div>
-                <div class="row col-md-12">
+                <div class="row col-md-12 mb-2">
                     <div class="col-md-4 gender-check">
                         <label class="label-font-primary mb-1 label-ender">*Gender</label>
                         <mat-checkbox class="gender_check_box gender_1_padding" [(ngModel)]="isMaleChecked">Male</mat-checkbox>
                         <mat-checkbox class="gender_check_box gender_2_padding" [(ngModel)]="isFemaleChecked">Female</mat-checkbox>
                     </div>
-                    <div class="row col-md-6 age-fill">
+                    <div class="row mt-4">
                         <div class="col-sm-3">
                             <label class="label-font-two mb-1">*Age Range</label>
                             <div class="small-text">Start</div>
                             <mat-form-field class="age_box" appearance="fill">
                                 <input matInput [(ngModel)]="startAge">
                             </mat-form-field>
-                            <mat-chip-list *ngIf="startAge">
-                                <mat-chip>{{ startAge }}</mat-chip>
-                              </mat-chip-list>
                         </div>  
-                        <hr style="width: 112px;margin-top: 70px;margin-left: 34px;">
+                        <hr class="horizontalRow" style="width: 112px;margin-top: 70px;margin-left: 34px;">
                         <div class="col-sm-3 agebox">
                             <div class="small-text">End</div>
                             <mat-form-field appearance="fill" class="age_box">
                                 <input matInput [(ngModel)]="endAge" max="80">
                             </mat-form-field>
-                            <mat-chip-list *ngIf="endAge">
-                                <mat-chip>{{ endAge }}</mat-chip>
-                              </mat-chip-list>
                         </div>  
                     </div>
                 </div>
                 <button type="submit" (click)="utilityCost()" class="search-btn-one point" *ngIf="selectedSearch == 1">Search</button>
-                <h4 class="program-detail-heading">Program Details</h4>
-                <div class="container program" *ngIf="selectedSearch == 2">
+                <h4 class="program-detail-heading" *ngIf="selectedSearch == 2">Program Details</h4>
+                <div class="container-chronic program" *ngIf="selectedSearch == 2">
                     <!-- <div class="vl"></div> -->
                     <form [formGroup]="roiForm">
                         <div class="main-container">
-                            <div class="container">
+                            <div class="container-chronic">
                         <!-- <div class="row mb-5 align-items-start"> -->
-                                <div class="row">
+                                <div class="row formContainer">
                                     <div class="col-lg-5 col-md-5 col-sm-5">
                                         <div class="row margin-row"> 
                                             <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
@@ -145,7 +139,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2 col-md-2 col-sm-2">
+                                    <div class="col-lg-1 col-md-1 col-sm-1">
                                             <div class="vl"></div>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5">

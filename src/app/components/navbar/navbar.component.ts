@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   showMobileNav: boolean = false;
-
-  constructor() { }
+  constructor(private  router: Router) {}
 
   div1: boolean = false;
 
@@ -28,5 +27,9 @@ export class NavbarComponent implements OnInit {
   }
   hideMobileNavBar() {
     this.showMobileNav = false;
+  }
+
+  checkActiveRoute(data: any) {
+    return this.router.url === data
   }
 }

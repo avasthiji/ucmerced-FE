@@ -7,6 +7,7 @@
     margin: 0 auto;
     width: 80%;
     padding: 0 !important;
+    min-height: 80vh;
 }
 
 .mat-expansion-panel {

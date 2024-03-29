@@ -1,29 +1,28 @@
 <div class="hideMobile" *ngIf="showMobileNav">
     <div class="mobileSideBlur" (click)="hideMobileNavBar()"></div>
     <div class="mobileNavBar">
-        <div class="mobileNavBarLogo" style="width: 206px; height: 58px;">        <a class="titleImage" href="http://www.ucmerced.edu/" target="_blank" id="homeLink">
-            <img src="../../../assets/images/logo.png" alt="UC Merced" width="206px" height="58px">
+        <div class="mobileNavBarLogo" style="width: 80%; height:aut"><a class="titleImage" href="http://www.ucmerced.edu/" target="_blank" id="homeLink">
+            <img src="../../../assets/images/logo.png" alt="UC Merced" width="100%px" height="100%">
         </a></div>
         <div class="actions">
-            <div class="headerActions"><a href="/" th:class="${currentPage == 'index' ? 'active' : ''}">Home</a>
+            <div class="headerActions"><a href="/home" [ngClass]="{'active': checkActiveRoute('/home')}">Home</a>
             </div>
-            <div class="headerActions"><a href="/start" th:class="${currentPage == 'start' ? 'active' : ''}">Before you
+            <div class="headerActions"><a href="/start" [ngClass]="{'active': checkActiveRoute('/start')}">Before you
                     Begin</a></div>
             <!-- <div class="headerActions" onclick="myFunction()"><a class="link" href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">
             Data Portal</a></div> -->
-            <div class="headerActions"><a style="display: flex;align-items: center;">Data Portal <div
+            <div class="headerActions"><a style="display: flex;align-items: center;" >Data Portal <div
                         class="flexDir arrows">
                         <p class="arrow1"></p>
                         <p class="arrow2"></p>
                     </div></a></div>
             <div class="subActions">
-                <a href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">Chronic Disease</a>
+                <a href="/app" [ngClass]="{'active': checkActiveRoute('/app')}">Chronic Disease</a>
                 <a href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">Infectious Disease</a>
                 <a href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">Climate Change</a>
                 <a href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">Health Care Access</a>
             </div>
-            <div class="headerActions"><a class="link" href="/faq"
-                    th:class="${currentPage == 'faq' ? 'active' : ''}">FAQ</a></div>
+            <div class="headerActions"><a class="link" href="/faq" [ngClass]="{'active': checkActiveRoute('/faq')}">FAQ</a></div>
         </div>
     </div>
 </div>
@@ -46,9 +45,9 @@
             <img src="../../../assets/images/logo.png" alt="UC Merced" width="206px" height="58px">
         </a>
         <div class="actions">
-            <div class="headerActions"><a href="/home" class="active">Home</a>
+            <div class="headerActions"><a href="/home" [ngClass]="{'active': checkActiveRoute('/home')}">Home</a>
             </div>
-            <div class="headerActions"><a href="/start">Before you Begin</a></div>
+            <div class="headerActions"><a href="/start" [ngClass]="{'active': checkActiveRoute('/start')}">Before you Begin</a></div>
             <!-- <div class="headerActions" onclick="myFunction()"><a class="link" href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">
                 Data Portal</a></div> -->
             <div class="dropdown headerActions" style="cursor: pointer" (click)="div1Function()">
@@ -65,7 +64,7 @@
                     <a href="/app">Health Care Access</a>
                 </div>
             </div>
-            <div class="headerActions"><a href="/faq">FAQ</a></div>
+            <div class="headerActions"><a href="/faq" [ngClass]="{'active': checkActiveRoute('/faq')}">FAQ</a></div>
             <div class=" rightImg"><img class="imgLogo" src="../../../assets/images/hsri.png"
                     alt="UC Merced Health Sciences Reseach Institute"></div>
 

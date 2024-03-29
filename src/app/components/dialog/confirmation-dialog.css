@@ -16,7 +16,7 @@
 }
 .max-row{
     max-width: 675px;
-    height: 178px;
+    height: auto;
 }
 ::ng-deep .mat-dialog-container{
     background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -66,8 +66,9 @@
     margin-top: -11px;
     text-decoration: underline;
 }
-::ng-deep .mat-dialog-actions {
-    float: right;
+.button-actions {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .font-style-check{

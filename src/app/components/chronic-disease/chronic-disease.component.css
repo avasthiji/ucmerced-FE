@@ -1,6 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic);
 @import url(https://fonts.googleapis.com/css?family=Bebas+Neue:400,700);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+.bodyLeftMargin {
+    width: 80%;
+    margin: 0 auto;
+}
+
 .infoBox {
     margin-top: 10px;
     background: #FFBF3C40 0% 0% no-repeat padding-box !important;
@@ -8,9 +14,75 @@
     opacity: 1 !important;
     padding: 25px !important;
     margin-bottom: 20px;
-    margin-left: 130px;
-    width: 75%;
 }
+
+.mat-radio-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mat-radio-button {
+    margin-right: 10px;
+}
+
+.container-chronic {
+    padding: 0;
+}
+
+.formContainer {
+    justify-content: center;
+}
+
+
+@media screen and (max-width: 1100px) {
+    .bodyLeftMargin {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .container {
+        width: 100% !important;
+    }
+
+    .vl {
+        display: none;
+    }
+
+    .horizontalRow {
+        display: none !important;
+    }
+
+    .small-input {
+        width: 100% !important;
+    }
+
+    .label-font {
+        height: auto !important;
+        vertical-align: text-top !important;
+        display: flex;
+        align-self: flex-start;
+    }
+
+    .mobile-div {
+        height: fit-content !important;
+    }
+
+
+}
+
+
+.appTitle {
+    text-align: left;
+    font: normal normal 32px / 40px Bebas Neue;
+    letter-spacing: 0px;
+    color: #002856;
+    opacity: 1;
+    text-transform: uppercase;
+    margin: 0 auto;
+}
+
+
 .centre_div {
     text-align: center;
 }
@@ -29,16 +101,7 @@
     opacity: 1;
     text-transform: uppercase;
 }
-.appTitle {
-    text-align: left;
-    font: normal normal 32px / 40px Bebas Neue;
-    letter-spacing: 0px;
-    color: #002856;
-    opacity: 1;
-    text-transform: uppercase;
-    width: 70%;
-    margin: 0 auto;
-}
+
 
 .underLine {
     border: 1px solid #FFBF3C;
@@ -181,9 +244,10 @@ img{
     border-radius: 10px;
     width: 150px;
     height: 48px;
-    margin-top: 14px;
-    margin-bottom: 10px;
-    margin-left: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
     color: #002856;
     font: normal normal bold 20px / 27px Open Sans;
     text-transform: uppercase;
@@ -215,7 +279,6 @@ img{
     height: 383px;
     position: absolute;
     left: 50%;
-    margin-left: -3px;
     top: 175%;
   }
 
@@ -258,19 +321,12 @@ img{
   }
   .calculate-button{
     background-color: #005487;
-    display: flex;
-    justify-content: end;
   }
 
   .label-ender{
     margin-left: 13px;
   }
-  .container{
-  display: grid;
-  padding: 12px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Two columns per line */
 
-}
   .grid{
     display: flex;
     justify-content: space-between;
@@ -306,11 +362,6 @@ img{
     text-transform: uppercase;
     margin-right: 5px;
 }
-@media (max-width: 576px) {
-    .program {
-        width: max-content; /* or any other display property suitable for mobile view */
-        /* Add any other styles specific to mobile view */
-    }}
 
 .table-title{
     background-color: #002856 !important;
@@ -386,7 +437,6 @@ img{
     border-left: 1px solid grey;
     height: 383px;
     left: 50%;
-    margin-left: 63px;
     top: 175%;
     position: static;
   }
@@ -395,8 +445,7 @@ img{
     display: flex;
     justify-content: end;
     border-radius: 0px 0px 12px 12px;
-    width: 921px;
-    margin-left: -12px;
+    width: 100%;
     background: #005487 0% 0% no-repeat padding-box;
   }
   .small-input{
@@ -412,53 +461,17 @@ img{
     text-transform: uppercase;
     margin-right: 5px;
     letter-spacing: 0px;
-    width: 18%;
 }
 .margin-row{
     margin-bottom: 35px;
   }
 
-  .text-margin{
-    margin-left: -28px;
-  }
 
-  @media (max-width: 576px) {
-    .mobile-div {
-        text-align: left; /* or any other display property suitable for mobile view */
-    }
-    .text-end{
-        text-align: unset !important;
-    }
-    .text-margin{
-        margin-left: 0px;
-    }
-    .label-font{
-        vertical-align:unset;
-        height: unset;
-    }
-    .form-control{
-        width: min-content;
-    }
 
-    .main-container{
-        width: min-content;
-    }
-    .vl{
-        display: none;
-    }
-    .calc-button{
-        width: unset;
-    }
-    .calculate-button{
-        width: 110%;
-    }
-}
 .label-font {
     font-weight: 600;
     color: #002856;
     text-transform: uppercase;
-    /* white-space: nowrap; */
-    vertical-align: middle;
     height: 4px;
     font-size: small;
 }
