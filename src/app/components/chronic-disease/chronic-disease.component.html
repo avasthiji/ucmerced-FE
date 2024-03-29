@@ -11,7 +11,7 @@
     <div class="appContent">
         <div class=radio-buttons>
             <mat-radio-group class="example-radio-group" [(ngModel)]="selectedSearch">
-                <mat-radio-button class="example-radio-button" *ngFor="let search of searchOptions"
+                <mat-radio-button class="example-radio-button point" *ngFor="let search of searchOptions"
                     [value]="search.key">
                     {{search.value}}
                 </mat-radio-button>
@@ -26,9 +26,9 @@
                 <div class="searchClass">Search</div>
                 <div class="lableContent">
                     <div class="mandatoryLabel">* = Mandatory Required Fields</div>
-                    <div class="clearLable" onclick="doReset()">
+                    <button class="clearLable point" (click)="doReset()">
                         <img src="../../assets/images/reload.png" width="auto" height="20px"> Clear selection
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -36,35 +36,39 @@
             <div class="form-group centre_div">
                 <div class="col-md-12">
                     <label class="label-font-primary mb-1">*ETHNICITY</label>
-                    <div class="dialog" (click)="openDialog('ethnicity')">
-                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let ethnicity of selectedEthnicity">{{ethnicity.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,ethnicity,selectedEthnicity)" >cancel</mat-icon></span>
-                      </div>
+                    <div class="outer-container" (click)="openDialog('ethnicity')">
+                        <div class="dialog">
+                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let ethnicity of selectedEthnicity">{{ethnicity.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,ethnicity,selectedEthnicity)" >delete</mat-icon></span></div>
+                       <div class="right">
+                        <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div></div>
+                    </div>
                 </div>
         
                 <div class="col-md-12">
                     <label class="label-font-primary mb-1">*Region</label>
-                    <div class="dialog" (click)="openDialog('region')">
-                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let region of selectedRegions">{{region.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,region,selectedRegions)" >cancel</mat-icon></span>
+                    <div class="outer-container" (click)="openDialog('region')">
+                        <div class="dialog">
+                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let region of selectedRegions">{{region.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,region,selectedRegions)" >cancel</mat-icon></span></div>
+                        <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>  
                     
                       </div>
             
                 </div>
                 <div class="col-md-12">
                     <label class="label-font-primary mb-1">*counties</label>
-                    <div class="dialog" (click)="openDialog('counties')">
-                        <mat-chip-listbox aria-label="region selection">
-                          <mat-chip-option *ngFor="let county of selectedCounties" [color]="county.color" [selected]="county.selected" (remove)="removeEthnicity(county)">
-                            {{ county.name }}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                          </mat-chip-option>
-                        </mat-chip-listbox>
+                    <div class="outer-container" (click)="openDialog('counties')">
+                        <div class="dialog">
+                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let county of selectedCounties">{{county.countyName}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,county,selectedCounties)" >cancel</mat-icon></span></div>
+                        <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>  
+
                       </div>
                 </div>
                 <div class="col-md-12">
                     <label class="label-font-primary mb-1">*disease</label>
-                    <div class="dialog" (click)="openDialog('disease')">
-                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let disease of selectedDiseases">{{disease.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,disease,selectedDiseases)" >cancel</mat-icon></span>
-                    
+                    <div class="outer-container" (click)="openDialog('disease')">
+                        <div class="dialog">
+                        <span class="badge badge-pill badge-primary " class="chip-content" *ngFor="let disease of selectedDiseases">{{disease.diseaseName}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,disease,selectedDiseases)" >cancel</mat-icon></span></div>
+                        <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>                     
                       </div>
                 </div>
                 <div class="row col-md-12">
@@ -96,7 +100,7 @@
                         </div>  
                     </div>
                 </div>
-                <button type="submit" (click)="utilityCost()" class="search-btn-one" *ngIf="selectedSearch == 1">Search</button>
+                <button type="submit" (click)="utilityCost()" class="search-btn-one point" *ngIf="selectedSearch == 1">Search</button>
                 <h4 class="program-detail-heading">Program Details</h4>
                 <div class="container program" *ngIf="selectedSearch == 2">
                     <!-- <div class="vl"></div> -->
@@ -220,7 +224,7 @@
                     </div>
                     <!-- </div> -->
                         <div class="calculate-button">
-                          <button type="submit" class="btn calc-button" (click)="roiCalcuator">Calculate</button>
+                          <button type="submit" class="btn calc-button point" (click)="roiCalcuator">Calculate</button>
                         </div>
                       </form>
                 </div>
@@ -326,8 +330,8 @@
                         <div *ngIf="title.key == 'totals'">
                             <div *ngFor="let innerTitle of getTableRecords(title)">
                                 <ul>
-                                    <li>Total Costs = {{innerTitle.costs}}</li>
-                                    <li>Total Cases = {{innerTitle.cases}}</li>
+                                    <li class="title-key-heading">Total Costs = {{innerTitle.costs}}</li>
+                                    <li class="title-key-heading">Total Cases = {{innerTitle.cases}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -337,8 +341,8 @@
                                     <h5 class="title-key-heading">{{inValue.key}}</h5>
                                     <div *ngFor="let inValue of getTableRecords(inValue)">
                                         <ul>
-                                            <li>Total Costs = {{inValue.costs}}</li>
-                                            <li>Total Cases = {{inValue.cases}}</li>
+                                            <li class="title-key-heading">Total Costs = {{inValue.costs}}</li >
+                                            <li class="title-key-heading">Total Cases = {{inValue.cases}}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -355,8 +359,8 @@
                                         <div *ngIf="inValue.key !== 'data'">
                                             <div *ngFor="let item of getTableRecords(inValue)">
                                                 <ul>
-                                                    <li>Total Costs = {{item.costs}}</li>
-                                                    <li>Total Cases = {{item.cases}}</li>
+                                                    <li class="title-key-heading" >Total Costs = {{item.costs}}</li>
+                                                    <li class="title-key-heading">Total Cases = {{item.cases}}</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -413,8 +417,8 @@
                                 <div *ngIf="item.key == 'totals'">
                                     <div *ngFor="let innerTitle of getTableRecords(item)">
                                         <ul>
-                                            <li>Total Costs = {{innerTitle.costs}}</li>
-                                            <li>Total Cases = {{innerTitle.cases}}</li>
+                                            <li class="title-key-heading">Total Costs = {{innerTitle.costs}}</li>
+                                            <li class="title-key-heading">Total Cases = {{innerTitle.cases}}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -424,8 +428,8 @@
                                             <h5 class="title-key-heading">{{inValue.key}}</h5>
                                             <div *ngFor="let inValue of getTableRecords(inValue)">
                                                 <ul>
-                                                    <li>Total Costs = {{inValue.costs}}</li>
-                                                    <li>Total Cases = {{inValue.cases}}</li>
+                                                    <li class="title-key-heading">Total Costs = {{inValue.costs}}</li>
+                                                    <li class="title-key-heading">Total Cases = {{inValue.cases}}</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -441,8 +445,8 @@
                                                 <div *ngIf="inValue.key !== 'data'">
                                                     <div *ngFor="let item of getTableRecords(inValue)">
                                                         <ul>
-                                                            <li>Total Costs = {{item.costs}}</li>
-                                                            <li>Total Cases = {{item.cases}}</li>
+                                                            <li class="title-key-heading">Total Costs = {{item.costs}}</li>
+                                                            <li class="title-key-heading">Total Cases = {{item.cases}}</li>
                                                         </ul>
                                                     </div>
                                                 </div>

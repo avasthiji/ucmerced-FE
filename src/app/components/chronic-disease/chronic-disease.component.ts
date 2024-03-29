@@ -7451,7 +7451,7 @@ export class ChronicDiseaseComponent implements OnInit {
           }
         });
         dialogRef.afterClosed().subscribe((selectedItems: any) => {
-            console.log(selectedItems)
+            console.log(selectedItems + '7454')
             if (messagetype == 'ETHNICITY') {
                 this.selectedEthnicity = selectedItems;
             }
@@ -7465,11 +7465,13 @@ export class ChronicDiseaseComponent implements OnInit {
 
                 // dataListtype = this.countiesList2
                 this.selectedCounties = selectedItems
-            } else if (messagetype == 'DISEASES') {
+            } 
+            
+            // else if (messagetype == 'DISEASES') {
                 
-                this.selectedDiseases = selectedItems
-                console.log(this.selectedDiseases)
-            }
+            //     this.selectedDiseases = selectedItems
+            //     console.log(this.selectedDiseases)
+            // }
             console.log(this.selectedRegions,"selectedRegions")
             console.log(this.selectedCounties,"counties")
             console.log(this.selectedEthnicity,"et")
@@ -7609,5 +7611,8 @@ export class ChronicDiseaseComponent implements OnInit {
     getDiseaseValue(diseaseName: string) {
         // console.log(diseaseName)
         return this.utilityCostData.diseases.find((obj: any) => obj.name === diseaseName)
+    }
+    doReset(){
+        window.location.reload();
     }
 }

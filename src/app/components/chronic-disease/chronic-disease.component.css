@@ -69,6 +69,8 @@ img{
     color: #002856;
     text-transform: uppercase;
     opacity: 1;
+    border: none;
+    background-color: transparent;
 }    
 .radio-buttons{
     text-align: center;
@@ -355,11 +357,6 @@ img{
       justify-content: start;
       align-items: end;
       display: flex;
-      width: auto;
-      height: auto;
-      padding: 10px;
-      background-color: #EFEFEF;
-      min-height: 50px;
   }
 
   .chip-content {
@@ -373,6 +370,7 @@ img{
       border-radius: 28px;
       opacity: 1;
       padding: 5px;
+      font: normal normal 600 14px/24px Open Sans;
   }
   .agebox{
     margin-top: 24px;
@@ -463,4 +461,17 @@ img{
     vertical-align: middle;
     height: 4px;
     font-size: small;
+}
+.arrow{
+    align-items: end;
+}
+.outer-container{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    background-color: #EFEFEF;
+    min-height: 50px;
 }
