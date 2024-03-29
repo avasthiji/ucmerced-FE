@@ -6,19 +6,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  showMobileNav: boolean = false;
 
   constructor() { }
 
-  div1:boolean=false;
+  div1: boolean = false;
 
   ngOnInit(): void {
   }
 
-  div1Function(){
-    if(this.div1 == true){
-      this.div1=false;
-    }else{
-      this.div1=true;
+  div1Function() {
+    if (this.div1 == true) {
+      this.div1 = false;
+    } else {
+      this.div1 = true;
     }
-}
+  }
+
+  showMobileNavBar() {
+    this.showMobileNav = true;
+  }
+  hideMobileNavBar() {
+    this.showMobileNav = false;
+  }
 }

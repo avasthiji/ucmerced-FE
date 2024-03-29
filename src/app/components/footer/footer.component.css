@@ -30,6 +30,14 @@
     color: yellow !important;
 }
 
+.left {
+    width: 50%;
+}
+
+.right {
+    width: 50%;
+}
+
 .aboutUsPanelClass {
     padding: 20px;
 }
@@ -44,9 +52,14 @@
     color: white !important;
 }
 
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 footer .right {
     text-align: right;
-    float: right;
     width: 450px;
     padding-right: 17px;
     position: relative;
@@ -81,7 +94,7 @@ footer {
 
 footer .left {
     float: left;
-    padding: 20px 0 0 20px;
+    padding: 20px 0 0 0;
 
 }
 
@@ -326,4 +339,20 @@ font-weight: 600 !important;
 }
 a{
     color: #4e76a6 !important;
+}
+
+
+@media only screen and (max-width: 1100px){
+    .footer {
+        padding: 20px 10px 0 10px;
+    }
+    .left {
+        padding: 0 !important;
+    }
+    .right {
+        padding: 0 !important;
+    }
+    .bodyLeftMargin {
+        width: 100%;
+    }
 }

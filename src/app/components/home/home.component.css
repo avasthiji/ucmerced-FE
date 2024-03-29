@@ -21,16 +21,18 @@
 .leftSide {
     margin-top: 20px;
     width: 66%;
-    
+
 }
-.contentBox{
+
+.contentBox {
     display: flex;
-justify-content: space-between;
+    justify-content: space-between;
 }
 
 .bg-warning {
     background-color: #fcf8e3 !important;
 }
+
 aside {
     top: 10px;
     right: 0px;
@@ -53,7 +55,7 @@ aside {
     color: black !important;
     opacity: 1;
     text-decoration: none !important;
-    font-size:12pt !important;
+    font-size: 12pt !important;
 }
 
 .leftCard {
@@ -85,13 +87,13 @@ aside {
 }
 
 .cardTxt {
-     text-align: left;
+    text-align: left;
     font: normal normal normal 18px/25px Open Sans;
     letter-spacing: 0px;
     color: black !important;
     opacity: 1;
     text-decoration: none !important;
-    font-size:10pt !important;
+    font-size: 10pt !important;
 }
 
 .portalBtn {
@@ -104,9 +106,10 @@ aside {
     right: 10px;
     bottom: 20px;
     font-weight: 700;
-border-color: transparent;
+    border-color: transparent;
 }
-.portalBtn a{
+
+.portalBtn a {
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -138,7 +141,8 @@ border-color: transparent;
     letter-spacing: 0px;
     color: #000000;
 }
-section{
+
+section {
     margin-top: 30px !important;
 }
 
@@ -150,50 +154,70 @@ section div {
     opacity: 1;
     margin-bottom: 10px !important;
 }
-.links{
-margin-top: 10px;
-text-align: center;
-font: normal normal bold 16px/22px Open Sans;
-letter-spacing: 0px;
-color: #002856;
-text-transform: uppercase;
-opacity: 1;
-margin-bottom: 10px !important;
+
+.links {
+    margin-top: 10px;
+    text-align: center;
+    font: normal normal bold 16px/22px Open Sans;
+    letter-spacing: 0px;
+    color: #002856;
+    text-transform: uppercase;
+    opacity: 1;
+    margin-bottom: 10px !important;
 }
-.linksTxt{
+
+.linksTxt {
     text-decoration: none !important;
-margin-top: 10px;
-text-align: center;
-font: normal normal normal 14px/20px Open Sans;
-letter-spacing: 0px;
-color: #002856;
-text-transform: uppercase;
-opacity: 1;
-margin-bottom: 10px !important;
+    margin-top: 10px;
+    text-align: center;
+    font: normal normal normal 14px/20px Open Sans;
+    letter-spacing: 0px;
+    color: #002856;
+    text-transform: uppercase;
+    opacity: 1;
+    margin-bottom: 10px !important;
 }
+
 .rightSideBottom {
     padding: 20px;
 }
-.right-side{
-    margin-left:20px;
+
+.right-side {
+    margin-left: 20px;
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 1100px) {
     .bodyLeftMargin {
         margin: 4px;
-        width:31%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0 10px !important;
     }
 
-    .cardContainer{
-        display: block;
+    .cardContainer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 
-    .leftSide{
+    .leftCard {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .rightCard {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+
+    .leftSide {
         width: 151%;
     }
 
-    .right-side{
-        left: 0;
-        top:164%
+    .right-side {
+       margin-left: 0 !important;
+       width: 100%;
     }
 }

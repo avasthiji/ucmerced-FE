@@ -3,10 +3,14 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 
 
-.bodyLeftMargin{
+.faq{
     margin: 0 auto;
     width: 80%;
     padding: 0 !important;
+}
+
+.mat-expansion-panel {
+    margin-bottom: 5px !important;
 }
 
 .FAQtitle{
@@ -90,12 +94,18 @@ p {
 .question{
     color: rgb(138, 9, 9);
 }
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 1100px){
+    .faq{
+        width: 100%;
+        padding: 0 10px !important;
+    }
+    .faqContainer {
+        padding: 0 !important;
+    }
     section {
         padding: 20px !important;
     }
     .FAQtitle{
-        padding: 10px;
         font-size: 20px;
     }
     .description-title{

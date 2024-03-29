@@ -11,7 +11,7 @@ export class ConfirmationDialog {
   confirmButtonText = "Ok"
   cancelButtonText = "Cancel"
   dataList: any[] = []
-
+ selectedOptions: {}[] = []
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ConfirmationDialog>) {
@@ -24,9 +24,29 @@ export class ConfirmationDialog {
         }
       }
   }
-
+  selectData(data: { id: '', name: '' }) {
+    if (this.selectedOptions.length > 0) {
+      const index = this.selectedOptions.findIndex((obj: any) => obj['id'] === data['id'])
+      if (index > -1) {
+        this.selectedOptions.splice(index, 1)
+      }
+      else {
+        this.selectedOptions.push(data)
+      }
+    }
+    else {
+      this.selectedOptions.push(data)
+    }
+    console.log(this.selectedOptions);
+  }
+  isEqual(obj1: any, obj2: any): boolean {
+    // Implement your own logic to compare objects
+    // For example, you can compare specific properties or use deep comparison
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+  }
   onConfirmClick(): void {
-    this.dialogRef.close(true);
+    console.log(this.selectedOptions)
+    this.dialogRef.close(this.selectedOptions);
   }
 
 }

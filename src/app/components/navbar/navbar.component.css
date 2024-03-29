@@ -5,9 +5,23 @@
 .headerMobile {
     display: none;
 }
-.headerDesktop {
-    display: block;
+
+.actions {
+    display: flex;
+    height: 27px;
+    text-align: center;
+    text-decoration: none;
+    justify-content: right;
+    align-items: center;
+
 }
+
+.headerDesktop {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center !important;
+}
+
 .site {
     color: yellow !important;
 }
@@ -32,12 +46,12 @@ footer .right {
     width: 450px;
     padding-right: 17px;
     position: relative;
-    padding-top:20px;
+    padding-top: 20px;
 }
 
 .headerContentBox {
     margin: 0 auto;
-width: 80% !important;
+    width: 80% !important;
     position: relative;
     padding: 0 !important;
     display: flex;
@@ -106,7 +120,7 @@ footer .pRight {
 }
 
 header {
-   
+
     height: 120px;
     background: var(--unnamed-color-002856) 0% 0% no-repeat padding-box;
     background: #002856 0% 0% no-repeat padding-box;
@@ -144,21 +158,21 @@ height: 1327px;
     text-decoration: none !important;
     color: white !important;
     font: normal normal 16px/22px Open Sans !important;
-letter-spacing: 0px;
-color: #FFFFFF;
-text-transform: uppercase;
-font-family: Open Sans !important;
-font-weight: 600 !important;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-family: Open Sans !important;
+    font-weight: 600 !important;
 }
 
 .headerActions a.active {
     text-decoration: none !important;
     color: #DAA900 !important;
     font: normal normal 16px/22px Open Sans !important;
-letter-spacing: 0px;
-color: #FFFFFF;
-text-transform: uppercase;
-font-weight: 600 !important;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-weight: 600 !important;
 
 }
 
@@ -186,9 +200,11 @@ font-weight: 600 !important;
     position: relative;
     display: inline-block;
 }
-.dropdown.active{
+
+.dropdown.active {
     color: #DAA900 !important;
 }
+
 .dropdown-content {
     display: block;
     flex-direction: column;
@@ -204,9 +220,10 @@ font-weight: 600 !important;
     padding: 20px 5px;
     margin-top: 15px;
     right: 0px;
-    
+
 }
-.showList{
+
+.showList {
     display: flex !important;
     flex-direction: column !important;
 }
@@ -219,14 +236,14 @@ font-weight: 600 !important;
     color: #FFFFFF !important;
     text-transform: uppercase;
     opacity: 1;
-    margin:10px;
+    margin: 10px;
     text-decoration: none;
     font-size: 12px !important;
     font-family: Open Sans !important;
 }
 
 .dropdown a.active {
-    color:white !important;
+    color: white !important;
     font: normal normal normal 12px/18px Open Sans !important;
 }
 
@@ -257,7 +274,8 @@ font-weight: 600 !important;
     background-color: white !important;
     transform: rotate(45deg);
 }
-.flexDir{
+
+.flexDir {
     display: flex !important;
     flex-direction: row !important;
     margin-left: 10px;
@@ -265,14 +283,17 @@ font-weight: 600 !important;
     height: 100%;
     font-size: 16px !important;
 }
-.arrows{
+
+.arrows {
     margin-top: 0px;
 }
-.rightImg{
+
+.rightImg {
     width: 228px;
     height: auto;
 }
-.imgLogo{
+
+.imgLogo {
     width: 100%;
 }
 
@@ -280,19 +301,63 @@ font-weight: 600 !important;
     width: 19%;
     margin-left: -166px;
 }
-.mobileNavBar{
+
+.mobileNavBar {
     display: none !important
 }
-.showMobile{
+
+.showMobile {
     visibility: visible !important;
     /* display: flex;
     flex-direction: row; */
     /* right: 0; */
     height: 100%;
 }
-.hideMobile{
-    visibility: hidden !important;
-    display: flex;
-    flex-direction: row;
-    display: none !important
+
+.hideMobile {
+    position: fixed;
+    right: 0;
+    z-index: 999;
+    width: 40%;
+    height: 100vh;
+    background-color: gray;
+}
+
+.mobileSideBlur {
+    width: 60%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width : 1100px) {
+    .headerDesktop {
+        display: none !important;
+    }
+
+    .headerMobile {
+        display: block;
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center !important;
+        position: relative;
+        padding: 0 10px
+    }
+    .headerMobile_right {
+        width: 40px;
+    }
+    .navAction {
+        width: 100%;
+        height: 2px;
+        background-color: #FFF;
+        border-radius: 6px;
+    }
+    .navAction1 {
+        margin-bottom: 5px;
+    }
+    .navAction2 {
+        margin-bottom: 5px;
+    }
 }
