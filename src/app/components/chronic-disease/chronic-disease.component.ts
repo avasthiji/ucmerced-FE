@@ -6,6 +6,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {ConfirmationDialog} from '../dialog/confirmation-dialog.component';
+import { CalculatorService } from 'src/app/services/calculator.service';
 
 @Component({
     selector: 'app-chronic-disease',
@@ -7391,7 +7392,7 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     allDiseasesName: any = [];
     roiForm: FormGroup;
-    constructor(private fb: FormBuilder,private dialog: MatDialog) {
+    constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
             initialProgramCosts: ['', Validators.required],
@@ -7403,6 +7404,18 @@ export class ChronicDiseaseComponent implements OnInit {
             programDuration: ['', Validators.required],
             valueOfQALY: ['', Validators.required]
           });
+          this.ethnicityList2.forEach((ele: { [x: string]: boolean; })=>{
+            ele['checked'] =  false
+          })
+          this.regionList2.forEach((ele: { [x: string]: boolean; })=>{
+            ele['checked'] =  false
+          })
+          this.countiesList2.forEach((ele: { [x: string]: boolean; })=>{
+            ele['checked'] =  false
+          })
+          this.diseaseList2.forEach((ele: { [x: string]: boolean; })=>{
+            ele['checked'] =  false
+          })
      }
      setActiveTab(tab:any) {
         console.log(tab)
@@ -7438,23 +7451,29 @@ export class ChronicDiseaseComponent implements OnInit {
           }
         });
         dialogRef.afterClosed().subscribe((selectedItems: any) => {
-            console.log(messagetype)
+            console.log(selectedItems)
             if (messagetype == 'ETHNICITY') {
                 this.selectedEthnicity = selectedItems;
             }
             else if (messagetype == 'REGIONS') {
-
                 this.selectedRegions = selectedItems
+                this.onRegionSelectionChange(this.selectedRegions)
             } else if (messagetype == 'COUNTIES') {
+
+                this.selectedCounties = this.countiesList2
+            } else if (messagetype == 'DISEASES') {
 
                 // dataListtype = this.countiesList2
                 this.selectedCounties = selectedItems
             } else if (messagetype == 'DISEASES') {
-                console.log(selectedItems)
+                
                 this.selectedDiseases = selectedItems
                 console.log(this.selectedDiseases)
             }
-              
+            console.log(this.selectedRegions,"selectedRegions")
+            console.log(this.selectedCounties,"counties")
+            console.log(this.selectedEthnicity,"et")
+            console.log(this.selectedDiseases,"ds")
         });
     }
     removeItemFromArray(item: any, array: any[]): void {
@@ -7472,30 +7491,50 @@ export class ChronicDiseaseComponent implements OnInit {
 
     
     // Inside your component class
-    onRegionSelectionChange(event: MatSelectChange) {
+    onRegionSelectionChange(selectedRegion:any[]) {
         // Handle the selection change event here
-        console.log('Selected options:', event.value);
-        const selectedCounty = this.countiesList.filter((county: { region: { id: any; }; }) => event.value.includes(county.region.id));
-        this.selectedCounties = selectedCounty.map((obj: { id: any; }) => obj.id)
+      let arrayOfArrays: any[] = []
+        selectedRegion.forEach((ele)=>{
+            const selectedCounty =  this.countiesList.filter((obj: { region: { id: any; }; })=> obj.region.id === ele.id)
+            arrayOfArrays.push(selectedCounty)
+           this.selectedCounties = [].concat(...arrayOfArrays);
+        })
+        
+       
         // You can access the selected value(s) using event.value
     }
     utilityCost() {
-        // let data = "region=1,2&county=1,7,21,28,38,41,43,48,49&disease=1&ethnicity=2&ageGroup=1-10&sex=Male"
-        // this.calculatorService.utilityCost(data).subscribe(res=>{
-        //     console.log(res)
-        //     //this.createUtilityData(res)
-        //     this.createUtilityData(this.dummyData)
-        // })
-        console.log(this.selectedRegions)
-        console.log(this.selectedCounties)
-        console.log(this.selectedEthnicity)
-        console.log(this.selectedDiseases)
+       
+    
+        const region = this.selectedRegions.map((obj)=> obj.id)
+        const county = this.selectedCounties.map((obj)=> obj.id)
+        const ethnicity = this.selectedEthnicity.map((obj: { id: any; })=> obj.id)
+        const disease = this.selectedDiseases.map((obj)=> obj.id)
+       
+       const sex = []
+        if(this.isFemaleChecked){
+            sex.push('Female')
+       }
+       if(this.isMaleChecked){
+        sex.push('Male')
+       }
+        let data = {
+            "region": region.join(","),
+            "county": county.join(","),
+            "disease": disease.join(","),
+            "ethnicity": ethnicity.join(","),
+            "ageGroup": `${this.startAge}-${this.endAge}`,
+            "sex": sex.join(","),
+        }
+        console.log(data)
+        this.calculatorService.utilityCost(data).subscribe(res=>{
+            console.log(res)
+            this.createUtilityData(res)
+            //this.createUtilityData(this.dummyData)
+        })
         //this.createUtilityData(this.dummyData)
     }
-    createUtilityData(data: {
-        diseases: [],
-        Totals: {}
-    }) {
+    createUtilityData(data: any) {
         this.tabs = Object.keys(data);
         this.utilityCostData = data
         this.allDiseasesName = data['diseases'].map((obj: { name: any; }) => obj.name)

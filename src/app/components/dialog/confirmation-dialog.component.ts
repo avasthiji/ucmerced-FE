@@ -18,13 +18,16 @@ export class ConfirmationDialog {
       if(data){
         this.message = data.message || this.message;
         this.dataList = data.dataList || this.dataList;
+        this.selectedOptions = this.dataList.filter((obj: { checked: boolean; })=> obj.checked == true)
         if (data.buttonText) {
           this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
           this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
         }
       }
   }
-  selectData(data: { id: '', name: '' }) {
+  selectData(event:any,data: { id: '', name: '',checked:boolean }) {
+    console.log(data)
+    data['checked'] = !data['checked']
     if (this.selectedOptions.length > 0) {
       const index = this.selectedOptions.findIndex((obj: any) => obj['id'] === data['id'])
       if (index > -1) {
@@ -37,12 +40,6 @@ export class ConfirmationDialog {
     else {
       this.selectedOptions.push(data)
     }
-    console.log(this.selectedOptions);
-  }
-  isEqual(obj1: any, obj2: any): boolean {
-    // Implement your own logic to compare objects
-    // For example, you can compare specific properties or use deep comparison
-    return JSON.stringify(obj1) === JSON.stringify(obj2);
   }
   onConfirmClick(): void {
     console.log(this.selectedOptions)

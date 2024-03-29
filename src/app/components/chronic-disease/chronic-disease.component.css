@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=Bebas+Neue:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 .infoBox {
     margin-top: 10px;
     background: #FFBF3C40 0% 0% no-repeat padding-box !important;
@@ -371,3 +374,93 @@ img{
       opacity: 1;
       padding: 5px;
   }
+  .agebox{
+    margin-top: 24px;
+}
+.small-text{
+    margin-left: -47px;
+    font: normal normal normal 13px / 24px Open Sans;
+    letter-spacing: 0px;
+    color: #000000;
+    margin-bottom: -7px;
+}
+.vl {
+    border-left: 1px solid grey;
+    height: 383px;
+    left: 50%;
+    margin-left: 63px;
+    top: 175%;
+    position: static;
+  }
+
+  .calculate-button{
+    display: flex;
+    justify-content: end;
+    border-radius: 0px 0px 12px 12px;
+    width: 921px;
+    margin-left: -12px;
+    background: #005487 0% 0% no-repeat padding-box;
+  }
+  .small-input{
+    width: 60%;
+  }
+  .calc-button{
+    background: #FFBF3C 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    margin-top: 14px;
+    margin-bottom: 10px;
+    color: #002856;
+    font: normal normal bold 18px / 27px Open Sans !important;
+    text-transform: uppercase;
+    margin-right: 5px;
+    letter-spacing: 0px;
+    width: 18%;
+}
+.margin-row{
+    margin-bottom: 35px;
+  }
+
+  .text-margin{
+    margin-left: -28px;
+  }
+
+  @media (max-width: 576px) {
+    .mobile-div {
+        text-align: left; /* or any other display property suitable for mobile view */
+    }
+    .text-end{
+        text-align: unset !important;
+    }
+    .text-margin{
+        margin-left: 0px;
+    }
+    .label-font{
+        vertical-align:unset;
+        height: unset;
+    }
+    .form-control{
+        width: min-content;
+    }
+
+    .main-container{
+        width: min-content;
+    }
+    .vl{
+        display: none;
+    }
+    .calc-button{
+        width: unset;
+    }
+    .calculate-button{
+        width: 110%;
+    }
+}
+.label-font {
+    font-weight: 600;
+    color: #002856;
+    text-transform: uppercase;
+    /* white-space: nowrap; */
+    vertical-align: middle;
+    height: 4px;
+    font-size: small;
+}

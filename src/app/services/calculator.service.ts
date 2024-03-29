@@ -11,15 +11,16 @@ export class CalculatorService {
   roiCalcuator(data:{}){
     return this.http.post(`${this.BaseURL}/roiCalculator`,data)
   }
-  utilityCost(data:{}){
-  // Convert data object into query parameters
+  utilityCost(data:any){
   let params = new HttpParams();
-  // Object.keys(data).forEach(key => {
-  //   params = params.append(key, data[key]);
-  // });
-  console.log(params)
-
-  // Make GET request with the data as query parameters
-  return this.http.get(`${this.BaseURL}/utilityCost?region=1,2&county=1,7,21,28,38,41,43,48,49&disease=1&ethnicity=2&ageGroup=1-10&sex=Male`, { params: params });
+  Object.keys(data).forEach(key => {
+    params = params.append(key, data[key]);
+  });
+  //const headers = new HttpHeaders().set('ngrok-skip-browser-warning', '96420');
+  const headers= new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('ngrok-skip-browser-warning', 'true')
+  .set('Access-Control-Allow-Origin', '*');
+  return this.http.get(`${this.BaseURL}/utilityCost1`, { params: params,headers: headers });
   }
 }

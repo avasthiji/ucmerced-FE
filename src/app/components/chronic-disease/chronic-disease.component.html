@@ -75,7 +75,8 @@
                     </div>
                     <div class="row col-md-6 age-fill">
                         <div class="col-sm-3">
-                            <label class="label-font-two mb-1">Start</label>
+                            <label class="label-font-two mb-1">*Age Range</label>
+                            <div class="small-text">Start</div>
                             <mat-form-field class="age_box" appearance="fill">
                                 <input matInput [(ngModel)]="startAge">
                             </mat-form-field>
@@ -83,9 +84,9 @@
                                 <mat-chip>{{ startAge }}</mat-chip>
                               </mat-chip-list>
                         </div>  
-                        <hr style="width: 112px;margin-top: 55px;margin-left: 34px;">
-                        <div class="col-sm-3">
-                            <label class="label-font-two mb-1">End</label>
+                        <hr style="width: 112px;margin-top: 70px;margin-left: 34px;">
+                        <div class="col-sm-3 agebox">
+                            <div class="small-text">End</div>
                             <mat-form-field appearance="fill" class="age_box">
                                 <input matInput [(ngModel)]="endAge" max="80">
                             </mat-form-field>
@@ -101,56 +102,125 @@
                     <!-- <div class="vl"></div> -->
                     <form [formGroup]="roiForm">
                         <div class="main-container">
-                        <div class="container">
+                            <div class="container">
                         <!-- <div class="row mb-5 align-items-start"> -->
-                            <div class="grid ">
-                                <label class="label-font mb-1 text-end">Size of Target group</label>
-                                <input type="text" placeholder="e.g: 1000" class="form-control big-input" formControlName="sizeOfTargetGroup">
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <div class="row margin-row"> 
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                                <label class="label-font mb-1 text-end">Size of Target group</label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <input type="text" placeholder="e.g: 1000" class="form-control" formControlName="sizeOfTargetGroup">
+                                            </div>
+                                        </div>
+                                        <div class="row margin-row"> 
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                                <!-- <div class="label-font mb-1 text-end text-margin">Anticipated effectiveness  of program</div> -->
+                                                <label class="label-font mb-1 text-end text-margin">Anticipated effectiveness  of program</label>
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <input type="text" placeholder="e.g: 20" class="form-control small-input" formControlName="anticipatedEffectivenessOfProgram">
+                                            </div>
+                                        </div>
+                                        <div class="row margin-row"> 
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                                <label class="label-font mb-1 text-end">Expected timeframes for results</label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <input type="text" placeholder="e.g: 10" class="form-control small-input" formControlName="expectedTimeframesForResults">
+                                            </div>
+                                        </div>
+                                        <div class="row margin-row"> 
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                                <label class="label-font mb-1 text-end">Expected timeframes for ROI</label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <input type="text" placeholder="e.g: 10" class="form-control small-input" formControlName="expectedTimeframesForROI">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2">
+                                            <div class="vl"></div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5">
+                                        <div class="row margin-row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                                <label class="label-font mb-1 text-end">Initial program costs</label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <input type="text" placeholder="e.g: 1000" class="form-control" formControlName="initialProgramCosts">
+                                            </div>
+                                        </div>
+                                        <div class="row margin-row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                                <label class="label-font mb-1 text-end">Ongoing program costs</label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <input type="text" placeholder="e.g: 1000" class="form-control" formControlName="ongoingProgramCosts">
+                                            </div>
+                                        </div>
+                                        <div class="row margin-row text-end">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                                <label class="label-font mb-1 text-end ">Discount rate</label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <input type="text" placeholder="e.g: 20" class="form-control small-input" formControlName="discountRate">
+                                            </div>
+                                        </div>
+                                        <div class="row margin-row text-end">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                                <label class="label-font mb-1">Program duration</label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <input type="text" placeholder="e.g: 10" class="form-control small-input" formControlName="programDuration">
+                                            </div>
+                                        </div>
+                                        <div class="row margin-row text-end">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                                <label class="label-font mb-1">Value of QALY</label>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <input type="text" placeholder="e.g: 50000" class="form-control" formControlName="valueOfQALY">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <!-- <div class="grid ">
                             </div>
                             <div class="grid">
-                                <label class="label-font mb-1 text-end">Initial program costs</label>
-                                <input type="text" placeholder="e.g: 1000" class="form-control big-input" formControlName="initialProgramCosts">
                             </div>
+                            <div class="grid"> -->
+                                <!-- <h6 class="help-text">% Re
+                                    duction</h6> -->
+                            <!-- </div>
                             <div class="grid">
-                                <div class="label-font mb-1 text-end">Anticipated effectiveness <br>of program</div>
-                                <input type="text" placeholder="e.g: 20" class="form-control adaptive small-input" formControlName="anticipatedEffectivenessOfProgram">
-                                <!-- <h6 class="help-text">% Reduction</h6> -->
                             </div>
-                            <div class="grid">
-                                <label class="label-font mb-1 text-end">Ongoing program costs</label>
-                                <input type="text" placeholder="e.g: 1000" class="form-control big-input" formControlName="ongoingProgramCosts">
-                            </div>
-                            <div class="grid">
-                                <label class="label-font mb-1 text-end">Expected timeframes<br> for results</label>
-                                <input type="text" placeholder="e.g: 10" class="form-control adaptive small-input" formControlName="expectedTimeframesForResults">
+                            <div class="grid"> -->
+                                
                                 <!-- <h6 class="help-text">Years</h6> -->
-                            </div>
-                            <div class="grid">
-                                <label class="label-font mb-1 text-end">Discount rate</label>
-                                <input type="text" placeholder="e.g: 20" class="form-control small-input " formControlName="discountRate">
+                            <!-- </div>
+                            <div class="grid"> -->
+                                
                                 <!-- <h6 class="help-text">%</h6> -->
-                            </div>
-                            <div class="grid">
-                                <label class="label-font mb-1 text-end">Expected timeframes<br> for ROI</label>
-                                <input type="text" placeholder="e.g: 10" class="form-control adaptive small-input" formControlName="expectedTimeframesForROI">
+                            <!-- </div>
+                            <div class="grid"> -->
+                                
                                 <!-- <h6 class="help-text">Years</h6> -->
-                            </div>
-                        <!-- </div> -->
-                        <div class="grid">
-                            <label class="label-font mb-1 text-end">Program duration</label>
-                            <input type="text" placeholder="e.g: 10" class="form-control small-input" formControlName="programDuration small-input">
-                            <!-- <h6 class="help-text">Years</h6> -->
-                        </div>
+                            <!-- </div>
+                            <div class="grid"> -->
+                                <!-- <h6 class="help-text">Years</h6> -->
+                            <!-- </div>
                             
                             <div class="grid">
-                                <label class="label-font mb-1 text-end">Value of QALY</label>
-                                <input type="text" placeholder="e.g: 50000" class="form-control big-input" formControlName="valueOfQALY">
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!-- </div> -->
                         <div class="calculate-button">
-                          <button type="submit" class="btn btn-primary calc-button" (click)="roiCalcuator">Calculate</button>
+                          <button type="submit" class="btn calc-button" (click)="roiCalcuator">Calculate</button>
                         </div>
                       </form>
                 </div>
