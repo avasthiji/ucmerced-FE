@@ -7410,7 +7410,7 @@ export class ChronicDiseaseComponent implements OnInit {
       }
      openDialog(data:any) {
        
-        var messagetype = 'ETHNICITY'
+        var messagetype = ''
         var dataListtype = this.ethnicityList2
         if(data == 'ethnicity'){
             messagetype = 'ETHNICITY'
