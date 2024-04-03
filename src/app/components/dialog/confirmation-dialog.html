@@ -11,8 +11,15 @@
 </mat-dialog-content>
 <div class="row max-row">
     <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let data of dataList">
-        <mat-checkbox class="font-style-check" [checked]="data.checked"
-            (change)="selectData($event,data)">{{data.name}}</mat-checkbox>
+        <div>
+            <mat-checkbox *ngIf="search == 1" class="font-style-check" [checked]="data.checked"
+                (change)="selectData($event, data)">
+            </mat-checkbox>
+            <mat-radio-button *ngIf="search == 2" [value]="data" [checked]="data.checked" (change)="selectOption(data)">
+            </mat-radio-button>
+        
+            {{ data.name }}
+        </div>
     </div>
 </div>
 <div class="button-actions">

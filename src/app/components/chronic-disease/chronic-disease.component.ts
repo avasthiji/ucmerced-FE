@@ -16,7 +16,7 @@ import { CalculatorService } from 'src/app/services/calculator.service';
 export class ChronicDiseaseComponent implements OnInit {
     
     searchOptions = [
-        { key: 1, value: 'Utility Cost' },
+        { key: 1, value: 'Total Cost' },
         { key: 2, value: 'Roi Calculator' }
     ]
     activeTab: any='';
@@ -28,6 +28,9 @@ export class ChronicDiseaseComponent implements OnInit {
     selectedEthnicity: any= []
     selectedDiseases:any[] = []
     selectedCounties: any[] = []
+    selectedCounty :{name:''} ={
+        name: ''
+    }
     endAge = 0
     startAge = 0
     diseaseList: any = [
@@ -7392,6 +7395,7 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     allDiseasesName: any = [];
     roiForm: FormGroup;
+    showCost: boolean = false;
     constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
@@ -7449,6 +7453,7 @@ export class ChronicDiseaseComponent implements OnInit {
           data:{
             message: messagetype,
             dataList:dataListtype,
+            search:this.selectedSearch
           }
         });
         dialogRef.afterClosed().subscribe((selectedItems: any) => {
@@ -7460,7 +7465,9 @@ export class ChronicDiseaseComponent implements OnInit {
                 this.selectedRegions = selectedItems
                 this.onRegionSelectionChange(this.selectedRegions)
             } else if (messagetype == 'COUNTIES') {
-                this.selectedCounties = selectedItems
+                console.log(selectedItems)
+                this.selectedCounties = selectedItems 
+                // }
             } else if (messagetype == 'DISEASES') {
                 this.selectedDiseases = selectedItems
             } 
@@ -7510,6 +7517,7 @@ export class ChronicDiseaseComponent implements OnInit {
     utilityCost() {
        
         this.createUtilityData(this.dummyData)
+        this.showCost = true;
     //     const region = this.selectedRegions.map((obj)=> obj.id)
     //     const county = this.selectedCounties.map((obj)=> obj.id)
     //     const ethnicity = this.selectedEthnicity.map((obj: { id: any; })=> obj.id)
@@ -7617,4 +7625,68 @@ export class ChronicDiseaseComponent implements OnInit {
     doReset(){
         window.location.reload();
     }
-}
+    resetFields() {
+        this.selectedRegions = [];
+        this.selectedEthnicity= []
+        this.selectedDiseases= []
+        this.selectedCounties = []
+        this.roiForm.reset();
+        this.showCost = false;
+        this.ethnicityList2.forEach((ele: { [x: string]: boolean; })=>{
+            ele['checked'] =  false
+          })
+          this.regionList2.forEach((ele: { [x: string]: boolean; })=>{
+            ele['checked'] =  false
+          })
+          this.countiesList2.forEach((ele: { [x: string]: boolean; })=>{
+            ele['checked'] =  false
+          })
+          this.diseaseList2.forEach((ele: { [x: string]: boolean; })=>{
+            ele['checked'] =  false
+          })
+          this.tabs = []
+      }
+      roiGuidelinesHeading(){
+      return ['Condition(s)','County', 'Cost per case', 'Utility loss per case' , 'Rates', 'Cases', 'Health Care Cost', 'Utility loss', 'Total cost (Healthcare and utility loss)']
+      }
+      getRoiGuidelinesData(){
+       return [
+            {
+                                                       
+                "Conditions": 0,
+                "County": "ASIAN",
+                "Cost_per_case": "$32",
+                "Utility_loss_per_case": "$2",
+                "Rates": "4%",
+                "Cases": "Coronary Heart Disease (CHD)",
+                "Health_Care_Cost": "$333",
+                "Utility_loss": "$21",
+                "Total_cost_Healthcare_and_utility_loss":"$53",
+            },
+            {
+                                                       
+                "Conditions": 0,
+                "County": "Japan",
+                "Cost_per_case": "$32",
+                "Utility_loss_per_case": "$2",
+                "Rates": "4%",
+                "Cases": "Coronary Heart Disease (CHD)",
+                "Health_Care_Cost": "$333",
+                "Utility_loss": "$21",
+                "Total_cost_Healthcare_and_utility_loss":"$53",
+            },
+            {
+                                                       
+                "Conditions": 0,
+                "County": "Australia",
+                "Cost_per_case": "$32",
+                "Utility_loss_per_case": "$2",
+                "Rates": "4%",
+                "Cases": "Coronary Heart Disease (CHD)",
+                "Health_Care_Cost": "$333",
+                "Utility_loss": "$21",
+                "Total_cost_Healthcare_and_utility_loss":"$53",
+            },
+         ]
+        }}
+     

@@ -10,7 +10,7 @@
     </div>
     <div class="appContent">
         <div class=radio-buttons>
-            <mat-radio-group class="example-radio-group" [(ngModel)]="selectedSearch">
+            <mat-radio-group class="example-radio-group" [(ngModel)]="selectedSearch" (ngModelChange)="resetFields()">
                 <mat-radio-button class="example-radio-button point" *ngFor="let search of searchOptions"
                     [value]="search.key">
                     {{search.value}}
@@ -44,7 +44,7 @@
                     </div>
                 </div>
         
-                <div class="col-md-12 mb-4">
+                <div class="col-md-12 mb-4" *ngIf = "selectedSearch == 1">
                     <label class="label-font-primary mb-1">*Region</label>
                     <div class="outer-container" (click)="openDialog('region')">
                         <div class="dialog">
@@ -319,6 +319,40 @@
         <mat-tab-group>
             <mat-tab *ngFor=" let tab of tabs; let index=index" [label]="tab">
                 <div *ngIf="tab =='Totals'">
+                    <table class="table table-bordered mt-3">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th></th><th></th>
+                                <th colspan="3" class="text-center">Per Case</th>
+                                <th colspan="4" class="text-center">For County (s) </th>
+                            </tr>
+                            <tr>                              
+                            </tr>
+                            <tr>
+                                <th scope="col" class="text-center"
+                                    *ngFor="let header of roiGuidelinesHeading()">
+                                    {{header}} 
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cellValue of getRoiGuidelinesData(); let i = index"
+                            [ngClass]="{'even-row': i % 2 === 0}" class="text-uppercase"
+                           >
+                                <td>{{cellValue.Conditions}}</td>
+                                <td>{{cellValue.County}}</td>
+                                <td>{{cellValue.Cost_per_case}}</td>
+                                <td>{{cellValue.Utility_loss_per_case}}</td>
+
+                                <td>{{cellValue.Rates}}</td>
+                                <td>{{cellValue.Cases}}</td>
+                                <td>{{cellValue.Health_Care_Cost}}</td>
+
+                                <td>{{cellValue.Utility_loss}}</td>
+                                <td>{{cellValue.Total_cost_Healthcare_and_utility_loss}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <div *ngFor="let title of utilityCostData[tab] | keyvalue">
 
                         <div *ngIf="title.key == 'totals'">

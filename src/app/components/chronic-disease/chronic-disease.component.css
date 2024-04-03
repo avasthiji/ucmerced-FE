@@ -499,3 +499,13 @@ img{
     background-color: #EFEFEF;
     min-height: 50px;
 }
+.county-content{
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+}
+.table-bordered td,
+.table-bordered th {
+    border: 1px solid #000;
+    vertical-align: top;
+}
