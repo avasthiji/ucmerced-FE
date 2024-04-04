@@ -509,3 +509,26 @@ img{
     border: 1px solid #000;
     vertical-align: top;
 }
+
+.csv-button {
+    border-radius: 10px;
+    width: 195px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E5E5E5;
+    color:#002856;
+    font: normal normal bold 15px / 27px Open Sans;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.table-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.left-margin {
+    margin-left: 10px;
+}

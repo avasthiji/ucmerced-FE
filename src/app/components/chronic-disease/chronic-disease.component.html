@@ -319,7 +319,7 @@
         <mat-tab-group>
             <mat-tab *ngFor=" let tab of tabs; let index=index" [label]="tab">
                 <div *ngIf="tab =='Totals'">
-                    <table class="table table-bordered mt-3">
+                    <table class="table table-bordered mt-3" id="userTable1">
                         <thead class="thead-dark">
                             <tr>
                                 <th></th><th></th>
@@ -330,7 +330,7 @@
                             </tr>
                             <tr>
                                 <th scope="col" class="text-center"
-                                    *ngFor="let header of roiGuidelinesHeading()">
+                                    *ngFor="let header of getRoiGuidelinesHeading()">
                                     {{header}} 
                                 </th>
                             </tr>
@@ -353,6 +353,12 @@
                             </tr>
                         </tbody>
                     </table>
+                    
+                    <div class="table-buttons">
+                    <button type="submit" (click)="downloadCSV('Utility Cost Result')" class="csv-button point" *ngIf="selectedSearch == 1"><mat-icon svgIcon="csv-icon"></mat-icon>Download CSV</button>
+                    <button type="submit" (click)="copyTable()" class="csv-button point left-margin" *ngIf="selectedSearch == 1"><mat-icon svgIcon="copy-icon"></mat-icon>Copy to Clipboard</button>
+                </div>
+
                     <div *ngFor="let title of utilityCostData[tab] | keyvalue">
 
                         <div *ngIf="title.key == 'totals'">

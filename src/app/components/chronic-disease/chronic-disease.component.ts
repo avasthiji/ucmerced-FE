@@ -7393,9 +7393,11 @@ export class ChronicDiseaseComponent implements OnInit {
             }
         ]
     }
+    roiGuidelinesHeading = ['Condition(s)','County', 'Cost per case', 'Utility loss per case' , 'Rates', 'Cases', 'Health Care Cost', 'Utility loss', 'Total cost (Healthcare and utility loss)']
     allDiseasesName: any = [];
     roiForm: FormGroup;
     showCost: boolean = false;
+
     constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
@@ -7421,6 +7423,44 @@ export class ChronicDiseaseComponent implements OnInit {
             ele['checked'] =  false
           })
      }
+     roiGuidelinesData = [
+        {
+                                                   
+            "Conditions": 0,
+            "County": "ASIAN",
+            "Cost_per_case": "$32",
+            "Utility_loss_per_case": "$2",
+            "Rates": "4%",
+            "Cases": "Coronary Heart Disease (CHD)",
+            "Health_Care_Cost": "$333",
+            "Utility_loss": "$21",
+            "Total_cost_Healthcare_and_utility_loss":"$53",
+        },
+        {
+                                                   
+            "Conditions": 0,
+            "County": "Japan",
+            "Cost_per_case": "$32",
+            "Utility_loss_per_case": "$2",
+            "Rates": "4%",
+            "Cases": "Coronary Heart Disease (CHD)",
+            "Health_Care_Cost": "$333",
+            "Utility_loss": "$21",
+            "Total_cost_Healthcare_and_utility_loss":"$53",
+        },
+        {
+                                                   
+            "Conditions": 0,
+            "County": "Australia",
+            "Cost_per_case": "$32",
+            "Utility_loss_per_case": "$2",
+            "Rates": "4%",
+            "Cases": "Coronary Heart Disease (CHD)",
+            "Health_Care_Cost": "$333",
+            "Utility_loss": "$21",
+            "Total_cost_Healthcare_and_utility_loss":"$53",
+        },
+     ]
      setActiveTab(tab:any) {
         console.log(tab)
         this.activeTab = tab;
@@ -7646,47 +7686,82 @@ export class ChronicDiseaseComponent implements OnInit {
           })
           this.tabs = []
       }
-      roiGuidelinesHeading(){
-      return ['Condition(s)','County', 'Cost per case', 'Utility loss per case' , 'Rates', 'Cases', 'Health Care Cost', 'Utility loss', 'Total cost (Healthcare and utility loss)']
-      }
-      getRoiGuidelinesData(){
-       return [
-            {
-                                                       
-                "Conditions": 0,
-                "County": "ASIAN",
-                "Cost_per_case": "$32",
-                "Utility_loss_per_case": "$2",
-                "Rates": "4%",
-                "Cases": "Coronary Heart Disease (CHD)",
-                "Health_Care_Cost": "$333",
-                "Utility_loss": "$21",
-                "Total_cost_Healthcare_and_utility_loss":"$53",
-            },
-            {
-                                                       
-                "Conditions": 0,
-                "County": "Japan",
-                "Cost_per_case": "$32",
-                "Utility_loss_per_case": "$2",
-                "Rates": "4%",
-                "Cases": "Coronary Heart Disease (CHD)",
-                "Health_Care_Cost": "$333",
-                "Utility_loss": "$21",
-                "Total_cost_Healthcare_and_utility_loss":"$53",
-            },
-            {
-                                                       
-                "Conditions": 0,
-                "County": "Australia",
-                "Cost_per_case": "$32",
-                "Utility_loss_per_case": "$2",
-                "Rates": "4%",
-                "Cases": "Coronary Heart Disease (CHD)",
-                "Health_Care_Cost": "$333",
-                "Utility_loss": "$21",
-                "Total_cost_Healthcare_and_utility_loss":"$53",
-            },
-         ]
-        }}
-     
+    getRoiGuidelinesHeading() {
+        return this.roiGuidelinesHeading;
+    }
+    getRoiGuidelinesData() {
+        return this.roiGuidelinesData;
+    }
+
+    copyTable() {
+        const table = document.getElementById('userTable1');
+
+        if (table) {
+            const range = document.createRange();
+            range.selectNode(table);
+
+            const selection = window.getSelection();
+            if (selection) {
+                selection.removeAllRanges();
+                selection.addRange(range);
+
+                try {
+                    // Copy selected content to clipboard
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        console.log('Table content copied to clipboard.');
+                    } else {
+                        console.error('Failed to copy table content to clipboard.');
+                    }
+                } catch (err) {
+                    console.error('Error copying table content to clipboard:', err);
+                } finally {
+                    selection.removeAllRanges();
+                }
+            }
+        } else {
+            console.error('Table element with ID "userTable1" not found.');
+        }
+    }
+
+    downloadCSV(fileName: string) {
+        const table = document.getElementById('userTable1');
+
+        if (table) {
+            const csvContent = this.convertTableToCSV(table);
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+
+            if ((navigator as any).msSaveBlob) { // For IE
+                (navigator as any).msSaveBlob(blob, fileName + '.csv');
+            } else {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', fileName + '.csv');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        } else {
+            console.error('Table element with ID "userTable1" not found.');
+        }
+    }      
+    convertTableToCSV(table: HTMLElement): string {
+        let csvContent = '';
+        const rows = table.querySelectorAll('tr');
+
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td, th');
+            cells.forEach((cell, index) => {
+                const cellText = cell.textContent;
+                if (cellText !== null && cellText !== undefined) {
+                    csvContent += index ? ',' : '';
+                    csvContent += '"' + cellText.trim().replace(/"/g, '""') + '"';
+                }
+            });
+            csvContent += '\n';
+        });
+
+        return csvContent;
+    }
+}
