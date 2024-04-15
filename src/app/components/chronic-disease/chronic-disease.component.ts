@@ -7396,7 +7396,32 @@ export class ChronicDiseaseComponent implements OnInit {
     roiGuidelinesHeading = ['Condition(s)','County', 'Cost per case', 'Utility loss per case' , 'Rates', 'Cases', 'Health Care Cost', 'Utility loss', 'Total cost (Healthcare and utility loss)']
     allDiseasesName: any = [];
     roiForm: FormGroup;
-    showCost: boolean = false;
+    showCost: boolean = true;
+    availableCounties: any = [];
+    totalCostResponse = {
+        "Totals": {
+            "conditions": "Asthma,Cancer",
+            "county": "Madera,Merced",
+            "costPerCase": "5000",
+            "utilityCostPerCase": "3.32",
+            "rates": ".07",
+            "cases": "1332",
+            "healthCareCost": "6659737.22",
+            "utilityLoss": "106.17",
+            "totalCost": "265420260825.09"
+        },
+        "Counties": {
+            "conditions": "Asthma,Cancer",
+            "county": "All Counties of SAN JOAQUIN VALLEY COUNTIES",
+            "costPerCase": "5000",
+            "utilityCostPerCase": "7.77",
+            "rates": ".07",
+            "cases": "12447",
+            "healthCareCost": "62247207.33",
+            "utilityLoss": "995.13",
+            "totalCost": "2488961826521.12"
+        }
+    }
 
     constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService) {
         this.roiForm = this.fb.group({
@@ -7462,7 +7487,6 @@ export class ChronicDiseaseComponent implements OnInit {
         },
      ]
      setActiveTab(tab:any) {
-        console.log(tab)
         this.activeTab = tab;
       }
       removeEthnicity(ethnicityToRemove: any): void {
@@ -7482,7 +7506,7 @@ export class ChronicDiseaseComponent implements OnInit {
             dataListtype = this.regionList2
         }else if(data == 'counties'){
             messagetype = 'COUNTIES'
-            dataListtype = this.countiesList2
+            dataListtype = this.availableCounties
         }else if(data == 'disease'){
             messagetype = 'DISEASES'
             dataListtype = this.diseaseList2
@@ -7511,16 +7535,6 @@ export class ChronicDiseaseComponent implements OnInit {
             } else if (messagetype == 'DISEASES') {
                 this.selectedDiseases = selectedItems
             } 
-            
-            // else if (messagetype == 'DISEASES') {
-                
-            //     this.selectedDiseases = selectedItems
-            //     console.log(this.selectedDiseases)
-            // }
-            console.log(this.selectedRegions,"selectedRegions")
-            console.log(this.selectedCounties,"counties")
-            console.log(this.selectedEthnicity,"et")
-            console.log(this.selectedDiseases,"ds")
         });
     }
     removeItemFromArray(item: any, array: any[],arrayName=''): void {
@@ -7546,44 +7560,43 @@ export class ChronicDiseaseComponent implements OnInit {
         // Handle the selection change event here
       let arrayOfArrays: any[] = []
         selectedRegion.forEach((ele)=>{
-            const selectedCounty =  this.countiesList2.filter((obj: { region: { id: any; }; })=> obj.region.id === ele.id)
+            let selectedCounty =  this.countiesList2.filter((obj: { region: { id: any; }; })=> obj.region.id === ele.id)
+            //selectedCounty = selectedCounty.map((obj: { checked: boolean; }) =>obj.checked == true)
             arrayOfArrays.push(selectedCounty)
-           this.selectedCounties = [].concat(...arrayOfArrays);
+           this.availableCounties = [].concat(...arrayOfArrays);
         })
-        
-       
-        // You can access the selected value(s) using event.value
     }
-    utilityCost() {
+    utilityCost(isCSV = false) {
        
-        this.createUtilityData(this.dummyData)
-        this.showCost = true;
-    //     const region = this.selectedRegions.map((obj)=> obj.id)
-    //     const county = this.selectedCounties.map((obj)=> obj.id)
-    //     const ethnicity = this.selectedEthnicity.map((obj: { id: any; })=> obj.id)
-    //     const disease = this.selectedDiseases.map((obj)=> obj.id)
+        const region = this.selectedRegions.map((obj)=> obj.id)
+        const county = this.selectedCounties.map((obj)=> obj.id)
+        const ethnicity = this.selectedEthnicity.map((obj: { id: any; })=> obj.id)
+        const disease = this.selectedDiseases.map((obj)=> obj.id)
        
-    //    const sex = []
-    //     if(this.isFemaleChecked){
-    //         sex.push('Female')
-    //    }
-    //    if(this.isMaleChecked){
-    //     sex.push('Male')
-    //    }
-    //     let data = {
-    //         "region": region.join(","),
-    //         "county": county.join(","),
-    //         "disease": disease.join(","),
-    //         "ethnicity": ethnicity.join(","),
-    //         "ageGroup": `${this.startAge}-${this.endAge}`,
-    //         "sex": sex.join(","),
-    //     }
-    //     console.log(data)
-    //     this.calculatorService.utilityCost(data).subscribe(res=>{
-    //         console.log(res)
-    //         this.createUtilityData(res)
-    //         //this.createUtilityData(this.dummyData)
-    //     })
+       const sex = []
+        if(this.isFemaleChecked){
+            sex.push('Female')
+       }
+       if(this.isMaleChecked){
+        sex.push('Male')
+       }
+        let data = {
+            "region": region.join(","),
+            "county": county.join(","),
+            "disease": disease.join(","),
+            "ethnicity": ethnicity.join(","),
+            "ageGroup": `${this.startAge}-${this.endAge}`,
+            "sex": sex.join(","),
+        }
+        if(isCSV){
+
+        }else{
+            this.calculatorService.utilityCost(data).subscribe(res=>{
+                this.createUtilityData(res)
+                this.showCost = true
+            })
+        }
+        
         
     }
     createUtilityData(data: any) {
@@ -7592,43 +7605,27 @@ export class ChronicDiseaseComponent implements OnInit {
         this.allDiseasesName = data['diseases'].map((obj: { name: any; }) => obj.name)
     }
     roiCalcuator() {
-        console.log(this.selectedCounties)
         let data = {
-            "countyName": this.selectedCounties.join(","),
-            "regionName": this.selectedRegions.join(","),
-            "diseaseName": this.selectedDiseases.join(","),
-            "sex": "Female,Male",
-            "ethnicity": this.selectedCounties.join(","),
-            "ageLimit": `${this.startAge} - ${this.endAge}`,
-
-
-
-            // "InvestmentPerPerson": initialProgramCosts,
-            // "unDiscounted": true,
-            // "numberOfFollowUpYears": expectedTimeframesForResults,
-            // "ReductionInRateWithProgram": 5.0,
-            // "ReductionInRateAfterYearsWithProgram": expectedTimeframesForROI,
-            // "discountedfactor": discountRate,
-            "percentIncreateInCasePerYear": 10.0,
-            "sizeOfGroup": {
-                "1": 50,
-                "2": 100,
-                "3": 150,
-                "4": 200,
-                "5": 250,
-                "6": 300,
-                "7": 350,
-                "8": 400,
-                "9": 450,
-                "10": 500
-            }
+            "countyName": "1",
+            "initialProgramCost" : 5000,
+            "regionName": "1",
+            "diseaseName": "1",
+            "sex": "Female",
+            "ethnicity": "1",
+            "ageLimit": "11-18",
+            "InvestmentPerPerson": 5000.0,
+            "numberOfFollowUpYears": 10,
+            "ReductionInRateWithProgram": 5.0,
+            "ReductionInRateAfterYearsWithProgram": 5.0,
+            "discountedfactor": 2.0,
+            "sizeOfGroup": 500	
         }
 
-        // this.calculatorService.roiCalcuator(data).subscribe(res => {
-        //     console.log(res)
-        //     this.resultsData = res
-        //     this.createData(this.resultsData)
-        // })
+        this.calculatorService.roiCalcuator(data).subscribe(res => {
+            console.log(res)
+            this.resultsData = res
+            this.createData(this.resultsData)
+        })
     }
     createData(res: {
         Ethnicity: {},
@@ -7646,6 +7643,7 @@ export class ChronicDiseaseComponent implements OnInit {
     tabChanged(event: any): void {
         // You can perform actions based on tab change if needed
         console.log('Tab changed:', event.tab.textLabel);
+        this.showCost = false
     }
    
     getValue(data: any) {
@@ -7725,26 +7723,7 @@ export class ChronicDiseaseComponent implements OnInit {
     }
 
     downloadCSV(fileName: string) {
-        const table = document.getElementById('userTable1');
-
-        if (table) {
-            const csvContent = this.convertTableToCSV(table);
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-
-            if ((navigator as any).msSaveBlob) { // For IE
-                (navigator as any).msSaveBlob(blob, fileName + '.csv');
-            } else {
-                const url = URL.createObjectURL(blob);
-                link.setAttribute('href', url);
-                link.setAttribute('download', fileName + '.csv');
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        } else {
-            console.error('Table element with ID "userTable1" not found.');
-        }
+        this.utilityCost(true)
     }      
     convertTableToCSV(table: HTMLElement): string {
         let csvContent = '';

@@ -38,44 +38,67 @@
                     <label class="label-font-primary mb-1">*ETHNICITY</label>
                     <div class="outer-container" (click)="openDialog('ethnicity')">
                         <div class="dialog">
-                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let ethnicity of selectedEthnicity">{{ethnicity.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,ethnicity,selectedEthnicity)" >delete</mat-icon></span></div>
-                       <div class="right">
-                        <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div></div>
+                            <span class="badge badge-pill badge-primary" class="chip-content"
+                                *ngFor="let ethnicity of selectedEthnicity">{{ethnicity.name}} <mat-icon
+                                    style="cursor: pointer;"
+                                    (click)="removeItem($event,ethnicity,selectedEthnicity)">delete</mat-icon></span>
+                        </div>
+                        <div class="right">
+                            <div class="arrow"><button class="clearLable point"><img
+                                        src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>
+                        </div>
                     </div>
                 </div>
-        
-                <div class="col-md-12 mb-4" *ngIf = "selectedSearch == 1">
+
+                <div class="col-md-12 mb-4" *ngIf="selectedSearch == 1">
                     <label class="label-font-primary mb-1">*Region</label>
                     <div class="outer-container" (click)="openDialog('region')">
                         <div class="dialog">
-                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let region of selectedRegions">{{region.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,region,selectedRegions,'region')" >cancel</mat-icon></span></div>
-                        <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>  
-                    
-                      </div>
-            
+                            <span class="badge badge-pill badge-primary" class="chip-content"
+                                *ngFor="let region of selectedRegions">{{region.name}} <mat-icon
+                                    style="cursor: pointer;"
+                                    (click)="removeItem($event,region,selectedRegions,'region')">cancel</mat-icon></span>
+                        </div>
+                        <div class="arrow"><button class="clearLable point"><img
+                                    src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>
+
+                    </div>
+
                 </div>
                 <div class="col-md-12 mb-4">
                     <label class="label-font-primary mb-1">*counties</label>
                     <div class="outer-container" (click)="openDialog('counties')">
                         <div class="dialog" style="flex-wrap: wrap;">
-                        <span class="badge badge-pill badge-primary" class="chip-content" *ngFor="let county of selectedCounties">{{county.name}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,county,selectedCounties)" >cancel</mat-icon></span></div>
-                        <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>  
+                            <span class="badge badge-pill badge-primary" class="chip-content"
+                                *ngFor="let county of selectedCounties">{{county.name}} <mat-icon
+                                    style="cursor: pointer;"
+                                    (click)="removeItem($event,county,selectedCounties)">cancel</mat-icon></span>
+                        </div>
+                        <div class="arrow"><button class="clearLable point"><img
+                                    src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>
 
-                      </div>
+                    </div>
                 </div>
                 <div class="col-md-12 mb-4">
                     <label class="label-font-primary mb-1">*disease</label>
                     <div class="outer-container" (click)="openDialog('disease')">
                         <div class="dialog">
-                        <span class="badge badge-pill badge-primary " class="chip-content" *ngFor="let disease of selectedDiseases">{{disease.diseaseName}}  <mat-icon style="cursor: pointer;" (click)="removeItem($event,disease,selectedDiseases)" >cancel</mat-icon></span></div>
-                        <div class="arrow"><button class="clearLable point"><img src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>                     
-                      </div>
+                            <span class="badge badge-pill badge-primary " class="chip-content"
+                                *ngFor="let disease of selectedDiseases">{{disease.name}} <mat-icon
+                                    style="cursor: pointer;"
+                                    (click)="removeItem($event,disease,selectedDiseases)">cancel</mat-icon></span>
+                        </div>
+                        <div class="arrow"><button class="clearLable point"><img
+                                    src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>
+                    </div>
                 </div>
                 <div class="row col-md-12 mb-2">
                     <div class="col-md-5 gender-check">
                         <label class="label-font-primary mb-1 label-ender">*Gender</label>
-                        <mat-checkbox class="gender_check_box gender_1_padding" [(ngModel)]="isMaleChecked">Male</mat-checkbox>
-                        <mat-checkbox class="gender_check_box gender_2_padding" [(ngModel)]="isFemaleChecked">Female</mat-checkbox>
+                        <mat-checkbox class="gender_check_box gender_1_padding"
+                            [(ngModel)]="isMaleChecked">Male</mat-checkbox>
+                        <mat-checkbox class="gender_check_box gender_2_padding"
+                            [(ngModel)]="isFemaleChecked">Female</mat-checkbox>
                     </div>
                     <div class="col-md-7 row ml-2 age-range">
                         <div class="col-sm-3">
@@ -84,450 +107,178 @@
                             <mat-form-field class="age_box" appearance="fill">
                                 <input matInput [(ngModel)]="startAge">
                             </mat-form-field>
-                        </div>  
+                        </div>
                         <hr class="horizontalRow" style="width: 110px;margin-top: 70px;">
                         <div class="col-sm-3 agebox">
                             <div class="small-text">End</div>
                             <mat-form-field appearance="fill" class="age_box">
                                 <input matInput [(ngModel)]="endAge" max="80">
                             </mat-form-field>
-                        </div>  
+                        </div>
                     </div>
                 </div>
-                <button type="submit" (click)="utilityCost()" class="search-btn-one point" *ngIf="selectedSearch == 1">Search</button>
+                <button type="submit" (click)="utilityCost()" class="search-btn-one point"
+                    *ngIf="selectedSearch == 1">Search</button>
                 <h4 class="program-detail-heading" *ngIf="selectedSearch == 2">Program Details</h4>
                 <div class="container-chronic program" *ngIf="selectedSearch == 2">
                     <!-- <div class="vl"></div> -->
                     <form [formGroup]="roiForm">
                         <div class="main-container">
                             <div class="container-chronic">
-                        <!-- <div class="row mb-5 align-items-start"> -->
+                                <!-- <div class="row mb-5 align-items-start"> -->
                                 <div class="row formContainer">
                                     <div class="col-lg-5 col-md-5 col-sm-5">
-                                        <div class="row margin-row"> 
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                        <div class="row margin-row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
                                                 <label class="label-font mb-1 text-end">Size of Target group</label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <input type="text" placeholder="e.g: 1000" class="form-control" formControlName="sizeOfTargetGroup">
+                                                <input type="text" placeholder="e.g: 1000" class="form-control"
+                                                    formControlName="sizeOfTargetGroup">
                                             </div>
                                         </div>
-                                        <div class="row margin-row"> 
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                        <div class="row margin-row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
                                                 <!-- <div class="label-font mb-1 text-end text-margin">Anticipated effectiveness  of program</div> -->
-                                                <label class="label-font mb-1 text-end text-margin">Anticipated effectiveness  of program</label>
+                                                <label class="label-font mb-1 text-end text-margin">Anticipated
+                                                    effectiveness of program</label>
 
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <input type="text" placeholder="e.g: 20" class="form-control small-input" formControlName="anticipatedEffectivenessOfProgram">
+                                                <input type="text" placeholder="e.g: 20"
+                                                    class="form-control small-input"
+                                                    formControlName="anticipatedEffectivenessOfProgram">
                                             </div>
                                         </div>
-                                        <div class="row margin-row"> 
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
-                                                <label class="label-font mb-1 text-end">Expected timeframes for results</label>
+                                        <div class="row margin-row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
+                                                <label class="label-font mb-1 text-end">Expected timeframes for
+                                                    results</label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <input type="text" placeholder="e.g: 10" class="form-control small-input" formControlName="expectedTimeframesForResults">
+                                                <input type="text" placeholder="e.g: 10"
+                                                    class="form-control small-input"
+                                                    formControlName="expectedTimeframesForResults">
                                             </div>
                                         </div>
-                                        <div class="row margin-row"> 
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
-                                                <label class="label-font mb-1 text-end">Expected timeframes for ROI</label>
+                                        <div class="row margin-row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
+                                                <label class="label-font mb-1 text-end">Expected timeframes for
+                                                    ROI</label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <input type="text" placeholder="e.g: 10" class="form-control small-input" formControlName="expectedTimeframesForROI">
+                                                <input type="text" placeholder="e.g: 10"
+                                                    class="form-control small-input"
+                                                    formControlName="expectedTimeframesForROI">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-1 col-md-1 col-sm-1">
-                                            <div class="vl"></div>
+                                        <div class="vl"></div>
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-5">
                                         <div class="row margin-row">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
                                                 <label class="label-font mb-1 text-end">Initial program costs</label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <input type="text" placeholder="e.g: 1000" class="form-control" formControlName="initialProgramCosts">
+                                                <input type="text" placeholder="e.g: 1000" class="form-control"
+                                                    formControlName="initialProgramCosts">
                                             </div>
                                         </div>
                                         <div class="row margin-row">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
                                                 <label class="label-font mb-1 text-end">Ongoing program costs</label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <input type="text" placeholder="e.g: 1000" class="form-control" formControlName="ongoingProgramCosts">
+                                                <input type="text" placeholder="e.g: 1000" class="form-control"
+                                                    formControlName="ongoingProgramCosts">
                                             </div>
                                         </div>
                                         <div class="row margin-row text-end">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
                                                 <label class="label-font mb-1 text-end ">Discount rate</label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <input type="text" placeholder="e.g: 20" class="form-control small-input" formControlName="discountRate">
+                                                <input type="text" placeholder="e.g: 20"
+                                                    class="form-control small-input" formControlName="discountRate">
                                             </div>
                                         </div>
                                         <div class="row margin-row text-end">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
                                                 <label class="label-font mb-1">Program duration</label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <input type="text" placeholder="e.g: 10" class="form-control small-input" formControlName="programDuration">
+                                                <input type="text" placeholder="e.g: 10"
+                                                    class="form-control small-input" formControlName="programDuration">
                                             </div>
                                         </div>
                                         <div class="row margin-row text-end">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div"> 
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
                                                 <label class="label-font mb-1">Value of QALY</label>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <input type="text" placeholder="e.g: 50000" class="form-control" formControlName="valueOfQALY">
+                                                <input type="text" placeholder="e.g: 50000" class="form-control"
+                                                    formControlName="valueOfQALY">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                            <!-- <div class="grid ">
+
                             </div>
-                            <div class="grid">
-                            </div>
-                            <div class="grid"> -->
-                                <!-- <h6 class="help-text">% Re
-                                    duction</h6> -->
-                            <!-- </div>
-                            <div class="grid">
-                            </div>
-                            <div class="grid"> -->
-                                
-                                <!-- <h6 class="help-text">Years</h6> -->
-                            <!-- </div>
-                            <div class="grid"> -->
-                                
-                                <!-- <h6 class="help-text">%</h6> -->
-                            <!-- </div>
-                            <div class="grid"> -->
-                                
-                                <!-- <h6 class="help-text">Years</h6> -->
-                            <!-- </div>
-                            <div class="grid"> -->
-                                <!-- <h6 class="help-text">Years</h6> -->
-                            <!-- </div>
-                            
-                            <div class="grid">
-                            </div> -->
                         </div>
-                    </div>
-                    <!-- </div> -->
+                        <!-- </div> -->
                         <div class="calculate-button">
-                          <button type="submit" class="btn calc-button point" (click)="roiCalcuator">Calculate</button>
+                            <button type="submit" class="btn calc-button point"
+                                (click)="roiCalcuator()">Calculate</button>
                         </div>
-                      </form>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Results -->
-    <div class="result-table">
-    <div *ngIf="tabs.length > 0 && selectedSearch == 2" >
-        <mat-tab-group  (selectedTabChange)="setActiveTab($event)" >
-            <mat-tab *ngFor="let tab of tabs; let index = index " [ngClass]="{'active-tab': tab === activeTab}"
-           [label]="tab" >
-                <div *ngIf="tab !=='Total'">
-                    <div *ngFor="let title of resultsData[tab] | keyvalue">
-                        <h5 class="title-heading">{{title.key}}</h5>
-                        <div *ngFor="let item of getValue(title.value) | keyvalue">
-                            {{item.key}}
-                            <div *ngFor="let innerItem of getValue(item.value) | keyvalue">
-                                <span *ngIf="innerItem.key !== 'ageRange'">{{innerItem.key}}--{{innerItem.value}}</span>
-                                <div *ngIf="innerItem.key == 'ageRange'">
-                                    <table class="table">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th scope="col" *ngFor="let header of getTableHeadings(innerItem)">
-                                                    {{header}}</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let cellValue of getTableRecords(innerItem)">
-                                                <td>{{cellValue.age}}</td>
-                                                <td>{{cellValue.numberOfPeopleWithProgram}}</td>
-                                                <td>{{cellValue.numberOfPeopleWithOutProgram}}</td>
-                                                <td>{{cellValue.investmentPerPerson}}</td>
-
-                                                <td>{{cellValue.difference}}</td>
-                                                <td>{{cellValue.costSavingPerYear}}</td>
-                                                <td>{{cellValue.discountedCostSavingsPerYear}}</td>
-
-                                                <td>{{cellValue.totalCost}}</td>
-                                                <td>{{cellValue.utilityCost}}</td>
 
 
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-                <div *ngIf="tab =='Total'">
-                    <div *ngFor="let title of resultsData[tab] | keyvalue">
-                        <h5 class="table-title">{{title.key}}</h5>
-                        <div *ngFor="let innerItem of getValue(title.value) | keyvalue">
-                            <span *ngIf="innerItem.key !== 'ageRange'">{{innerItem.key}}--{{innerItem.value}}</span>
-                            <div *ngIf="innerItem.key == 'ageRange'">
-                                <table class="table">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col" *ngFor="let header of getTableHeadings(innerItem)">
-                                                {{header}}</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let cellValue of getTableRecords(innerItem)">
-                                            <td>{{cellValue.age}}</td>
-                                            <td>{{cellValue.numberOfPeopleWithProgram}}</td>
-                                            <td>{{cellValue.numberOfPeopleWithOutProgram}}</td>
-                                            <td>{{cellValue.investmentPerPerson}}</td>
-
-                                            <td>{{cellValue.difference}}</td>
-                                            <td>{{cellValue.costSavingPerYear}}</td>
-                                            <td>{{cellValue.discountedCostSavingsPerYear}}</td>
-
-                                            <td>{{cellValue.totalCost}}</td>
-                                            <td>{{cellValue.utilityCost}}</td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
+    <div class="results" *ngIf="showCost">
+        <h5 class="searchClass">Results</h5>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" *ngFor="let header of roiGuidelinesHeading">
+                        {{header}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{totalCostResponse['Totals'].conditions}}</td>
+                    <td>{{totalCostResponse['Totals'].county}}</td>
+                    <td>{{totalCostResponse['Totals'].costPerCase}}</td>
+                    <td>{{totalCostResponse['Totals'].utilityCostPerCase}}</td>
+                    <td>{{totalCostResponse['Totals'].rates}}</td>
+                    <td>{{totalCostResponse['Totals'].cases}}</td>
+                    <td>{{totalCostResponse['Totals'].healthCareCost}}</td>
+                    <td>{{totalCostResponse['Totals'].utilityLoss}}</td>
+                    <td>{{totalCostResponse['Totals'].totalCost}}</td>
+                </tr>
+                <tr>
+                    <td>{{totalCostResponse['Counties'].conditions}}</td>
+                    <td>{{totalCostResponse['Counties'].county}}</td>
+                    <td>{{totalCostResponse['Counties'].costPerCase}}</td>
+                    <td>{{totalCostResponse['Counties'].utilityCostPerCase}}</td>
+                    <td>{{totalCostResponse['Counties'].rates}}</td>
+                    <td>{{totalCostResponse['Counties'].cases}}</td>
+                    <td>{{totalCostResponse['Counties'].healthCareCost}}</td>
+                    <td>{{totalCostResponse['Counties'].utilityLoss}}</td>
+                    <td>{{totalCostResponse['Counties'].totalCost}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="table-buttons">
+            <button type="submit" (click)="downloadCSV('Utility Cost Result')" class="csv-button point" *ngIf="selectedSearch == 1"><mat-icon svgIcon="csv-icon"></mat-icon>Download CSV</button>
+            <button type="submit" (click)="copyTable()" class="csv-button point left-margin" *ngIf="selectedSearch == 1"><mat-icon svgIcon="copy-icon"></mat-icon>Copy to Clipboard</button>
+        </div>
     </div>
 
-    <div *ngIf="selectedSearch == 1">
-        <mat-tab-group>
-            <mat-tab *ngFor=" let tab of tabs; let index=index" [label]="tab">
-                <div *ngIf="tab =='Totals'">
-                    <table class="table table-bordered mt-3" id="userTable1">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th></th><th></th>
-                                <th colspan="3" class="text-center">Per Case</th>
-                                <th colspan="4" class="text-center">For County (s) </th>
-                            </tr>
-                            <tr>                              
-                            </tr>
-                            <tr>
-                                <th scope="col" class="text-center"
-                                    *ngFor="let header of getRoiGuidelinesHeading()">
-                                    {{header}} 
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let cellValue of getRoiGuidelinesData(); let i = index"
-                            [ngClass]="{'even-row': i % 2 === 0}" class="text-uppercase"
-                           >
-                                <td>{{cellValue.Conditions}}</td>
-                                <td>{{cellValue.County}}</td>
-                                <td>{{cellValue.Cost_per_case}}</td>
-                                <td>{{cellValue.Utility_loss_per_case}}</td>
-
-                                <td>{{cellValue.Rates}}</td>
-                                <td>{{cellValue.Cases}}</td>
-                                <td>{{cellValue.Health_Care_Cost}}</td>
-
-                                <td>{{cellValue.Utility_loss}}</td>
-                                <td>{{cellValue.Total_cost_Healthcare_and_utility_loss}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <div class="table-buttons">
-                    <button type="submit" (click)="downloadCSV('Utility Cost Result')" class="csv-button point" *ngIf="selectedSearch == 1"><mat-icon svgIcon="csv-icon"></mat-icon>Download CSV</button>
-                    <button type="submit" (click)="copyTable()" class="csv-button point left-margin" *ngIf="selectedSearch == 1"><mat-icon svgIcon="copy-icon"></mat-icon>Copy to Clipboard</button>
-                </div>
-
-                    <div *ngFor="let title of utilityCostData[tab] | keyvalue">
-
-                        <div *ngIf="title.key == 'totals'">
-                            <div *ngFor="let innerTitle of getTableRecords(title)">
-                                <ul>
-                                    <li class="title-key-heading">Total Costs = {{innerTitle.costs}}</li>
-                                    <li class="title-key-heading">Total Cases = {{innerTitle.cases}}</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div *ngIf="title.key == 'regions'">
-                            <div *ngFor="let innerTitle of getTableRecords(title)">
-                                <div *ngFor="let inValue of innerTitle | keyvalue">
-                                    <h5 class="title-key-heading">{{inValue.key}}</h5>
-                                    <div *ngFor="let inValue of getTableRecords(inValue)">
-                                        <ul>
-                                            <li class="title-key-heading">Total Costs = {{inValue.costs}}</li >
-                                            <li class="title-key-heading">Total Cases = {{inValue.cases}}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                        <div *ngIf="title.key == 'counties'">
-                            <span class="title-heading">{{title.key}}</span>
-                            <div *ngFor="let innerTitle of getTableRecords(title)">
-                                <div *ngFor="let inValue of innerTitle | keyvalue">
-                                    <h5 class="title-key-heading">{{inValue.key}}</h5>
-                                    <div *ngFor="let inValue of getTableRecords(inValue) | keyvalue">
-                                        <div *ngIf="inValue.key !== 'data'">
-                                            <div *ngFor="let item of getTableRecords(inValue)">
-                                                <ul>
-                                                    <li class="title-key-heading" >Total Costs = {{item.costs}}</li>
-                                                    <li class="title-key-heading">Total Cases = {{item.cases}}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="inValue.key == 'data'">
-                                            <table class="table">
-                                                <thead class="thead-dark">
-                                                    <tr>
-                                                        <th scope="col" class="text-uppercase"
-                                                            *ngFor="let header of getTableHeadings(inValue)">
-                                                            {{header}} </th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let cellValue of getTableRecords(inValue); let i = index"
-                                                    [ngClass]="{'even-row': i % 2 === 0}" class="text-uppercase"
-                                                   >
-                                                        <td>{{cellValue.cases}}</td>
-                                                        <td>{{cellValue.ethnicity}}</td>
-                                                        <td>{{cellValue.groupName}}</td>
-                                                        <td>{{cellValue.sex}}</td>
-
-                                                        <td>{{cellValue.regionName}}</td>
-                                                        <td>{{cellValue.diseaseName}}</td>
-                                                        <td>{{cellValue.countyName}}</td>
-
-                                                        <td>{{cellValue.costs}}</td>
-                                                        <td>{{cellValue.prevalenceRate}}</td>
-                                                        <td>{{cellValue.population}}</td>
-
-
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div *ngIf="tab =='diseases'">
-                    <mat-tab-group>
-                        <mat-tab *ngFor=" let tab of allDiseasesName; let index=index" [label]="tab">
-                            <div *ngFor="let item of getDiseaseValue(tab) | keyvalue">
-                                <div *ngFor="let item of getTableRecords(item) | keyvalue"></div>
-                                <span *ngIf="item.key == 'name'">
-                                    <h5>{{item.key}}--{{item.value}}</h5>
-                                </span>
-                                <div *ngIf="item.key == 'totals'">
-                                    <div *ngFor="let innerTitle of getTableRecords(item)">
-                                        <ul>
-                                            <li class="title-key-heading">Total Costs = {{innerTitle.costs}}</li>
-                                            <li class="title-key-heading">Total Cases = {{innerTitle.cases}}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div *ngIf="item.key == 'regions'">
-                                    <div *ngFor="let innerTitle of getTableRecords(item)">
-                                        <div *ngFor="let inValue of innerTitle | keyvalue">
-                                            <h5 class="title-key-heading">{{inValue.key}}</h5>
-                                            <div *ngFor="let inValue of getTableRecords(inValue)">
-                                                <ul>
-                                                    <li class="title-key-heading">Total Costs = {{inValue.costs}}</li>
-                                                    <li class="title-key-heading">Total Cases = {{inValue.cases}}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-        
-        
-                                    </div>
-                                </div>
-                                <div *ngIf="item.key == 'counties'">
-                                    <div *ngFor="let innerTitle of getTableRecords(item)">
-                                        <div *ngFor="let inValue of innerTitle | keyvalue">
-                                            <h5 class="title-key-heading">{{inValue.key}}</h5>
-                                            <div *ngFor="let inValue of getTableRecords(inValue) | keyvalue">
-                                                <div *ngIf="inValue.key !== 'data'">
-                                                    <div *ngFor="let item of getTableRecords(inValue)">
-                                                        <ul>
-                                                            <li class="title-key-heading">Total Costs = {{item.costs}}</li>
-                                                            <li class="title-key-heading">Total Cases = {{item.cases}}</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div *ngIf="inValue.key == 'data'">
-                                                    <table class="table">
-                                                        <thead class="thead-dark">
-                                                            <tr>
-                                                                <th scope="col"
-                                                                    *ngFor="let header of getTableHeadings(inValue)">
-                                                                    {{header}}</th>
-        
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr *ngFor="let cellValue of getTableRecords(inValue);">
-                                                           
-                                                                <td>{{cellValue.cases}}</td>
-                                                                <td>{{cellValue.ethnicity}}</td>
-                                                                <td>{{cellValue.groupName}}</td>
-                                                                <td>{{cellValue.sex}}</td>
-        
-                                                                <td>{{cellValue.regionName}}</td>
-                                                                <td>{{cellValue.diseaseName}}</td>
-                                                                <td>{{cellValue.countyName}}</td>
-        
-                                                                <td>{{cellValue.costs}}</td>
-                                                                <td>{{cellValue.prevalenceRate}}</td>
-                                                                <td>{{cellValue.population}}</td>
-        
-        
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-        
-                                            </div>
-                                        </div>
-        
-        
-                                    </div>
-                                </div>
-                            </div>
-                        </mat-tab>
-                    </mat-tab-group>
-                </div>
-            </mat-tab></mat-tab-group>
-    </div>
-</div>
 
 </article>

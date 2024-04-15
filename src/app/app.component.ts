@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 
 export class AppComponent {
-  title = 'prateeks';
+  title = 'ucmerced';
   constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(
       'copy-icon',
@@ -18,5 +18,6 @@ export class AppComponent {
       'csv-icon',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../../assets/svg-icons/csv-file-icon.svg')
     );
+  
 }
 }

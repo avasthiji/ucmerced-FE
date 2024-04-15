@@ -1,6 +1,6 @@
-<h4 class="clearselect point" (click)="clearAll()">cancel all
+<h4 class="clearselect point" *ngIf="!isSelectionRadio(data)" (click)="clearAll()">cancel all
 </h4>
-<h4 class="clearselect point" (click)="slectAll()">
+<h4 class="clearselect point" *ngIf="!isSelectionRadio(data)" (click)="slectAll()">
     select all | &nbsp;
 </h4>
 <mat-dialog-content>
@@ -12,12 +12,11 @@
 <div class="row max-row">
     <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let data of dataList">
         <div>
-            <mat-checkbox *ngIf="search == 1" class="font-style-check" [checked]="data.checked"
+            <mat-checkbox *ngIf="!isSelectionRadio(data)" class="font-style-check" [checked]="data.checked"
                 (change)="selectData($event, data)">
             </mat-checkbox>
-            <mat-radio-button *ngIf="search == 2" [value]="data" [checked]="data.checked" (change)="selectOption(data)">
+            <mat-radio-button *ngIf="isSelectionRadio(data)" [value]="data" [checked]="data.checked" (change)="selectOption(data)">
             </mat-radio-button>
-        
             {{ data.name }}
         </div>
     </div>
