@@ -1,0 +1,11 @@
+{
+    "/api": {
+      "target": "https://ea24-223-233-72-198.ngrok-free.app/",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      },
+      "logLevel": "debug"
+    }
+  }

@@ -105,14 +105,14 @@
                             <label class="label-font-two mb-1">*Age Range</label>
                             <div class="small-text">Start</div>
                             <mat-form-field class="age_box" appearance="fill">
-                                <input matInput [(ngModel)]="startAge">
+                                <input matInput type="number" [(ngModel)]="startAge" min="1" max="80">
                             </mat-form-field>
                         </div>
                         <hr class="horizontalRow" style="width: 110px;margin-top: 70px;">
                         <div class="col-sm-3 agebox">
                             <div class="small-text">End</div>
                             <mat-form-field appearance="fill" class="age_box">
-                                <input matInput [(ngModel)]="endAge" max="80">
+                                <input matInput type="number" [(ngModel)]="endAge" min="1" max="80">
                             </mat-form-field>
                         </div>
                     </div>
@@ -249,7 +249,7 @@
                         {{header}}</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="checkIsDataAvailable()">
                 <tr>
                     <td>{{totalCostResponse['Totals'].conditions}}</td>
                     <td>{{totalCostResponse['Totals'].county}}</td>
