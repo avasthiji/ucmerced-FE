@@ -558,3 +558,30 @@ table {
     background-color: #f2f2f2; /* Light gray background for even rows */
   }
   
+  .color-uc{
+    background-color: #002856;
+    color: white;
+    font-weight: 400;
+    border: none;
+  }
+  .color-blue{
+    background-color: rgb(0, 122, 136);
+    color: white;
+    border: none;
+    font-weight: 400;
+
+  }
+  .color-grey{
+    background-color: grey;
+    color: white;
+    border: none;
+    font-weight: 400;
+
+  }
+  .color-yellow{
+    background-color: rgb(253, 251, 206);
+    color: #002856;
+  }
+  .blue-text{
+    color: #002856;
+  }

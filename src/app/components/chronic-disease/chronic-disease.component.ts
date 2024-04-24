@@ -43,6 +43,8 @@ export class ChronicDiseaseComponent implements OnInit {
     GenderData: any = {};
     utilityCostData: any = {};
     roiGuidelinesHeading = ['Condition(s)','County', 'Cost per case', 'Utility loss per case' , 'Rates', 'Cases', 'Health Care Cost', 'Utility loss', 'Total cost (Healthcare and utility loss)']
+    resultHeading = ['Condition(s)', 'County', 'Cost per case', 'Utility loss per case', 'Rates', 'Population', 'Cases', 'Utility loss', 'Health Care Cost', 'Total cost (Healthcare and utility loss)']
+    investmentHeading = ['Without Program', 'With Program', 'Difference', 'Description']
     allDiseasesName: any = [];
     roiForm: FormGroup;
     showCost: boolean = false;
@@ -117,6 +119,85 @@ export class ChronicDiseaseComponent implements OnInit {
             "Total_cost_Healthcare_and_utility_loss":"$53",
         },
      ]
+
+    resultData = [
+        {
+
+            "Conditions": "Initial",
+            "County": "ASIAN",
+            "Cost_per_case": "$32",
+            "Utility_loss_per_case": "$2",
+            "Rates": "4%",
+            "Population": "200",
+            "Cases": "Coronary Heart Disease (CHD)",
+            "Utility_loss": "$21",
+            "Health_Care_Cost": "$768,000,000",
+            "Total_cost_Healthcare_and_utility_loss": "$53",
+        },
+        {
+
+            "Conditions": "After Program",
+            "County": "Japan",
+            "Cost_per_case": "$32",
+            "Utility_loss_per_case": "$2",
+            "Rates": "4%",
+            "Population": "201",
+            "Cases": "Coronary Heart Disease (CHD)",
+            "Utility_loss": "$21",
+            "Health_Care_Cost": "$333,000,000",
+            "Total_cost_Healthcare_and_utility_loss": "$53",
+        },
+        {
+
+            "Conditions": "Difference",
+            "County": "Australia",
+            "Cost_per_case": "$32",
+            "Utility_loss_per_case": "$2",
+            "Rates": "4%",
+            "Population": "220",
+            "Cases": "Coronary Heart Disease (CHD)",
+            "Utility_loss": "$21",
+            "Health_Care_Cost": "$333,000,000",
+            "Total_cost_Healthcare_and_utility_loss": "$53",
+        },
+    ]
+    investmentData = [
+        {
+            "Heading": "Cases in 10 years",
+            "without_program": 937,
+            "With_Program": 838,
+            "Difference": 21,
+            "Description": "Total cases of the chronic disease(s) for your target group with and without the program.",
+        },
+        {
+            "Heading": "Total costs over 10 years (without QALYs)",
+            "Without_Program": 5832,
+            "With_Program": 5752,
+            "Difference": 22,
+            "Description": "Total cost of the chronic disease(s) for your target group with and without the program.",
+        },
+        {
+            "Heading": "Total costs over 'X' years (with QALYs)",
+            "Without_Program": 50000,
+            "With_Program": 50000,
+            "Difference": 23,
+            "Description": "Total QALYs for your target group with and without the program.",
+        },
+        {
+            "Heading": "Total QALYs over 'X' years",
+            "Without_Program": 50000,
+            "With_Program": 50000,
+            "Difference": 24,
+            "Description": "Total QALYs for your target group with and without the program.",
+        },
+        {
+            "Heading": "Total Investment",
+            "Without_Program": 50000,
+            "With_Program": 50000,
+            "Difference": 25,
+            "Description": "Initial cost of your program + Ongoing cost of your program",
+        },
+    ]
      setActiveTab(tab:any) {
         this.activeTab = tab;
       }
@@ -361,6 +442,14 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     getRoiGuidelinesData() {
         return this.roiGuidelinesData;
+    }
+
+    getResultData() {
+        return this.resultData;
+    }
+
+    getInvestmentData() {
+        return this.investmentData;
     }
 
     copyTable() {
