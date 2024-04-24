@@ -46,6 +46,7 @@ export class ChronicDiseaseComponent implements OnInit {
     allDiseasesName: any = [];
     roiForm: FormGroup;
     showCost: boolean = false;
+    showRoi: boolean = true;
     availableCounties: any = [];
     totalCostResponse:any = { "Totals":{},"Counties":{}}
     regionList: any = [];
