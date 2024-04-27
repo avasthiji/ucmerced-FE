@@ -3,7 +3,7 @@
     color: white;
     font-weight: 400;
     border: none;
-    text-align: center;
+    text-align: center;    
   }
 
 .color-white{
@@ -69,4 +69,12 @@ tbody tr {
 }
 .table-border{
   border: 1px solid grey;
+}
+
+.border-radius-left {
+  border-top-left-radius: 4px;
+}
+
+.border-radius-right {
+  border-top-right-radius: 4px;
 }

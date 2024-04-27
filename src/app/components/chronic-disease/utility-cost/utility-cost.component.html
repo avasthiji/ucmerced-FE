@@ -2,17 +2,17 @@
     <thead>
         <tr>
             <th colspan="3"></th>
-            <th colspan="3" class="color-grey">Without Program</th>
-            <th colspan="2" class="color-uc">With Program</th>
-            <th colspan="1" class="color-blue ">Difference</th>
-            <th colspan="8" class="blue-text">Description</th>
+            <th colspan="3" class="color-grey radius">Without Program</th>
+            <th colspan="2" class="color-uc radius">With Program</th>
+            <th colspan="1" class="color-blue radius">Difference</th>
+            <th colspan="8" class="blue-text text-start radius">Description</th>
         </tr>
         <tr>
         </tr>
     </thead>
     <tbody class="table-border">
         <tr *ngFor="let data of roiData">
-            <td colspan="5" class="color-yellow blue-text ">{{data.Heading}}</td>
+            <td colspan="5" class="color-yellow blue-text fw-bold">{{data.Heading}}</td>
             <td class="blue-text">{{data.Without_Program??data.With_Program}}</td>
             <td class="blue-text">{{data.With_Program}}</td>
             <td class="blue-text" colspan="2">{{data.Difference}}</td>
