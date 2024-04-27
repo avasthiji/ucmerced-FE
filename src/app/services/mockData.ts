@@ -628,4 +628,44 @@ export const roiResultFormat: any = [
         "Description": "Return on investment with the QALYs but with all future cost savings and utility savings discounted at the rate of 3%",
     },
 ]
-  
+export const resultData = [
+    {
+
+        "Conditions": "Initial",
+        "County": "ASIAN",
+        "Cost_per_case": "$32",
+        "Utility_loss_per_case": "$2",
+        "Rates": "4%",
+        "Population": "200",
+        "Cases": "Coronary Heart Disease (CHD)",
+        "Utility_loss": "$21",
+        "Health_Care_Cost": "$768,000,000",
+        "Total_cost_Healthcare_and_utility_loss": "$53",
+    },
+    {
+
+        "Conditions": "After Program",
+        "County": "Japan",
+        "Cost_per_case": "$32",
+        "Utility_loss_per_case": "$2",
+        "Rates": "4%",
+        "Population": "201",
+        "Cases": "Coronary Heart Disease (CHD)",
+        "Utility_loss": "$21",
+        "Health_Care_Cost": "$333,000,000",
+        "Total_cost_Healthcare_and_utility_loss": "$53",
+    },
+    {
+
+        "Conditions": "Difference",
+        "County": "Australia",
+        "Cost_per_case": "$32",
+        "Utility_loss_per_case": "$2",
+        "Rates": "4%",
+        "Population": "220",
+        "Cases": "Coronary Heart Disease (CHD)",
+        "Utility_loss": "$21",
+        "Health_Care_Cost": "$333,000,000",
+        "Total_cost_Healthcare_and_utility_loss": "$53",
+    },
+]

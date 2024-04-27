@@ -1,0 +1,72 @@
+.color-uc{
+    background-color: #002856;
+    color: white;
+    font-weight: 400;
+    border: none;
+    text-align: center;
+  }
+
+.color-white{
+  background-color: white;
+  color:  #002856;;
+  font-weight: 400;
+  border: none;
+  text-align: center;
+}
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* For table headers */
+  th {
+    padding: 8px; /* Padding */
+    text-align: left; /* Align text to the left */
+  }
+  
+  /* For table cells */
+  td {
+    /* border: 1px solid #ddd; Gray border */
+    padding: 8px; /* Padding */
+    text-align: left; /* Align text to the left */
+  }
+  
+.row-grey {
+    background-color:#ebebeb
+}
+
+.row-purple {
+    background-color:#e8e8ff;
+}
+
+.row-blue {
+    background-color:#def9ff;
+}
+tbody tr {
+  margin-bottom: 10px; /* Adjust the value as desired */
+}
+
+.table-buttons {
+  display: flex;
+  justify-content: end;
+}
+.csv-button {
+  border-radius: 10px;
+  width: 195px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #E5E5E5;
+  color:#002856;
+  font: normal normal bold 15px / 27px Open Sans;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.left-margin {
+  margin-left: 10px;
+}
+.table-border{
+  border: 1px solid grey;
+}

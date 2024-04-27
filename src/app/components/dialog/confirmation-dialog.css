@@ -77,3 +77,6 @@
     letter-spacing: 0px;
     color: #002856;
 }
+mat-radio-button {
+    margin-bottom: 10px;
+}

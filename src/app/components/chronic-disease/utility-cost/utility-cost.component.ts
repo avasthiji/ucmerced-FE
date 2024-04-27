@@ -1,18 +1,17 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit ,Input } from '@angular/core';
+
 @Component({
-  selector: 'app-roi-results',
-  templateUrl: './roi-results.component.html',
-  styleUrls: ['./roi-results.component.css']
+  selector: 'app-utility-cost',
+  templateUrl: './utility-cost.component.html',
+  styleUrls: ['./utility-cost.component.css']
 })
-export class RoiResultsComponent implements OnInit {
-  @Input() resultData: any[] =[]; 
-  @Input() resultHeading: string[]=[];
-
+export class UtilityCostComponent implements OnInit {
+  @Input() roiData: any[]=[]; // Array to hold data passed from the parent component
   constructor() { }
-
   ngOnInit(): void {
   }
- 
+
+
 downloadCSV(fileName: string) {
   const tableElement = document.getElementById('roiTable');
   
@@ -50,6 +49,5 @@ downloadCSV(fileName: string) {
       console.error('Table element with ID "roiTable" not found.');
   }
 }
-
-
+  
 }

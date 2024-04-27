@@ -112,7 +112,7 @@
                         <div class="col-sm-3 agebox">
                             <div class="small-text">End</div>
                             <mat-form-field appearance="fill" class="age_box">
-                                <input matInput type="number" [(ngModel)]="endAge" min="1" max="80">
+                                <input matInput type="number" [(ngModel)]="endAge" min="1" max="80"  (ngModelChange)="onEndAgeChange($event)">
                             </mat-form-field>
                         </div>
                     </div>
@@ -331,7 +331,7 @@
         <!-- </tbody>
       </table>  -->
 
-      <table>
+      <!-- <table>
         <thead>
             <tr >       
                 <th scope="col" *ngFor="let header of resultHeading" class="color-uc">
@@ -353,30 +353,12 @@
                 <td>{{ row.Total_cost_Healthcare_and_utility_loss }}</td>
             </tr>
         </tbody>
-      </table>
-      <br><br><br><br>
-<table>
-    <thead>
-        <tr>
-            <th colspan="3"></th>
-            <th colspan="2" class="color-grey">Without Program</th>
-            <th colspan="2" class="color-uc">With Program</th>
-            <th colspan="1" class="color-blue ">Difference</th>
-            <th colspan="8" class="blue-text">Description</th>
-        </tr>
-        <tr>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let data of ROIDATA">
-            <td colspan="4" class="color-yellow blue-text ">{{data.Heading}}</td>
-            <td class="blue-text">{{data.Without_Program??data.With_Program}}</td>
-            <td class="blue-text">{{data.With_Program}}</td>
-            <td class="blue-text" colspan="2">{{data.Difference}}</td>
-            <td class="blue-text">{{data.Description}}</td>
-        </tr>
-    </tbody>
-</table>
+      </table> -->
+    <app-roi-results [resultData]="RESULTDATA" [resultHeading]="resultHeading"></app-roi-results>
+    
+    <br><br><br><br>
+    <!-- Second table -->
+    <app-utility-cost [roiData]="ROIDATA"></app-utility-cost>
 </div>
 
 </article>

@@ -7,7 +7,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {ConfirmationDialog} from '../dialog/confirmation-dialog.component';
 import { CalculatorService } from 'src/app/services/calculator.service';
-import {countiesList, diseaseList, ethnicityList, regionList, roiResultFormat} from '../../services/mockData'
+import {countiesList, diseaseList, ethnicityList, regionList, roiResultFormat, resultData} from '../../services/mockData'
 @Component({
     selector: 'app-chronic-disease',
     templateUrl: './chronic-disease.component.html',
@@ -55,7 +55,8 @@ export class ChronicDiseaseComponent implements OnInit {
     ethnicityList: any = [];
     diseaseList: any = [];
     countiesList: any = [];
-    ROIDATA = roiResultFormat
+    ROIDATA = roiResultFormat;
+    RESULTDATA = resultData;
     constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
@@ -120,47 +121,7 @@ export class ChronicDiseaseComponent implements OnInit {
         },
      ]
 
-    resultData = [
-        {
-
-            "Conditions": "Initial",
-            "County": "ASIAN",
-            "Cost_per_case": "$32",
-            "Utility_loss_per_case": "$2",
-            "Rates": "4%",
-            "Population": "200",
-            "Cases": "Coronary Heart Disease (CHD)",
-            "Utility_loss": "$21",
-            "Health_Care_Cost": "$768,000,000",
-            "Total_cost_Healthcare_and_utility_loss": "$53",
-        },
-        {
-
-            "Conditions": "After Program",
-            "County": "Japan",
-            "Cost_per_case": "$32",
-            "Utility_loss_per_case": "$2",
-            "Rates": "4%",
-            "Population": "201",
-            "Cases": "Coronary Heart Disease (CHD)",
-            "Utility_loss": "$21",
-            "Health_Care_Cost": "$333,000,000",
-            "Total_cost_Healthcare_and_utility_loss": "$53",
-        },
-        {
-
-            "Conditions": "Difference",
-            "County": "Australia",
-            "Cost_per_case": "$32",
-            "Utility_loss_per_case": "$2",
-            "Rates": "4%",
-            "Population": "220",
-            "Cases": "Coronary Heart Disease (CHD)",
-            "Utility_loss": "$21",
-            "Health_Care_Cost": "$333,000,000",
-            "Total_cost_Healthcare_and_utility_loss": "$53",
-        },
-    ]
+    
   
      setActiveTab(tab:any) {
         this.activeTab = tab;
@@ -434,6 +395,10 @@ export class ChronicDiseaseComponent implements OnInit {
         this.selectedEthnicity= []
         this.selectedDiseases= []
         this.selectedCounties = []
+        this.isFemaleChecked = false;
+        this.isMaleChecked = false;
+        this.endAge = 0;
+        this.startAge =0;
         this.roiForm.reset();
         this.showCost = false;
         this.ethnicityList.forEach((ele: { [x: string]: boolean; })=>{
@@ -457,9 +422,6 @@ export class ChronicDiseaseComponent implements OnInit {
         return this.roiGuidelinesData;
     }
 
-    getResultData() {
-        return this.resultData;
-    }
 
     copyTable() {
         const table = document.getElementById('userTable1');
@@ -512,5 +474,12 @@ export class ChronicDiseaseComponent implements OnInit {
         });
 
         return csvContent;
+    }
+    onEndAgeChange(value: number){
+        if (value > 80) {
+            this.endAge = 80;
+        } else {
+            this.endAge = value;
+        }
     }
 }
