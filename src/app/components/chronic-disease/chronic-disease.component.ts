@@ -7,7 +7,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {ConfirmationDialog} from '../dialog/confirmation-dialog.component';
 import { CalculatorService } from 'src/app/services/calculator.service';
-import {countiesList, diseaseList, ethnicityList, regionList} from '../../services/mockData'
+import {countiesList, diseaseList, ethnicityList, regionList, roiResultFormat} from '../../services/mockData'
 @Component({
     selector: 'app-chronic-disease',
     templateUrl: './chronic-disease.component.html',
@@ -55,7 +55,7 @@ export class ChronicDiseaseComponent implements OnInit {
     ethnicityList: any = [];
     diseaseList: any = [];
     countiesList: any = [];
-
+    ROIDATA = roiResultFormat
     constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
@@ -161,43 +161,7 @@ export class ChronicDiseaseComponent implements OnInit {
             "Total_cost_Healthcare_and_utility_loss": "$53",
         },
     ]
-    investmentData = [
-        {
-            "Heading": "Cases in 10 years",
-            "without_program": 937,
-            "With_Program": 838,
-            "Difference": 21,
-            "Description": "Total cases of the chronic disease(s) for your target group with and without the program.",
-        },
-        {
-            "Heading": "Total costs over 10 years (without QALYs)",
-            "Without_Program": 5832,
-            "With_Program": 5752,
-            "Difference": 22,
-            "Description": "Total cost of the chronic disease(s) for your target group with and without the program.",
-        },
-        {
-            "Heading": "Total costs over 'X' years (with QALYs)",
-            "Without_Program": 50000,
-            "With_Program": 50000,
-            "Difference": 23,
-            "Description": "Total QALYs for your target group with and without the program.",
-        },
-        {
-            "Heading": "Total QALYs over 'X' years",
-            "Without_Program": 50000,
-            "With_Program": 50000,
-            "Difference": 24,
-            "Description": "Total QALYs for your target group with and without the program.",
-        },
-        {
-            "Heading": "Total Investment",
-            "Without_Program": 50000,
-            "With_Program": 50000,
-            "Difference": 25,
-            "Description": "Initial cost of your program + Ongoing cost of your program",
-        },
-    ]
+  
      setActiveTab(tab:any) {
         this.activeTab = tab;
       }
@@ -357,41 +321,90 @@ export class ChronicDiseaseComponent implements OnInit {
         }
         return false
     }
-    roiCalcuator() {
+    roiCalculator() {
+       
+        
+        const county = this.selectedCounties.map((obj)=> obj.id)
+        const countyRegion = this.countiesList.find((obj: { id: any; })=> obj.id === county[0])
+        const region = countyRegion.region.id
+        const ethnicity = this.selectedEthnicity.map((obj: { id: any; })=> obj.id)
+        const disease = this.selectedDiseases.map((obj)=> obj.id)
+       
+       const sex = []
+        if(this.isFemaleChecked){
+            sex.push('Female')
+       }
+       if(this.isMaleChecked){
+        sex.push('Male')
+       }
         let data = {
-            "countyName": "1",
-            "initialProgramCost" : 5000,
-            "regionName": "1",
-            "diseaseName": "1",
-            "sex": "Female",
-            "ethnicity": "1",
-            "ageLimit": "11-18",
-            "InvestmentPerPerson": 5000.0,
-            "numberOfFollowUpYears": 10,
-            "ReductionInRateWithProgram": 5.0,
-            "ReductionInRateAfterYearsWithProgram": 5.0,
-            "discountedfactor": 2.0,
-            "sizeOfGroup": 500	
+            "county": county.join(","),
+            "region": region.join(","),
+            "disease": disease.join(","),
+            "sex": sex.join(","),
+            "ethnicity":ethnicity.join(","),
+            "ageLimit":  `${this.startAge}-${this.endAge}`,
+            "sizeOfGroup":this.roiForm.value.sizeOfTargetGroup,
+            "anticipatedEffectivenessOfProgram": this.roiForm.value.anticipatedEffectivenessOfProgram,
+            "anticipatedTimeForEffectivenessOfProgram": this.roiForm.value.expectedTimeframesForResults,//
+            "numberOfYearsForROI" : this.roiForm.value.expectedTimeframesForROI,//
+            "initialProgramCost" :this.roiForm.value.initialProgramCosts,
+            "ongoingProgramCost" : this.roiForm.value.ongoingProgramCosts,
+            "operationalPeriodOfProgram" :this.roiForm.value.programDuration,//
+            "discountRate": this.roiForm.value.discountRate,
+            "valueOfQaly": this.roiForm.value.valueOfQALY
         }
 
         this.calculatorService.roiCalcuator(data).subscribe(res => {
-            console.log(res)
             this.resultsData = res
             this.createData(this.resultsData)
+        },(err)=>{
+            //TO_DO for error handling
         })
     }
-    createData(res: {
-        Ethnicity: {},
-        Region: {},
-        Gender: {},
-        Total: {}
-    }) {
-        this.tabs = Object.keys(res);
-        this.EthnicityData = res['Ethnicity'];
-        this.RegionData = res['Region'];
-        this.GenderData = res['Gender'];
-        //this.EthnicityData = res['Ethnicity'];
-        console.log(this.tabs)
+    createData(res: any) {
+        //"Id":"CASES",
+        this.ROIDATA[0]['without_program'] = res['totalCasesWithoutProgram']
+        this.ROIDATA[0]['With_Program']= res['totalCasesWithProgram']
+        this.ROIDATA[0]['Difference']= res['totalCasesDiff']
+
+        //"Id":"COSTS_WITHOUT_QALYS",
+        this.ROIDATA[1]['without_program'] = res['totalCostWithoutQalyWithoutProgram']
+        this.ROIDATA[1]['With_Program']= res['totalCostWithoutQalyWithProgram']
+        this.ROIDATA[1]['Difference']= res['totalCostWithoutQalyDiff']
+
+        //"Id":"COSTS_QALYS",
+        this.ROIDATA[2]['without_program'] = res['totalCostWithQalyWithoutProgram']
+        this.ROIDATA[2]['With_Program']= res['totalCostWithQalyWithProgram']
+        this.ROIDATA[2]['Difference']= res['totalCostWithQalyDiff']
+
+
+        //"Id":"QALYS",
+        this.ROIDATA[3]['without_program'] = res['totalQaLYWithoutProgram']
+        this.ROIDATA[3]['With_Program']= res['totalQalyWithProgram']
+        this.ROIDATA[3]['Difference']= res['totalQalyDiff']
+
+
+        //"Id":"INVESTMENT",
+        this.ROIDATA[4]['without_program'] = res['investmentWithoutProgram']
+        this.ROIDATA[4]['With_Program']= res['investmentWithProgram']
+        this.ROIDATA[4]['Difference']= res['investmentDiff']
+
+
+        //"Id":"ROI_WITHOUT_QALYS",
+        this.ROIDATA[5]['without_program'] = "-"
+        this.ROIDATA[5]['With_Program']= res['roiwithoutQaly']
+        this.ROIDATA[5]['Difference']= res['roiwithoutQaly']
+
+        //"Id":"ROI_QALYS",
+        this.ROIDATA[0]['without_program'] = "-"
+        this.ROIDATA[0]['With_Program']= res['roiwithQaly']
+        this.ROIDATA[0]['Difference']= res['roiwithQaly']
+
+       // "Id":"ROI_DISCOUNT",
+        this.ROIDATA[0]['without_program'] = res['totalCasesWithoutProgram']
+        this.ROIDATA[0]['With_Program']= res['roidiscounted']
+        this.ROIDATA[0]['Difference']= res['roidiscounted']
     }
     tabChanged(event: any): void {
         // You can perform actions based on tab change if needed
@@ -446,10 +459,6 @@ export class ChronicDiseaseComponent implements OnInit {
 
     getResultData() {
         return this.resultData;
-    }
-
-    getInvestmentData() {
-        return this.investmentData;
     }
 
     copyTable() {

@@ -231,7 +231,7 @@
                         <!-- </div> -->
                         <div class="calculate-button">
                             <button type="submit" class="btn calc-button point"
-                                (click)="roiCalcuator()">Calculate</button>
+                                (click)="roiCalculator()">Calculate</button>
                         </div>
                     </form>
                 </div>
@@ -368,7 +368,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let data of getInvestmentData()">
+        <tr *ngFor="let data of ROIDATA">
             <td colspan="4" class="color-yellow blue-text ">{{data.Heading}}</td>
             <td class="blue-text">{{data.Without_Program??data.With_Program}}</td>
             <td class="blue-text">{{data.With_Program}}</td>

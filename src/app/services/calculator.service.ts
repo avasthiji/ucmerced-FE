@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CalculatorService {
-  BaseURL:string= 'https://ea24-223-233-72-198.ngrok-free.app'
+  BaseURL:string= 'https://5ebc-2402-e280-2234-1f-411-560d-1b61-b5a0.ngrok-free.app/'
   constructor(private http: HttpClient,) { }
 
   roiCalcuator(data:{}){

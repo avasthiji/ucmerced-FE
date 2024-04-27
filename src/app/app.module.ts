@@ -23,6 +23,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogRef, MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {ConfirmationDialog} from './components/dialog/confirmation-dialog.component';
 import {MatIconModule} from '@angular/material/icon';
+import { RoiResultsComponent } from './components/chronic-disease/roi-results/roi-results.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {MatIconModule} from '@angular/material/icon';
     BeforeYouBeginComponent,
     FaqComponent,
     ChronicDiseaseComponent,
-    ConfirmationDialog
+    ConfirmationDialog,
+    RoiResultsComponent
   ],
   imports: [
     BrowserModule,
