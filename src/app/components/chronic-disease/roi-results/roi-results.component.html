@@ -7,19 +7,43 @@
 
           </tr>
     </thead>
+    <!-- [ngClass]="{'row-grey': i === 0, 'row-purple': i === 1, 'row-blue': i === 2}" -->
     <tbody class="table-border">
-        <tr *ngFor="let row of resultData; let i = index" class="color-white roi-second-table-tr" [ngClass]="{'row-grey': i === 0, 'row-purple': i === 1, 'row-blue': i === 2}">
-            <td class="fw-bold text-end roi-second-table-td">{{ row.Conditions }}</td>
-            <td class="text-center roi-second-table-td">{{ row.County }}</td>
-            <td class="text-center roi-second-table-td">{{ row.Cost_per_case }}</td>
-            <td class="text-center roi-second-table-td">{{ row.Utility_loss_per_case }}</td>
-            <td class="text-center roi-second-table-td">{{ row.Rates }}</td>
-            <td class="text-center roi-second-table-td">{{ row.Population }}</td>
-            <td class="text-center roi-second-table-td">{{ row.Cases }}</td>
-            <td class="text-center roi-second-table-td">{{ row.Utility_loss}}</td>
-            <td class="text-center roi-second-table-td">{{ row.Health_Care_Cost }}</td>
-            <td class="text-center roi-second-table-td">{{ row.Total_cost_Healthcare_and_utility_loss }}</td>
+        <tr class="color-white roi-second-table-tr">
+            <td class="fw-bold text-end roi-second-table-td">Initial</td>
+            <td class="text-center roi-second-table-td">{{ costData2.county }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.costPerCaseInitial }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.utilityLossPerCaseInitial }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.ratesInitial }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.populationInitial }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.casesInitial }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.utilityLossInitial}}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.healthCareCostInitial }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.totalCostInitial }}</td>
+        </tr>
+        <tr class="color-white roi-second-table-tr">
+            <td class="fw-bold text-end roi-second-table-td">After Program</td>
+            <td class="text-center roi-second-table-td">{{ costData2.county }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.costPerCaseAfterProgram }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.utilityLossPerCaseAfterProgram }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.ratesAfterProgram }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.populationAfterProgram }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.casesAfterProgram }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.utilityLossAfterProgram}}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.healthCareCostAfterProgram }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.totalCostAfterProgram }}</td>
+        </tr>
+        <tr class="color-white roi-second-table-tr">
+            <td class="fw-bold text-end roi-second-table-td">Difference</td>
+            <td class="text-center roi-second-table-td">{{ costData2.county }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.costPerCaseDiff }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.utilityLossPerCaseDiff }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.ratesDiff }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.populationDiff }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.casesDiff }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.utilityLossDiff}}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.healthCareCostDiff }}</td>
+            <td class="text-center roi-second-table-td">{{ costData2.totalCostDiff }}</td>
         </tr>
     </tbody>
   </table>
-  

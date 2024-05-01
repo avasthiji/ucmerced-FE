@@ -5,10 +5,12 @@ import { Component, OnInit ,Input} from '@angular/core';
   styleUrls: ['./roi-results.component.css']
 })
 export class RoiResultsComponent implements OnInit {
-  @Input() resultData: any[] =[]; 
-  @Input() resultHeading: string[]=[];
+  @Input() costData2: any ={}; 
+  resultHeading: string[]=['Conditon(s)','County','Cost per case','Utility loss per case','Rates','Population','Cases','Utility Loss','Health Care Costs', 'Total Cost'];
 
-  constructor() { }
+  constructor() {
+    console.log(this.costData2)
+   }
 
   ngOnInit(): void {
   }

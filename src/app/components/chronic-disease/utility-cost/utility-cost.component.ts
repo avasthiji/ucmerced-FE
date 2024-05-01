@@ -6,11 +6,16 @@ import { Component, OnInit ,Input } from '@angular/core';
   styleUrls: ['./utility-cost.component.css']
 })
 export class UtilityCostComponent implements OnInit {
-  @Input() roiData: any[]=[]; // Array to hold data passed from the parent component
-  constructor() { }
+  @Input() roiData: any[]=[];
+  @Input() costData:any ;
+  constructor() { 
+    console.log(this.costData)
+  }
   ngOnInit(): void {
   }
-
+ngAfterViewInit(){
+  console.log(this.costData)
+}
 
 downloadCSV(fileName: string) {
   const tableElement = document.getElementById('roiTable');

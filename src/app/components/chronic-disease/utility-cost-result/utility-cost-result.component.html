@@ -1,25 +1,35 @@
-<table class="centered-text" id="utilityTable">
+
+<table class="roi-second-table" id="roiTable">
     <thead>
-        <tr>
-            <th colspan="3"></th>
-            <th colspan="3" class="color-grey radius">Without Program</th>
-            <th colspan="2" class="color-uc radius">With Program</th>
-            <th colspan="1" class="color-blue radius">Difference</th>
-            <th colspan="8" class="blue-text text-start radius">Description</th>
-        </tr>
-        <tr>
-        </tr>
+        <tr >       
+            <th class="roi-second-table-th" scope="col" *ngFor="let header of resultHeading; let i=index" [ngClass]="{'color-uc': true, 'color-white': i === 0,'border-radius-left': i === 1, 'border-radius-right': i === (resultHeading.length - 1)}">                
+                {{header}}</th>
+
+          </tr>
     </thead>
+    <!-- [ngClass]="{'row-grey': i === 0, 'row-purple': i === 1, 'row-blue': i === 2}" -->
     <tbody class="table-border">
-        <tr *ngFor="let data of roiData">
-            <td colspan="5" class="color-yellow blue-text fw-bold">{{data.Heading}}</td>
-            <td class="blue-text">{{data.Without_Program??data.With_Program}}</td>
-            <td class="blue-text">{{data.With_Program}}</td>
-            <td class="blue-text" colspan="2">{{data.Difference}}</td>
-            <td class="blue-text">{{data.Description}}</td>
+        <tr class="color-white roi-second-table-tr">
+            <td class="text-center roi-second-table-td">{{ costs['Counties'].conditions }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Counties'].county }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Counties'].costPerCase }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Counties'].utilityCostPerCase }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Counties'].rates }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Counties'].cases }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Counties'].healthCareCost}}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Counties'].utilityLoss }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Counties'].totalCost }}</td>
+        </tr>
+        <tr class="color-white roi-second-table-tr">
+            <td class="text-center roi-second-table-td">{{ costs['Totals'].conditions }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Totals'].county }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Totals'].costPerCase }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Totals'].utilityCostPerCase }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Totals'].rates }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Totals'].cases }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Totals'].healthCareCost}}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Totals'].utilityLoss }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Totals'].totalCost }}</td>
         </tr>
     </tbody>
-</table>
-<div class="table-buttons">
-    <!-- <button type="submit" (click)="downloadCSV('ROI Cost Result')" class="csv-button point mt-1"><mat-icon svgIcon="csv-icon"></mat-icon>Download CSV</button> -->
-</div>
+  </table>

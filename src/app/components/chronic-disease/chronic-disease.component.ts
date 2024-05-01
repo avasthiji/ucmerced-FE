@@ -7,7 +7,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {ConfirmationDialog} from '../dialog/confirmation-dialog.component';
 import { CalculatorService } from 'src/app/services/calculator.service';
-import {countiesList, diseaseList, ethnicityList, regionList, roiResultFormat, resultData, dummyROIResult} from '../../services/mockData'
+import {countiesList, diseaseList, ethnicityList, regionList, roiResultFormat, resultData, dummyROIResult, dummyUtilityCostResult} from '../../services/mockData'
 @Component({
     selector: 'app-chronic-disease',
     templateUrl: './chronic-disease.component.html',
@@ -58,6 +58,8 @@ export class ChronicDiseaseComponent implements OnInit {
     RESULTDATA = resultData;
     consolidateROIDATA: any[] = [];
     dummyROIResult = dummyROIResult;
+    dummyUtilityCostResult = dummyUtilityCostResult
+    consolidateCOSTDATA: any;
     constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
@@ -242,7 +244,8 @@ export class ChronicDiseaseComponent implements OnInit {
         })
     }
     utilityCost(isCSV = false) {
-       
+        this.showRoi = false
+        this.createUtilityData(this.dummyUtilityCostResult)
         const region = this.selectedRegions.map((obj)=> obj.id)
         const county = this.selectedCounties.map((obj)=> obj.id)
         const ethnicity = this.selectedEthnicity.map((obj: { id: any; })=> obj.id)
@@ -269,6 +272,8 @@ export class ChronicDiseaseComponent implements OnInit {
             this.calculatorService.utilityCost(data).subscribe(res=>{
                 this.createUtilityData(res)
                 this.showCost = true
+            },(err)=>{
+                this.createUtilityData(this.dummyUtilityCostResult)
             })
         }
         
@@ -276,6 +281,8 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     createUtilityData(data: any) {
         this.totalCostResponse = data
+        this.showCost = true
+        console.log(this.totalCostResponse)
     }
     checkIsDataAvailable(){
         if(this.Object.keys(this.totalCostResponse['Totals']).length > 0){
@@ -284,7 +291,9 @@ export class ChronicDiseaseComponent implements OnInit {
         return false
     }
     roiCalculator() {
-        this.createData(this.dummyROIResult)
+        this.showRoi = true
+        this.createData(this.dummyROIResult['Total'])
+        return
         const county = this.selectedCounties.map((obj)=> obj.id)
         const countyRegion = this.countiesList.find((obj: { id: any; })=> obj.id === county[0])
         const region = [countyRegion.region.id]
@@ -324,14 +333,47 @@ export class ChronicDiseaseComponent implements OnInit {
             //TO_DO for error handling
         })
     }
+    getCostData(i:number){
+        return this.consolidateCOSTDATA[i]
+    }
     createData(res: any) {
         //"Id":"CASES",
-        this.consolidateROIDATA = []
+        this.showRoi = true
+        this.consolidateROIDATA = [];
+        this.consolidateCOSTDATA = []
         let keys = Object.keys(res)
         for(let i = 0; i < keys.length ; i++){
             let keyName = keys[i]
             let roiData = this.ROIDATA
-            console.log("res[keyName]['totalCasesWithoutProgram']",res[keyName]['totalCasesWithoutProgram'])
+            let costObj:any = {}
+            costObj["county"]= res[keyName]['county'],
+            costObj["costPerCaseInitial"]= res[keyName]['costPerCaseInitial'],
+            costObj["costPerCaseAfterProgram"]= res[keyName]['costPerCaseAfterProgram']
+            costObj["costPerCaseDiff"]= res[keyName]['costPerCaseDiff']
+            costObj["utilityLossPerCaseInitial"]= res[keyName]['utilityLossPerCaseInitial']
+            costObj["utilityLossPerCaseAfterProgram"]= res[keyName]['utilityLossPerCaseAfterProgram']
+            costObj["utilityLossPerCaseDiff"]= res[keyName]['utilityLossPerCaseDiff']
+            costObj["ratesInitial"]= res[keyName]['ratesInitial']
+            costObj["ratesAfterProgram"]= res[keyName]['ratesAfterProgram']
+            costObj["ratesDiff"]= res[keyName]['ratesDiff']
+            costObj["populationInitial"]= res[keyName]['populationInitial']
+            costObj["populationAfterProgram"]= res[keyName]['populationAfterProgram']
+            costObj["populationDiff"]= res[keyName]['populationDiff']
+            costObj["casesInitial"]= res[keyName]['casesInitial']
+            costObj["casesAfterProgram"]= res[keyName]['casesAfterProgram']
+            costObj["casesDiff"]= res[keyName]['casesDiff']
+            costObj["utilityLossInitial"]= res[keyName]['utilityLossInitial']
+            costObj["utilityLossAfterProgram"]= res[keyName]['utilityLossAfterProgram']
+            costObj["utilityLossDiff"]= res[keyName]['utilityLossDiff']
+            costObj["healthCareCostInitial"]= res[keyName]['healthCareCostInitial']
+            costObj["healthCareCostAfterProgram"]= res[keyName]['healthCareCostAfterProgram']
+            costObj["healthCareCostDiff"]= res[keyName]['healthCareCostDiff']
+            costObj["totalCostInitial"]= res[keyName]['totalCostInitial']
+            costObj["totalCostAfterProgram"]= res[keyName]['totalCostAfterProgram']
+            costObj["totalCostDiff"]= res[keyName]['totalCostDiff']
+
+            this.consolidateCOSTDATA.push(costObj)
+
             roiData[0]['without_program'] = res[keyName]['totalCasesWithoutProgram']
             roiData[0]['With_Program']= res[keyName]['totalCasesWithProgram']
             roiData[0]['Difference']= res[keyName]['totalCasesDiff']
@@ -376,7 +418,6 @@ export class ChronicDiseaseComponent implements OnInit {
 
             this.consolidateROIDATA.push(roiData)
         }
-        console.log(this.consolidateROIDATA)
        
     }
     tabChanged(event: any): void {
