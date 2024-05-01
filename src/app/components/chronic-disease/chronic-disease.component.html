@@ -242,8 +242,10 @@
 
 <div  *ngIf="showRoi && !showCost" class="mt-5">
     <div *ngFor="let data of consolidateROIDATA ; let i = index">
-        <app-utility-cost [roiData]="data" [costData]="getCostData(i)"></app-utility-cost>
+        <app-utility-cost [roiData]="consolidateROIDATA[currentIndex]" [costData]="getCostData(currentIndex)"></app-utility-cost>
     </div>
+    <button (click)="previousData()" [disabled]="currentIndex === 0">Previous</button>
+<button (click)="nextData()" [disabled]="currentIndex === consolidateROIDATA.length - 1">Next</button>
 </div>
 <div  *ngIf="showCost && !showRoi" class="mt-5">
         <app-utility-cost-result [costs]="totalCostResponse" ></app-utility-cost-result>

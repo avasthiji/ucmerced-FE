@@ -47,7 +47,7 @@ export class ChronicDiseaseComponent implements OnInit {
     allDiseasesName: any = [];
     roiForm: FormGroup;
     showCost: boolean = false;
-    showRoi: boolean = true;
+    showRoi: boolean = false;
     availableCounties: any = [];
     totalCostResponse:any = { "Totals":{},"Counties":{}}
     regionList: any = [];
@@ -60,6 +60,7 @@ export class ChronicDiseaseComponent implements OnInit {
     dummyROIResult = dummyROIResult;
     dummyUtilityCostResult = dummyUtilityCostResult
     consolidateCOSTDATA: any;
+    currentIndex: number = 0;
     constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
@@ -535,4 +536,16 @@ export class ChronicDiseaseComponent implements OnInit {
             this.endAge = value;
         }
     }
+    nextData(): void {
+        if (this.currentIndex < this.consolidateROIDATA.length - 1) {
+          this.currentIndex++;
+        }
+      }
+    
+      // Method to navigate to the previous data
+      previousData(): void {
+        if (this.currentIndex > 0) {
+          this.currentIndex--;
+        }
+      }
 }
