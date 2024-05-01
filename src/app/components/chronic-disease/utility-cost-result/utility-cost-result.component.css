@@ -1,0 +1,102 @@
+.color-uc {
+    background-color: #002856;
+    color: white;
+    font-weight: 400;
+    border: none;
+  }
+  
+  .color-blue {
+    background-color: rgb(0, 122, 136);
+    color: white;
+    border: none;
+    font-weight: 400;
+  
+  }
+  
+  .color-grey {
+    background-color: grey;
+    color: white;
+    border: none;
+    font-weight: 400;
+  
+  }
+  
+  .color-yellow {
+    background-color: rgb(253, 251, 206);
+    color: #002856;
+    text-align: right !important;
+  }
+  
+  .blue-text {
+    color: #002856;
+    padding: 20px;
+  }
+  
+  .result-table {
+    margin: 0 16%;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+  
+  }
+  
+  th {
+    padding: 0px 30px;
+    text-align: left;
+  }
+  
+  .centered-text th,
+  .centered-text td {
+    text-align: center;
+  }
+  
+  .centered-text td:last-child {
+    text-align: left;
+  }
+  
+  .table-buttons {
+    display: flex;
+    justify-content: end;
+  }
+  
+  .csv-button {
+    border-radius: 10px;
+    width: 195px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E5E5E5;
+    color: #002856;
+    font: normal normal bold 15px / 27px Open Sans;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  
+  .left-margin {
+    margin-left: 10px;
+  }
+  
+  .table-border {
+    border: 1px solid grey;
+  }
+  
+  tr {
+    border: none;
+    margin-bottom: 10px;
+  }
+  
+  .radius {
+    border-radius: 4px;
+  }
+  table {
+    border-spacing: 8px; /* Adjust the value as desired for the amount of space */
+  }

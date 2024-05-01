@@ -14,19 +14,19 @@
   text-align: center;
 }
 
-  table {
+.roi-second-table {
     width: 100%;
     border-collapse: collapse;
   }
   
   /* For table headers */
-  th {
+  .roi-second-table-th {
     padding: 8px; /* Padding */
     text-align: left; /* Align text to the left */
   }
   
   /* For table cells */
-  td {
+  .roi-second-table-td {
     /* border: 1px solid #ddd; Gray border */
     padding: 8px; /* Padding */
     text-align: left; /* Align text to the left */
@@ -43,7 +43,7 @@
 .row-blue {
     background-color:#def9ff;
 }
-tbody tr {
+.roi-second-table-tr {
   margin-bottom: 10px; /* Adjust the value as desired */
 }
 

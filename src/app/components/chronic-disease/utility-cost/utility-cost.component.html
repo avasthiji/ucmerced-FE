@@ -1,22 +1,22 @@
-<table class="centered-text" id="utilityTable">
+<table class="centered-text roi-result-diff-table">
     <thead>
-        <tr>
+        <tr class="roi-result-diff-tr"> 
             <th colspan="3"></th>
-            <th colspan="3" class="color-grey radius">Without Program</th>
-            <th colspan="2" class="color-uc radius">With Program</th>
-            <th colspan="1" class="color-blue radius">Difference</th>
-            <th colspan="8" class="blue-text text-start radius">Description</th>
+            <th colspan="3" class="color-grey radius roi-result-diff-th">Without Program</th>
+            <th colspan="2" class="color-uc radius roi-result-diff-th">With Program</th>
+            <th colspan="1" class="color-blue radius roi-result-diff-th">Difference</th>
+            <th colspan="8" class="blue-text text-start radius roi-result-diff-th">Description</th>
         </tr>
         <tr>
         </tr>
     </thead>
     <tbody class="table-border">
-        <tr *ngFor="let data of roiData">
-            <td colspan="5" class="color-yellow blue-text fw-bold">{{data.Heading}}</td>
-            <td class="blue-text">{{data.Without_Program??data.With_Program}}</td>
-            <td class="blue-text">{{data.With_Program}}</td>
-            <td class="blue-text" colspan="2">{{data.Difference}}</td>
-            <td class="blue-text">{{data.Description}}</td>
+        <tr *ngFor="let data of roiData" class="roi-result-diff-tr">
+            <td colspan="5" class="color-yellow blue-text fw-bold roi-result-diff-td">{{data.Heading}}</td>
+            <td class="blue-text roi-result-diff-th">{{data.Without_Program??data.With_Program}}</td>
+            <td class="blue-text roi-result-diff-th">{{data.With_Program}}</td>
+            <td class="blue-text roi-result-diff-th" colspan="2">{{data.Difference}}</td>
+            <td class="blue-text roi-result-diff-th">{{data.Description}}</td>
         </tr>
     </tbody>
 </table>

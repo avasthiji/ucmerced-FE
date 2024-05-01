@@ -5,10 +5,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CalculatorService {
-  BaseURL:string= 'https://5ebc-2402-e280-2234-1f-411-560d-1b61-b5a0.ngrok-free.app/'
+  BaseURL:string= 'https://d4ba-2402-e280-2234-1f-d4ef-ab50-83f2-545.ngrok-free.app/'
   constructor(private http: HttpClient,) { }
 
   roiCalcuator(data:{}){
+    const headers= new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('ngrok-skip-browser-warning', 'true')
+  .set('Access-Control-Allow-Origin', '*');
     return this.http.post(`${this.BaseURL}/api/roiCalculator`,data)
   }
   utilityCost(data:any){

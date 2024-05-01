@@ -36,7 +36,7 @@
   margin: 0 16%;
 }
 
-table {
+.roi-result-diff-table {
   width: 100%;
   border-collapse: collapse;
 }
@@ -89,10 +89,7 @@ th {
   border: 1px solid grey;
 }
 
-tr {
-  border: none;
-  margin-bottom: 10px;
-}
+
 
 .radius {
   border-radius: 4px;

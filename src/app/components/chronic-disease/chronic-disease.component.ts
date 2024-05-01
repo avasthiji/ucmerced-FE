@@ -7,7 +7,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {ConfirmationDialog} from '../dialog/confirmation-dialog.component';
 import { CalculatorService } from 'src/app/services/calculator.service';
-import {countiesList, diseaseList, ethnicityList, regionList, roiResultFormat, resultData} from '../../services/mockData'
+import {countiesList, diseaseList, ethnicityList, regionList, roiResultFormat, resultData, dummyROIResult} from '../../services/mockData'
 @Component({
     selector: 'app-chronic-disease',
     templateUrl: './chronic-disease.component.html',
@@ -44,7 +44,6 @@ export class ChronicDiseaseComponent implements OnInit {
     utilityCostData: any = {};
     roiGuidelinesHeading = ['Condition(s)','County', 'Cost per case', 'Utility loss per case' , 'Rates', 'Cases', 'Health Care Cost', 'Utility loss', 'Total cost (Healthcare and utility loss)']
     resultHeading = ['Condition(s)', 'County', 'Cost per case', 'Utility loss per case', 'Rates', 'Population', 'Cases', 'Utility loss', 'Health Care Cost', 'Total cost (Healthcare and utility loss)']
-    investmentHeading = ['Without Program', 'With Program', 'Difference', 'Description']
     allDiseasesName: any = [];
     roiForm: FormGroup;
     showCost: boolean = false;
@@ -57,6 +56,8 @@ export class ChronicDiseaseComponent implements OnInit {
     countiesList: any = [];
     ROIDATA = roiResultFormat;
     RESULTDATA = resultData;
+    consolidateROIDATA: any[] = [];
+    dummyROIResult = dummyROIResult;
     constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
@@ -283,11 +284,10 @@ export class ChronicDiseaseComponent implements OnInit {
         return false
     }
     roiCalculator() {
-       
-        
+        this.createData(this.dummyROIResult)
         const county = this.selectedCounties.map((obj)=> obj.id)
         const countyRegion = this.countiesList.find((obj: { id: any; })=> obj.id === county[0])
-        const region = countyRegion.region.id
+        const region = [countyRegion.region.id]
         const ethnicity = this.selectedEthnicity.map((obj: { id: any; })=> obj.id)
         const disease = this.selectedDiseases.map((obj)=> obj.id)
        
@@ -318,54 +318,66 @@ export class ChronicDiseaseComponent implements OnInit {
 
         this.calculatorService.roiCalcuator(data).subscribe(res => {
             this.resultsData = res
-            this.createData(this.resultsData)
+            this.createData(this.resultsData['Total'])
         },(err)=>{
+            this.createData(this.dummyROIResult['Total'])
             //TO_DO for error handling
         })
     }
     createData(res: any) {
         //"Id":"CASES",
-        this.ROIDATA[0]['without_program'] = res['totalCasesWithoutProgram']
-        this.ROIDATA[0]['With_Program']= res['totalCasesWithProgram']
-        this.ROIDATA[0]['Difference']= res['totalCasesDiff']
+        this.consolidateROIDATA = []
+        let keys = Object.keys(res)
+        for(let i = 0; i < keys.length ; i++){
+            let keyName = keys[i]
+            let roiData = this.ROIDATA
+            console.log("res[keyName]['totalCasesWithoutProgram']",res[keyName]['totalCasesWithoutProgram'])
+            roiData[0]['without_program'] = res[keyName]['totalCasesWithoutProgram']
+            roiData[0]['With_Program']= res[keyName]['totalCasesWithProgram']
+            roiData[0]['Difference']= res[keyName]['totalCasesDiff']
+    
+            //"Id":"COSTS_WITHOUT_QALYS",
+            roiData[1]['without_program'] = res[keyName]['totalCostWithoutQalyWithoutProgram']
+            roiData[1]['With_Program']= res[keyName]['totalCostWithoutQalyWithProgram']
+            roiData[1]['Difference']= res[keyName]['totalCostWithoutQalyDiff']
+    
+            //"Id":"COSTS_QALYS",
+            roiData[2]['without_program'] = res[keyName]['totalCostWithQalyWithoutProgram']
+            roiData[2]['With_Program']= res[keyName]['totalCostWithQalyWithProgram']
+            roiData[2]['Difference']= res[keyName]['totalCostWithQalyDiff']
+    
+    
+            //"Id":"QALYS",
+            roiData[3]['without_program'] = res[keyName]['totalQaLYWithoutProgram']
+            roiData[3]['With_Program']= res[keyName]['totalQalyWithProgram']
+            roiData[3]['Difference']= res[keyName]['totalQalyDiff']
+    
+    
+            //"Id":"INVESTMENT",
+            roiData[4]['without_program'] = res[keyName]['investmentWithoutProgram']
+            roiData[4]['With_Program']= res[keyName]['investmentWithProgram']
+            roiData[4]['Difference']= res[keyName]['investmentDiff']
+    
+    
+            //"Id":"ROI_WITHOUT_QALYS",
+            roiData[5]['without_program'] = "-"
+            roiData[5]['With_Program']= res[keyName]['roiwithoutQaly']
+            roiData[5]['Difference']= res[keyName]['roiwithoutQaly']
+    
+            //"Id":"ROI_QALYS",
+            roiData[6]['without_program'] = "-"
+            roiData[6]['With_Program']= res[keyName]['roiwithQaly']
+            roiData[6]['Difference']= res[keyName]['roiwithQaly']
+    
+           // "Id":"ROI_DISCOUNT",
+            roiData[7]['without_program'] = res[keyName]['totalCasesWithoutProgram']
+            roiData[7]['With_Program']= res[keyName]['roidiscounted']
+            roiData[7]['Difference']= res[keyName]['roidiscounted']
 
-        //"Id":"COSTS_WITHOUT_QALYS",
-        this.ROIDATA[1]['without_program'] = res['totalCostWithoutQalyWithoutProgram']
-        this.ROIDATA[1]['With_Program']= res['totalCostWithoutQalyWithProgram']
-        this.ROIDATA[1]['Difference']= res['totalCostWithoutQalyDiff']
-
-        //"Id":"COSTS_QALYS",
-        this.ROIDATA[2]['without_program'] = res['totalCostWithQalyWithoutProgram']
-        this.ROIDATA[2]['With_Program']= res['totalCostWithQalyWithProgram']
-        this.ROIDATA[2]['Difference']= res['totalCostWithQalyDiff']
-
-
-        //"Id":"QALYS",
-        this.ROIDATA[3]['without_program'] = res['totalQaLYWithoutProgram']
-        this.ROIDATA[3]['With_Program']= res['totalQalyWithProgram']
-        this.ROIDATA[3]['Difference']= res['totalQalyDiff']
-
-
-        //"Id":"INVESTMENT",
-        this.ROIDATA[4]['without_program'] = res['investmentWithoutProgram']
-        this.ROIDATA[4]['With_Program']= res['investmentWithProgram']
-        this.ROIDATA[4]['Difference']= res['investmentDiff']
-
-
-        //"Id":"ROI_WITHOUT_QALYS",
-        this.ROIDATA[5]['without_program'] = "-"
-        this.ROIDATA[5]['With_Program']= res['roiwithoutQaly']
-        this.ROIDATA[5]['Difference']= res['roiwithoutQaly']
-
-        //"Id":"ROI_QALYS",
-        this.ROIDATA[0]['without_program'] = "-"
-        this.ROIDATA[0]['With_Program']= res['roiwithQaly']
-        this.ROIDATA[0]['Difference']= res['roiwithQaly']
-
-       // "Id":"ROI_DISCOUNT",
-        this.ROIDATA[0]['without_program'] = res['totalCasesWithoutProgram']
-        this.ROIDATA[0]['With_Program']= res['roidiscounted']
-        this.ROIDATA[0]['Difference']= res['roidiscounted']
+            this.consolidateROIDATA.push(roiData)
+        }
+        console.log(this.consolidateROIDATA)
+       
     }
     tabChanged(event: any): void {
         // You can perform actions based on tab change if needed

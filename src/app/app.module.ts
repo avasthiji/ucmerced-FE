@@ -25,6 +25,7 @@ import {ConfirmationDialog} from './components/dialog/confirmation-dialog.compon
 import {MatIconModule} from '@angular/material/icon';
 import { RoiResultsComponent } from './components/chronic-disease/roi-results/roi-results.component';
 import { UtilityCostComponent } from './components/chronic-disease/utility-cost/utility-cost.component';
+import { UtilityCostResultComponent } from './components/chronic-disease/utility-cost-result/utility-cost-result.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UtilityCostComponent } from './components/chronic-disease/utility-cost/
     ChronicDiseaseComponent,
     ConfirmationDialog,
     RoiResultsComponent,
-    UtilityCostComponent
+    UtilityCostComponent,
+    UtilityCostResultComponent
   ],
   imports: [
     BrowserModule,

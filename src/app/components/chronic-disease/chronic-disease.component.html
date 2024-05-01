@@ -280,7 +280,7 @@
         </div>
     </div>
 <div class="results" *ngIf="showRoi">
-    <!-- <table>
+    <table>
         <thead>
             <tr>
                 <th rowspan="1"></th>
@@ -328,38 +328,14 @@
         </thead>
         <tbody>
           <!-- Your dynamic data here -->
-        <!-- </tbody>
-      </table>  -->
-
-      <!-- <table>
-        <thead>
-            <tr >       
-                <th scope="col" *ngFor="let header of resultHeading" class="color-uc">
-                    {{header}}</th>
-
-              </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let row of getResultData()">
-                <td>{{ row.Conditions }}</td>
-                <td>{{ row.County }}</td>
-                <td>{{ row.Cost_per_case }}</td>
-                <td>{{ row.Utility_loss_per_case }}</td>
-                <td>{{ row.Rates }}</td>
-                <td>{{ row.Population }}</td>
-                <td>{{ row.Cases }}</td>
-                <td>{{ row.Utility_loss}}</td>
-                <td>{{ row.Health_Care_Cost }}</td>
-                <td>{{ row.Total_cost_Healthcare_and_utility_loss }}</td>
-            </tr>
         </tbody>
-      </table> -->
+      </table> 
       <br>
-    <app-roi-results [resultData]="RESULTDATA" [resultHeading]="resultHeading"></app-roi-results>
+    <!-- Roi Results table -->
+    <div *ngFor="let data of consolidateROIDATA">
+        <app-utility-cost [roiData]="data"></app-utility-cost>
+    </div>
     
-    <br><br><br><br>
-    <!-- Second table -->
-    <app-utility-cost [roiData]="ROIDATA"></app-utility-cost>
 </div>
 
 </article>
