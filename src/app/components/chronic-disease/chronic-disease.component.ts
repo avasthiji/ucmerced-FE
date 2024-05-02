@@ -274,7 +274,9 @@ export class ChronicDiseaseComponent implements OnInit {
                 this.createUtilityData(res)
                 this.showCost = true
             },(err)=>{
-                this.createUtilityData(this.dummyUtilityCostResult)
+                // this.createUtilityData(this.dummyUtilityCostResult)
+                this.showCost= false
+                alert("No Data Found")
             })
         }
         
@@ -327,7 +329,9 @@ export class ChronicDiseaseComponent implements OnInit {
             this.resultsData = res
             this.createData(this.resultsData['Total'])
         },(err)=>{
-            this.createData(this.dummyROIResult['Total'])
+            // this.createData(this.dummyROIResult['Total'])
+            this.showRoi= false
+            alert("No Data Found")
             //TO_DO for error handling
         })
     }
@@ -410,7 +414,7 @@ export class ChronicDiseaseComponent implements OnInit {
             roiData[6]['Difference']= res[keyName]['roiwithQaly']
     
            // "Id":"ROI_DISCOUNT",
-            roiData[7]['without_program'] = res[keyName]['totalCasesWithoutProgram']
+            roiData[7]['without_program'] = "-"
             roiData[7]['With_Program']= res[keyName]['roidiscounted']
             roiData[7]['Difference']= res[keyName]['roidiscounted']
 
