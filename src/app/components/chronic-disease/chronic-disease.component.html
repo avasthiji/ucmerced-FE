@@ -112,7 +112,8 @@
                         <div class="col-sm-3 agebox">
                             <div class="small-text">End</div>
                             <mat-form-field appearance="fill" class="age_box">
-                                <input matInput type="number" [(ngModel)]="endAge" min="1" max="80"  (ngModelChange)="onEndAgeChange($event)">
+                                <input matInput type="number" [(ngModel)]="endAge" min="1" max="80"
+                                    (ngModelChange)="onEndAgeChange($event)">
                             </mat-form-field>
                         </div>
                     </div>
@@ -240,26 +241,22 @@
     </div>
 
 
-<div  *ngIf="showRoi && !showCost" class="mt-5">
-    <div *ngFor="let data of consolidateROIDATA ; let i = index">
-        <div class="searchClass text-center">{{getHeading(i)}}</div>
-        <app-utility-cost [roiData]="consolidateROIDATA[currentIndex]" [costData]="getCostData(currentIndex)"></app-utility-cost>
-    </div>
-    <div *ngFor="let data of consolidateROIDATA ; let i = index" id="roiTable"  [hidden]="true">
-        <div class="searchClass text-center">{{getHeading(i)}}</div>
-        <app-utility-cost [roiData]="consolidateROIDATA[currentIndex]" [costData]="getCostData(currentIndex)"></app-utility-cost>
-    </div>
-    <button (click)="previousData()" [disabled]="currentIndex === 0">Previous</button>
-<button (click)="nextData()" [disabled]="currentIndex === consolidateROIDATA.length - 1">Next</button>
-</div>
-<div  *ngIf="showCost && !showRoi" class="mt-5">
-        <app-utility-cost-result [costs]="totalCostResponse" ></app-utility-cost-result>
-</div>
-<div *ngIf="(showCost || showRoi) && !showError">
-    <div class="table-buttons">
-        <button type="submit" (click)="downloadCSV()" class="csv-button point mt-1"><mat-icon svgIcon="csv-icon"></mat-icon>Download CSV</button>
-    </div>
-</div>
-<app-no-data-found *ngIf="showError"></app-no-data-found>
+    <div *ngIf="showRoi && !showCost" class="mt-5">
+        <div class="searchClass text-center">{{getHeading(currentIndex)}}</div>
+        <app-utility-cost [roiData]="consolidateROIDATA[currentIndex]"
+            [costData]="getCostData(currentIndex)"></app-utility-cost>
+        <button (click)="previousData()" [disabled]="currentIndex === 0">Previous</button>
+        <button (click)="nextData()" [disabled]="currentIndex === consolidateROIDATA.length - 1">Next</button>
 
+        <div class="table-buttons">
+            <button type="submit" (click)="exportToExcel()" class="csv-button point mt-1"><mat-icon
+                    svgIcon="csv-icon"></mat-icon>Download CSV</button>
+        </div>
+    </div>
+    <div *ngIf="showCost && !showRoi" class="mt-5">
+        <div>
+            <app-utility-cost-result [costs]="totalCostResponse"></app-utility-cost-result>
+        </div>
+    </div>
+    <app-no-data-found *ngIf="showError" [msg]="showError"></app-no-data-found>
 </article>

@@ -1,5 +1,5 @@
 
-<table class="roi-second-table" id="roiTable">
+<table class="roi-second-table" id="totalCostTable">
     <thead>
         <tr >       
             <th class="roi-second-table-th" scope="col" *ngFor="let header of resultHeading; let i=index" [ngClass]="{'color-uc': true, 'color-white': i === 0,'border-radius-left': i === 1, 'border-radius-right': i === (resultHeading.length - 1)}">                
@@ -13,7 +13,7 @@
             <td class="text-center roi-second-table-td">{{ costs['Counties'].conditions }}</td>
             <td class="text-center roi-second-table-td">{{ costs['Counties'].county }}</td>
             <td class="text-center roi-second-table-td">{{ costs['Counties'].costPerCase }}</td>
-            <td class="text-center roi-second-table-td">{{ costs['Counties'].utilityCostPerCase }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Counties'].utilityLossPerCase }}</td>
             <td class="text-center roi-second-table-td">{{ costs['Counties'].rates }}</td>
             <td class="text-center roi-second-table-td">{{ costs['Counties'].cases }}</td>
             <td class="text-center roi-second-table-td">{{ costs['Counties'].healthCareCost}}</td>
@@ -24,7 +24,7 @@
             <td class="text-center roi-second-table-td">{{ costs['Totals'].conditions }}</td>
             <td class="text-center roi-second-table-td">{{ costs['Totals'].county }}</td>
             <td class="text-center roi-second-table-td">{{ costs['Totals'].costPerCase }}</td>
-            <td class="text-center roi-second-table-td">{{ costs['Totals'].utilityCostPerCase }}</td>
+            <td class="text-center roi-second-table-td">{{ costs['Totals'].utilityLossPerCase }}</td>
             <td class="text-center roi-second-table-td">{{ costs['Totals'].rates }}</td>
             <td class="text-center roi-second-table-td">{{ costs['Totals'].cases }}</td>
             <td class="text-center roi-second-table-td">{{ costs['Totals'].healthCareCost}}</td>
@@ -33,3 +33,6 @@
         </tr>
     </tbody>
   </table>
+  <div class="table-buttons">
+    <button type="submit" (click)="downloadCSV()" class="csv-button point mt-1"><mat-icon svgIcon="csv-icon"></mat-icon>Download CSV</button>
+</div>

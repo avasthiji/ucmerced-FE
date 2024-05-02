@@ -686,7 +686,7 @@ export const dummyROIResult =
             "totalCostAfterProgram": 0.0,
             "totalCostDiff": 0.0,
             "totalCasesWithProgram": 799,
-            "totalCasesWithoutProgram": 887,
+            "totalCasesWithoutProgram": 883337,
             "totalCasesDiff": 88,
             "totalCostWithoutQalyWithProgram": 3995000.0,
             "totalCostWithoutQalyWithoutProgram": 4435000.0,

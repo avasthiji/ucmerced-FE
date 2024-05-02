@@ -15,7 +15,4 @@ export class UtilityCostComponent implements OnInit {
   }
 ngAfterViewInit(){
 }
-
-
-  
 }
