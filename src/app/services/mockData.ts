@@ -566,65 +566,52 @@ export const roiResultFormat: any = [
     {   
         "Id":"CASES",
         "Heading": "Cases in 10 years",
-        "without_program": 937,
-        "With_Program": 838,
-        "Difference": 21,
+    
         "Description": "The number of cases of the chronic disease(s) that your target group will have in 'X' years with and without the program",
     },
     {
         "Id":"COSTS_WITHOUT_QALYS",
         "Heading": "Total costs over 10 years (without QALYs)",
-        "Without_Program": 5832,
-        "With_Program": 5752,
-        "Difference": 22,
+    
         "Description": "Total cost of the chronic disease(s) for your target group with and without the program.",
     },
     {
         "Id":"COSTS_QALYS",
         "Heading": "Total costs over 'X' years (with QALYs)",
-        "Without_Program": 50000,
-        "With_Program": 50000,
-        "Difference": 23,
+
         "Description": "",
     },
     {
         "Id":"QALYS",
         "Heading": "Total QALYs over 'X' years",
-        "Without_Program": 50000,
-        "With_Program": 50000,
-        "Difference": 24,
+ 
         "Description": "Total QALYs for your target group with and without the program.",
     },
     {
         "Id":"INVESTMENT",
         "Heading": "Total Investment",
-        "Without_Program": 50000,
-        "With_Program": 50000,
-        "Difference": 25,
+
         "Description": "Initial cost of your program + Ongoing cost of your program",
     },
     {
         "Id":"ROI_WITHOUT_QALYS",
         "Heading": "Return on investment (without QALYs)",
         "Without_Program": "-",
-        "With_Program": 50000,
-        "Difference": 23,
+  
         "Description": "(Total Cost without Program - Total Cost with Program)/Investment",
     },
     {
         "Id":"ROI_QALYS",
         "Heading": "Return on investment (with QALYs)",
         "Without_Program": "-",
-        "With_Program": 50000,
-        "Difference": 24,
+  
         "Description": "[(Total Cost without Program - Total Cost with Program)+(Total utility loss without program - Total utility loss with program) X Value of QALY]/Investment",
     },
     {
         "Id":"ROI_DISCOUNT",
         "Heading": "Return on investment (with Discounting)",
         "Without_Program": "-",
-        "With_Program": 50000,
-        "Difference": 25,
+   
         "Description": "Return on investment with the QALYs but with all future cost savings and utility savings discounted at the rate of 3%",
     },
 ]
