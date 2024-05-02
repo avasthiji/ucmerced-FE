@@ -246,7 +246,7 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     utilityCost(isCSV = false) {
         this.showRoi = false
-        this.createUtilityData(this.dummyUtilityCostResult)
+        // this.createUtilityData(this.dummyUtilityCostResult)
         const region = this.selectedRegions.map((obj)=> obj.id)
         const county = this.selectedCounties.map((obj)=> obj.id)
         const ethnicity = this.selectedEthnicity.map((obj: { id: any; })=> obj.id)
@@ -292,9 +292,6 @@ export class ChronicDiseaseComponent implements OnInit {
         return false
     }
     roiCalculator() {
-        this.showRoi = true
-        this.createData(this.dummyROIResult['Total'])
-        return
         const county = this.selectedCounties.map((obj)=> obj.id)
         const countyRegion = this.countiesList.find((obj: { id: any; })=> obj.id === county[0])
         const region = [countyRegion.region.id]
