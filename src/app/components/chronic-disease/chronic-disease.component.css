@@ -103,14 +103,7 @@
     letter-spacing: 0px;
     opacity: 1;
 }
-.searchClass {
-    text-align: left;
-    font: normal normal 42px / 60px Bebas Neue;
-    letter-spacing: 0px;
-    color: #002856;
-    opacity: 1;
-    text-transform: uppercase;
-}
+
 
 
 .underLine {
@@ -584,4 +577,7 @@ table {
   }
   .blue-text{
     color: #002856;
+  }
+  .extra-hide{
+    visibility: hidden;
   }

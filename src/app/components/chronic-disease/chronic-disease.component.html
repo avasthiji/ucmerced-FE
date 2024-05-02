@@ -242,6 +242,11 @@
 
 <div  *ngIf="showRoi && !showCost" class="mt-5">
     <div *ngFor="let data of consolidateROIDATA ; let i = index">
+        <div class="searchClass text-center">{{getHeading(i)}}</div>
+        <app-utility-cost [roiData]="consolidateROIDATA[currentIndex]" [costData]="getCostData(currentIndex)"></app-utility-cost>
+    </div>
+    <div *ngFor="let data of consolidateROIDATA ; let i = index" id="roiTable"  [hidden]="true">
+        <div class="searchClass text-center">{{getHeading(i)}}</div>
         <app-utility-cost [roiData]="consolidateROIDATA[currentIndex]" [costData]="getCostData(currentIndex)"></app-utility-cost>
     </div>
     <button (click)="previousData()" [disabled]="currentIndex === 0">Previous</button>
@@ -250,5 +255,11 @@
 <div  *ngIf="showCost && !showRoi" class="mt-5">
         <app-utility-cost-result [costs]="totalCostResponse" ></app-utility-cost-result>
 </div>
+<div *ngIf="(showCost || showRoi) && !showError">
+    <div class="table-buttons">
+        <button type="submit" (click)="downloadCSV()" class="csv-button point mt-1"><mat-icon svgIcon="csv-icon"></mat-icon>Download CSV</button>
+    </div>
+</div>
+<app-no-data-found *ngIf="showError"></app-no-data-found>
 
 </article>

@@ -26,6 +26,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { RoiResultsComponent } from './components/chronic-disease/roi-results/roi-results.component';
 import { UtilityCostComponent } from './components/chronic-disease/utility-cost/utility-cost.component';
 import { UtilityCostResultComponent } from './components/chronic-disease/utility-cost-result/utility-cost-result.component';
+import { NoDataFoundComponent } from './components/chronic-disease/no-data-found/no-data-found.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UtilityCostResultComponent } from './components/chronic-disease/utility
     ConfirmationDialog,
     RoiResultsComponent,
     UtilityCostComponent,
-    UtilityCostResultComponent
+    UtilityCostResultComponent,
+    NoDataFoundComponent
   ],
   imports: [
     BrowserModule,

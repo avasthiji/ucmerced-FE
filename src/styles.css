@@ -51,3 +51,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .point{
   cursor: pointer;
   }
+  .searchClass {
+    text-align: left;
+    font: normal normal 42px / 60px Bebas Neue;
+    letter-spacing: 0px;
+    color: #002856;
+    opacity: 1;
+    text-transform: uppercase;
+}

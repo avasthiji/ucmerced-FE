@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectChange } from '@angular/material/select';
-// import { CalculatorService } from 'src/app/services/calculator.service';
-import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {ConfirmationDialog} from '../dialog/confirmation-dialog.component';
 import { CalculatorService } from 'src/app/services/calculator.service';
 import {countiesList, diseaseList, ethnicityList, regionList, roiResultFormat, resultData, dummyROIResult, dummyUtilityCostResult} from '../../services/mockData'
+import { CsvExportServiceService } from 'src/app/services/csv-export-service.service';
 @Component({
     selector: 'app-chronic-disease',
     templateUrl: './chronic-disease.component.html',
@@ -61,7 +58,8 @@ export class ChronicDiseaseComponent implements OnInit {
     dummyUtilityCostResult = dummyUtilityCostResult
     consolidateCOSTDATA: any;
     currentIndex: number = 0;
-    constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService) {
+    showError: boolean = false;
+    constructor(private fb: FormBuilder,private dialog: MatDialog,private calculatorService : CalculatorService,private csvExportService: CsvExportServiceService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
             initialProgramCosts: ['', Validators.required],
@@ -202,7 +200,6 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     getRegions(){
         this.calculatorService.getRegions().subscribe(res=>{
-            console.log("res")
             this.regionList = res
         },(err)=>{
             this.regionList = regionList
@@ -210,7 +207,6 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     getEthnicity(){
         this.calculatorService.getEthnicity().subscribe(res=>{
-            console.log("res")
             this.ethnicityList = res
         },(err)=>{
             this.ethnicityList = ethnicityList
@@ -218,7 +214,6 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     getDiseases(){
         this.calculatorService.getDiseases().subscribe(res=>{
-            console.log("res")
             this.diseaseList = res
         },(err)=>{
             this.diseaseList = diseaseList
@@ -226,7 +221,6 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     getCounties(){
         this.calculatorService.getCounties().subscribe(res=>{
-            console.log("res")
             this.countiesList = res
             this.availableCounties = res
         },(err)=>{
@@ -246,6 +240,8 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     utilityCost(isCSV = false) {
         this.showRoi = false
+        this.showError = false
+        this.showCost = false
         // this.createUtilityData(this.dummyUtilityCostResult)
         const region = this.selectedRegions.map((obj)=> obj.id)
         const county = this.selectedCounties.map((obj)=> obj.id)
@@ -272,11 +268,11 @@ export class ChronicDiseaseComponent implements OnInit {
         }else{
             this.calculatorService.utilityCost(data).subscribe(res=>{
                 this.createUtilityData(res)
-                this.showCost = true
             },(err)=>{
                 // this.createUtilityData(this.dummyUtilityCostResult)
                 this.showCost= false
-                alert("No Data Found")
+                this.showError = true
+                this.showRoi = false
             })
         }
         
@@ -284,8 +280,9 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     createUtilityData(data: any) {
         this.totalCostResponse = data
-        this.showCost = true
-        console.log(this.totalCostResponse)
+        this.showCost = true 
+         this.showRoi = false
+        this.showError = false
     }
     checkIsDataAvailable(){
         if(this.Object.keys(this.totalCostResponse['Totals']).length > 0){
@@ -294,6 +291,9 @@ export class ChronicDiseaseComponent implements OnInit {
         return false
     }
     roiCalculator() {
+        this.showRoi = false
+        this.showError = false
+        this.showCost = false
         const county = this.selectedCounties.map((obj)=> obj.id)
         const countyRegion = this.countiesList.find((obj: { id: any; })=> obj.id === county[0])
         const region = [countyRegion.region.id]
@@ -329,10 +329,9 @@ export class ChronicDiseaseComponent implements OnInit {
             this.resultsData = res
             this.createData(this.resultsData['Total'])
         },(err)=>{
-            // this.createData(this.dummyROIResult['Total'])
-            this.showRoi= false
-            alert("No Data Found")
-            //TO_DO for error handling
+            this.showRoi = false
+            this.showError = true
+            this.showCost = false
         })
     }
     getCostData(i:number){
@@ -341,6 +340,8 @@ export class ChronicDiseaseComponent implements OnInit {
     createData(res: any) {
         //"Id":"CASES",
         this.showRoi = true
+        this.showError = false
+        this.showCost = false
         this.consolidateROIDATA = [];
         this.consolidateCOSTDATA = []
         let keys = Object.keys(res)
@@ -379,6 +380,8 @@ export class ChronicDiseaseComponent implements OnInit {
             roiData[0]['without_program'] = res[keyName]['totalCasesWithoutProgram']
             roiData[0]['With_Program']= res[keyName]['totalCasesWithProgram']
             roiData[0]['Difference']= res[keyName]['totalCasesDiff']
+            roiData[0]['title']= keys[i]
+    
     
             //"Id":"COSTS_WITHOUT_QALYS",
             roiData[1]['without_program'] = res[keyName]['totalCostWithoutQalyWithoutProgram']
@@ -421,6 +424,9 @@ export class ChronicDiseaseComponent implements OnInit {
             this.consolidateROIDATA.push(roiData)
         }
        
+    }
+    getHeading(index:number){
+        return this.consolidateROIDATA[index][0]['title']
     }
     tabChanged(event: any): void {
         // You can perform actions based on tab change if needed
@@ -470,13 +476,6 @@ export class ChronicDiseaseComponent implements OnInit {
           })
           this.tabs = []
       }
-    getRoiGuidelinesHeading() {
-        return this.roiGuidelinesHeading;
-    }
-    getRoiGuidelinesData() {
-        return this.roiGuidelinesData;
-    }
-
 
     copyTable() {
         const table = document.getElementById('userTable1');
@@ -507,11 +506,7 @@ export class ChronicDiseaseComponent implements OnInit {
         } else {
             console.error('Table element with ID "userTable1" not found.');
         }
-    }
-
-    downloadCSV(fileName: string) {
-        this.utilityCost(true)
-    }      
+    } 
     convertTableToCSV(table: HTMLElement): string {
         let csvContent = '';
         const rows = table.querySelectorAll('tr');
@@ -548,5 +543,42 @@ export class ChronicDiseaseComponent implements OnInit {
         if (this.currentIndex > 0) {
           this.currentIndex--;
         }
+      }
+      downloadCSV() {
+        const tableElement = document.getElementById('roiTable');
+  const fileName = 'roiTable'
+  if (tableElement) {
+      const table = tableElement as HTMLTableElement;
+
+      const csvData: string[] = [];
+
+      Array.from(table.rows).forEach(row => {
+          const csvRow: string[] = [];
+          Array.from(row.cells).forEach(cell => {
+              const cellData = cell.textContent ? cell.textContent.replace(/"/g, '""') : '';
+              csvRow.push(`"${cellData}"`);
+          });
+          csvData.push(csvRow.join(','));
+      });
+
+      const csvContent = csvData.join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${fileName}.csv`;
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      URL.revokeObjectURL(url);
+      
+  } else {
+      console.error('Table element with ID "roiTable" not found.');
+  }
       }
 }
