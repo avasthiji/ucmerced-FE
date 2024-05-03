@@ -366,7 +366,7 @@ export class ChronicDiseaseComponent implements OnInit {
         const ethnicity = this.selectedEthnicity.map((obj: { id: any; }) => obj.id)
         const disease = this.selectedDiseases.map((obj) => obj.id)
 
-        const sex = []
+        const sex:any = []
         if (this.isFemaleChecked) {
             sex.push('Female')
         }
@@ -442,7 +442,7 @@ export class ChronicDiseaseComponent implements OnInit {
             this.diseaseMsg = 'Diseases are required';
             count++;
         }
-        const sex = []
+        const sex:any = []
         if (this.isFemaleChecked) {
             sex.push('Female')
         }

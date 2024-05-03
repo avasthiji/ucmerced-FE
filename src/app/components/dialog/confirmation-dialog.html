@@ -3,12 +3,12 @@
 <h4 class="clearselect point" *ngIf="!isSelectionRadio(data)" (click)="slectAll()">
     select all | &nbsp;
 </h4>
-<mat-dialog-content>
+<div>
     <h4 class="box_title">
         {{message}}
     </h4>
 
-</mat-dialog-content>
+</div>
 <div class="row max-row">
     <div class="col-sm-12 col-md-6 col-lg-6" *ngFor="let data of dataList">
         <div>
