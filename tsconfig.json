@@ -16,19 +16,17 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2018",
-    "module": "ES2020",
+    "target": "ES2015",
+    "module": "ES2015",
     "lib": [
-      "es2018",
+      "es2015",
       "dom"
     ],
-    "types": ["node"],
     "paths": {
       "exceljs": [
         "node_modules/exceljs/dist/exceljs.min"
       ]
-    },
-    
+    }
   },
   "files": [
     "src/main.ts",

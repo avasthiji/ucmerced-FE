@@ -5,9 +5,9 @@ import { ConfirmationDialog } from '../dialog/confirmation-dialog.component';
 import { CalculatorService } from 'src/app/services/calculator.service';
 import { countiesList, diseaseList, ethnicityList, regionList, roiResultFormat, resultData, dummyROIResult, dummyUtilityCostResult } from '../../services/mockData'
 import { CsvExportServiceService } from 'src/app/services/csv-export-service.service';
-import * as ExcelJS from "exceljs";
 
-
+import { Workbook } from 'exceljs';
+import * as fs from 'file-saver';
 @Component({
     selector: 'app-chronic-disease',
     templateUrl: './chronic-disease.component.html',
@@ -647,9 +647,9 @@ export class ChronicDiseaseComponent implements OnInit {
             this.currentIndex--;
         }
     }
-
+    
     exportToExcel(): void {
-        const workbook = new ExcelJS.Workbook();
+        let workbook = new Workbook();
         for (let i = 0; i < this.consolidateROIDATA.length; i++) {
             const worksheet = workbook.addWorksheet(this.consolidateROIDATA[i][0]['title']);
             worksheet.addRow(['Conditon(s)', 'County', 'Cost per case', 'Utility loss per case', 'Rates', 'Population', 'Cases', 'Utility Loss', 'Health Care Costs', 'Total Cost']);
@@ -704,23 +704,28 @@ export class ChronicDiseaseComponent implements OnInit {
             }
 
         }
-        workbook.csv.writeBuffer().then((data: any) => {
-            const blob = new Blob([data], {
-                type:
-                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        workbook.xlsx.writeBuffer().then((data) => {
+            let blob = new Blob([data], {
+              type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             });
-            let url = window.URL.createObjectURL(blob);
-            let a = document.createElement("a");
-            document.body.appendChild(a);
-            a.setAttribute("style", "display: none");
-            a.href = url;
-            a.download = "export.csv";
-            a.click();
-            window.URL.revokeObjectURL(url);
-            a.remove();
-        });
+            fs.saveAs(blob, 'my_multi_sheet_doc.xlsx');
+          });
+        // workbook.csv.writeBuffer().then((data: any) => {
+        //     const blob = new Blob([data], {
+        //         type:
+        //             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        //     });
+        //     let url = window.URL.createObjectURL(blob);
+        //     let a = document.createElement("a");
+        //     document.body.appendChild(a);
+        //     a.setAttribute("style", "display: none");
+        //     a.href = url;
+        //     a.download = "export.csv";
+        //     a.click();
+        //     window.URL.revokeObjectURL(url);
+        //     a.remove();
+        // });
 
 
     }
-
 }
