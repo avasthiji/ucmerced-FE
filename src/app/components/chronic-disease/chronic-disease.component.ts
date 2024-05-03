@@ -31,8 +31,8 @@ export class ChronicDiseaseComponent implements OnInit {
     selectedCounty: { name: '' } = {
         name: ''
     }
-    endAge = 0
-    startAge = 0
+    endAge:any = 0
+    startAge:any = 0
 
 
     tabs: any = [];
@@ -442,13 +442,6 @@ export class ChronicDiseaseComponent implements OnInit {
             this.diseaseMsg = 'Diseases are required';
             count++;
         }
-        
-        const county = this.selectedCounties.map((obj) => obj.id)
-        const countyRegion = this.countiesList.find((obj: { id: any; }) => obj.id === county[0])
-        const region = [countyRegion.region.id]
-        const ethnicity = this.selectedEthnicity.map((obj: { id: any; }) => obj.id)
-        const disease = this.selectedDiseases.map((obj) => obj.id)
-
         const sex = []
         if (this.isFemaleChecked) {
             sex.push('Female')
@@ -467,6 +460,13 @@ export class ChronicDiseaseComponent implements OnInit {
         if(count > 0){
             return 
         }
+        const county = this.selectedCounties.map((obj) => obj.id)
+        const countyRegion = this.countiesList.find((obj: { id: any; }) => obj.id === county[0])
+        const region = [countyRegion.region.id]
+        const ethnicity = this.selectedEthnicity.map((obj: { id: any; }) => obj.id)
+        const disease = this.selectedDiseases.map((obj) => obj.id)
+
+       
         let data = {
             "county": county.join(","),
             "region": region.join(","),
@@ -582,23 +582,6 @@ export class ChronicDiseaseComponent implements OnInit {
 
         return this.consolidateROIDATA[index][0]['title']
     }
-    tabChanged(event: any): void {
-        this.showCost = false
-    }
-
-    getValue(data: any) {
-        return data
-    }
-    getTableHeadings(data: any) {
-        return Object.keys(data.value[0])
-    }
-    getTableRecords(data: any) {
-        return data.value
-    }
-    getDiseaseValue(diseaseName: string) {
-        // console.log(diseaseName)
-        return this.utilityCostData.diseases.find((obj: any) => obj.name === diseaseName)
-    }
     doReset() {
         window.location.reload();
     }
@@ -626,6 +609,15 @@ export class ChronicDiseaseComponent implements OnInit {
             ele['checked'] = false
         })
         this.tabs = []
+        this.showCost = false
+        this.showRoi = false
+        this.showError = ''
+        this.ageMsg = '';
+        this.genderMsg = '';
+         this.diseaseMsg = '';
+         this.countiesMsg = '';
+         this.regionMsg = '';
+         this.ethnicityMsg = '';
     }
 
     onEndAgeChange(value: number) {
@@ -710,22 +702,6 @@ export class ChronicDiseaseComponent implements OnInit {
             });
             fs.saveAs(blob, 'my_multi_sheet_doc.xlsx');
           });
-        // workbook.csv.writeBuffer().then((data: any) => {
-        //     const blob = new Blob([data], {
-        //         type:
-        //             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        //     });
-        //     let url = window.URL.createObjectURL(blob);
-        //     let a = document.createElement("a");
-        //     document.body.appendChild(a);
-        //     a.setAttribute("style", "display: none");
-        //     a.href = url;
-        //     a.download = "export.csv";
-        //     a.click();
-        //     window.URL.revokeObjectURL(url);
-        //     a.remove();
-        // });
-
 
     }
 }
