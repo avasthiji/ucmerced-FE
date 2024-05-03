@@ -581,3 +581,10 @@ table {
   .extra-hide{
     visibility: hidden;
   }
+  .error-msg{
+    color: red;
+    text-align: left;
+    margin-bottom: 3px;
+    font-weight: 600;
+    margin-top: -20px;
+  }

@@ -22,7 +22,7 @@
     </div>
 </div>
 <div class="button-actions">
-    <button mat-raised-button color="primary" class="ok_button point" (click)="onConfirmClick()"
+    <button color="primary" class="ok_button point" (click)="onConfirmClick()"
         tabindex="1">{{confirmButtonText}}</button>
-    <button mat-raised-button mat-dialog-close class="cancle_btn point" tabindex="-1">{{cancelButtonText}}</button>
+    <button class="cancle_btn point" (click)="onCancelClick()" tabindex="-1">{{cancelButtonText}}</button>
 </div>

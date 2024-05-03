@@ -62,6 +62,15 @@ export class ChronicDiseaseComponent implements OnInit {
     consolidateCOSTDATA: any;
     currentIndex: number = 0;
     showError: string = '';
+    ageMsg: string = '';
+    genderMsg: string = '';
+    diseaseMsg: string = '';
+    countiesMsg: string = '';
+    regionMsg: string = '';
+    ethnicityMsg: string = '';
+    
+
+
     constructor(private fb: FormBuilder, private dialog: MatDialog, private calculatorService: CalculatorService, private csvExportService: CsvExportServiceService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
@@ -74,18 +83,7 @@ export class ChronicDiseaseComponent implements OnInit {
             programDuration: ['', Validators.required],
             valueOfQALY: ['', Validators.required]
         });
-        this.ethnicityList.forEach((ele: { [x: string]: boolean; }) => {
-            ele['checked'] = false
-        })
-        this.regionList.forEach((ele: { [x: string]: boolean; }) => {
-            ele['checked'] = false
-        })
-        this.countiesList.forEach((ele: { [x: string]: boolean; }) => {
-            ele['checked'] = false
-        })
-        this.diseaseList.forEach((ele: { [x: string]: boolean; }) => {
-            ele['checked'] = false
-        })
+       
     }
     roiGuidelinesData = [
         {
@@ -131,66 +129,131 @@ export class ChronicDiseaseComponent implements OnInit {
     setActiveTab(tab: any) {
         this.activeTab = tab;
     }
-    removeEthnicity(ethnicityToRemove: any): void {
-        this.selectedEthnicity = this.selectedEthnicity.filter((selectedEthnicity: any) => selectedEthnicity !== ethnicityToRemove);
-    }
     openDialog(data: any) {
 
         var messagetype = ''
         var selectedItems;
-        var dataListtype = this.ethnicityList
+        var dataListtype: any[] = []
         if (data == 'ethnicity') {
             messagetype = 'ETHNICITY'
-            dataListtype = this.ethnicityList
+            dataListtype = [...this.ethnicityList]
         } else if (data == 'region') {
             messagetype = 'REGIONS'
-            dataListtype = this.regionList
+            dataListtype = [...this.regionList]
         } else if (data == 'counties') {
             messagetype = 'COUNTIES'
-            dataListtype = this.availableCounties
+            dataListtype = [...this.availableCounties]
         } else if (data == 'disease') {
             messagetype = 'DISEASES'
-            dataListtype = this.diseaseList
+            dataListtype = [...this.diseaseList]
 
         }
         const dialogRef = this.dialog.open(ConfirmationDialog, {
             maxHeight: "90vh",
             data: {
                 message: messagetype,
-                dataList: dataListtype,
+                dataList: [...dataListtype],
                 search: this.selectedSearch
             }
         });
         dialogRef.afterClosed().subscribe((selectedItems: any) => {
-            if (selectedItems.length == 0) {
-                return
-            }
             if (messagetype == 'ETHNICITY') {
-                this.selectedEthnicity = selectedItems;
+              
+                this.selectedEthnicity = selectedItems.length === 0 ? this.selectedEthnicity : selectedItems;
+                this.ethnicityList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                    let index = this.selectedEthnicity.find((obj: { id: any; }) => obj.id === ele.id)
+                    if (index) {
+                        ele['checked'] = true
+                    }
+                })
+                console.log("171",this.ethnicityList)
             }
             else if (messagetype == 'REGIONS') {
-                this.selectedRegions = selectedItems
+                this.selectedRegions = selectedItems.length === 0 ? this.selectedRegions : selectedItems;
+                this.regionList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                    let index = this.selectedRegions.find((obj: { id: any; }) => obj.id === ele.id)
+                    if (index) {
+                        ele['checked'] = true
+                    }
+                })
                 this.onRegionSelectionChange(this.selectedRegions)
             } else if (messagetype == 'COUNTIES') {
-                this.selectedCounties = selectedItems
+                this.selectedCounties = selectedItems.length === 0 ? this.selectedCounties : selectedItems;
+                this.countiesList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                    let index = this.selectedCounties.find((obj: { id: any; }) => obj.id === ele.id)
+                    if (index) {
+                        ele['checked'] = true
+                    }
+                })
                 // }
             } else if (messagetype == 'DISEASES') {
-                this.selectedDiseases = selectedItems
+                this.selectedDiseases = selectedItems.length === 0 ? this.selectedDiseases : selectedItems;
+                this.diseaseList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                    let index = this.selectedDiseases.find((obj: { id: any; }) => obj.id === ele.id)
+                    if (index) {
+                        ele['checked'] = true
+                    }
+                })
             }
         });
     }
-    removeItemFromArray(item: any, array: any[], arrayName = ''): void {
-        const index = array.indexOf(item);
-        if (index !== -1) {
-            array.splice(index, 1);
-        }
-        if (arrayName === 'region') {
-            this.onRegionSelectionChange(array)
+    removeItemFromArray(item: any,arrayName = ''): void {
+        if (arrayName === 'REGIONS') {
+            const index = this.selectedRegions.findIndex((obj: { id: any; })=>obj.id === item.id)
+            if (index !== -1) {
+                this.selectedRegions.splice(index, 1);
+            }
+            this.regionList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                let index = this.selectedRegions.findIndex((obj: { id: any; }) => obj.id === ele.id)
+                ele['checked'] = false
+                if (index) {
+                    ele['checked'] = true
+                }
+            })
+            this.onRegionSelectionChange(this.selectedRegions)
+        } if (arrayName === 'ETHNICITY') {
+            const index = this.selectedEthnicity.findIndex((obj: any)=>obj.id === item.id)
+            if (index !== -1) {
+                this.selectedEthnicity.splice(index, 1);
+            }
+            this.ethnicityList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                let index =  this.selectedEthnicity.findIndex((obj: { id: any; }) => obj.id === ele.id)
+                ele['checked'] = false
+                if (index > -1) {
+                    ele['checked'] = true
+                }
+                console.log(this.ethnicityList)
+            })
+            console.log(this.ethnicityList)
+        } if (arrayName === 'COUNTIES') {
+            const index = this.selectedCounties.findIndex((obj: { id: any; })=>obj.id === item.id)
+            if (index !== -1) {
+                this.selectedCounties.splice(index, 1);
+            }
+            this.countiesList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                let index = this.selectedCounties.findIndex((obj: { id: any; }) => obj.id === ele.id)
+                ele['checked'] = false
+                if (index) {
+                    ele['checked'] = true
+                }
+            })
+        } if (arrayName === 'DISEASES') {
+            const index = this.selectedDiseases.findIndex((obj: { id: any; })=>obj.id === item.id)
+            if (index !== -1) {
+                this.selectedDiseases.splice(index, 1);
+            }
+            this.diseaseList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                let index =this.selectedDiseases.findIndex((obj: { id: any; }) => obj.id === ele.id)
+                ele['checked'] = false
+                if (index) {
+                    ele['checked'] = true
+                }
+            })
         }
     }
-    removeItem(event: Event, item: any, array: any[], arrayName = ''): void {
-        event.stopPropagation(); // Prevent propagation of the click event
-        this.removeItemFromArray(item, array, arrayName);
+    removeItem(event: Event, item: any, arrayName = ''): void {
+        event.stopPropagation()
+        this.removeItemFromArray(item, arrayName);
     }
     ngOnInit(): void {
         this.getEthnicity()
@@ -202,30 +265,60 @@ export class ChronicDiseaseComponent implements OnInit {
     getRegions() {
         this.calculatorService.getRegions().subscribe(res => {
             this.regionList = res
+            this.regionList.forEach((ele: { [x: string]: boolean; }) => {
+                ele['checked'] = false
+            })
         }, (err) => {
             this.regionList = regionList
+            this.regionList.forEach((ele: { [x: string]: boolean; }) => {
+                ele['checked'] = false
+            })
         })
+      
     }
     getEthnicity() {
         this.calculatorService.getEthnicity().subscribe(res => {
             this.ethnicityList = res
+            this.ethnicityList.forEach((ele: { [x: string]: boolean; }) => {
+                ele['checked'] = false
+            })
         }, (err) => {
             this.ethnicityList = ethnicityList
+            this.ethnicityList.forEach((ele: { [x: string]: boolean; }) => {
+                ele['checked'] = false
+            })
         })
+        
+       
+       
+       
     }
     getDiseases() {
         this.calculatorService.getDiseases().subscribe(res => {
             this.diseaseList = res
+            this.diseaseList.forEach((ele: { [x: string]: boolean; }) => {
+                ele['checked'] = false
+            })
         }, (err) => {
             this.diseaseList = diseaseList
+            this.diseaseList.forEach((ele: { [x: string]: boolean; }) => {
+                ele['checked'] = false
+            })
         })
     }
     getCounties() {
         this.calculatorService.getCounties().subscribe(res => {
             this.countiesList = res
-            this.availableCounties = res
+            this.countiesList.forEach((ele: { [x: string]: boolean; }) => {
+                ele['checked'] = false
+            })
+            this.availableCounties = this.countiesList
         }, (err) => {
             this.countiesList = countiesList
+           
+            this.countiesList.forEach((ele: { [x: string]: boolean; }) => {
+                ele['checked'] = false
+            })
             this.availableCounties = countiesList
         })
     }
@@ -243,22 +336,30 @@ export class ChronicDiseaseComponent implements OnInit {
         this.showRoi = false
         this.showError = ''
         this.showCost = false
-        if (this.selectedRegions.length === 0) {
-            this.showError = 'Region is required';
-            return
-        }
+        this.ageMsg = '';
+        this.genderMsg = '';
+         this.diseaseMsg = '';
+         this.countiesMsg = '';
+         this.regionMsg = '';
+         this.ethnicityMsg = '';
+        let count = 0
         if (this.selectedCounties.length === 0) {
-            this.showError = 'Counties are required';
-            return
+            this.countiesMsg = 'Counties are required';
+            count++;
         }
         if (this.selectedEthnicity.length === 0) {
-            this.showError = 'Ethnicity are required';
-            return
+            this.ethnicityMsg = 'Ethnicity are required';
+            count++;
         }
         if (this.selectedDiseases.length === 0) {
-            this.showError = 'Diseases are required';
-            return
+            this.diseaseMsg = 'Diseases are required';
+            count++;
         }
+        if (this.selectedRegions.length === 0) {
+            this.regionMsg = 'Diseases are required';
+            count++;
+        }
+       
         // this.createUtilityData(this.dummyUtilityCostResult)
         const region = this.selectedRegions.map((obj) => obj.id)
         const county = this.selectedCounties.map((obj) => obj.id)
@@ -273,12 +374,15 @@ export class ChronicDiseaseComponent implements OnInit {
             sex.push('Male')
         }
         if (!this.isFemaleChecked && !this.isMaleChecked) {
-            this.showError = 'Gender is required';
-            return
+            this.genderMsg = 'Gender is required';
+            count++;
         }
         if (!this.startAge && !this.endAge) {
-            this.showError = 'Start and End age is required';
-            return
+            this.ageMsg = 'Start and End age is required';
+            count++;
+        }
+        if(count > 0){
+            return 
         }
         let data = {
             "region": region.join(","),
@@ -319,18 +423,26 @@ export class ChronicDiseaseComponent implements OnInit {
         this.showRoi = false
         this.showError = ''
         this.showCost = false
+        this.ageMsg = '';
+        this.genderMsg = '';
+         this.diseaseMsg = '';
+         this.countiesMsg = '';
+         this.regionMsg = '';
+         this.ethnicityMsg = '';
+        let count = 0
         if (this.selectedCounties.length === 0) {
-            this.showError = 'Counties are required';
-            return
+            this.countiesMsg = 'Counties are required';
+            count++;
         }
         if (this.selectedEthnicity.length === 0) {
-            this.showError = 'Ethnicity are required';
-            return
+            this.ethnicityMsg = 'Ethnicity are required';
+            count++;
         }
         if (this.selectedDiseases.length === 0) {
-            this.showError = 'Diseases are required';
-            return
+            this.diseaseMsg = 'Diseases are required';
+            count++;
         }
+        
         const county = this.selectedCounties.map((obj) => obj.id)
         const countyRegion = this.countiesList.find((obj: { id: any; }) => obj.id === county[0])
         const region = [countyRegion.region.id]
@@ -345,12 +457,15 @@ export class ChronicDiseaseComponent implements OnInit {
             sex.push('Male')
         }
         if (!this.isFemaleChecked && !this.isMaleChecked) {
-            this.showError = 'Gender is required';
-            return
+            this.genderMsg = 'Gender is required';
+            count++;
         }
         if (!this.startAge && !this.endAge) {
-            this.showError = 'Start and End age is required';
-            return
+            this.ageMsg = 'Start and End age is required';
+            count++;
+        }
+        if(count > 0){
+            return 
         }
         let data = {
             "county": county.join(","),

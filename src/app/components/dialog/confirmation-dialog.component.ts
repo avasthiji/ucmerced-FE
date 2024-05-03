@@ -18,7 +18,6 @@ export class ConfirmationDialog {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ConfirmationDialog>) {
       if(data){
-        console.log(data)
         this.message = data.message || this.message;
         this.dataList = data.dataList || this.dataList;
         // if (data.message === 'COUNTIES' && data.search === 2) {
@@ -27,7 +26,7 @@ export class ConfirmationDialog {
         // } else {
         //   this.search = 1; // Checkboxes
         //   console.log(this.search) }
-        this.selectedOptions = this.dataList.filter((obj: { checked: boolean; })=> obj.checked == true)
+        this.selectedOptions = [...this.dataList.filter((obj: { checked: boolean; })=> obj.checked == true)]
         if (data.buttonText) {
           this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
           this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
@@ -35,7 +34,6 @@ export class ConfirmationDialog {
       }
   }
   isSelectionRadio(data:any){
-    console.log(data)
     if(this.data.search  === 2 && (this.data.message === 'COUNTIES')){
       return true
     }
@@ -47,7 +45,6 @@ export class ConfirmationDialog {
 
   }
   selectData(event:any,data: { id: '', name: '',checked:boolean }) {
-    console.log(data)
     data['checked'] = !data['checked']
     if (this.selectedOptions.length > 0) {
       const index = this.selectedOptions.findIndex((obj: any) => obj['id'] === data['id'])
@@ -66,7 +63,14 @@ export class ConfirmationDialog {
     option.checked = true
     this.selectedOptions = [option];
   }
-  onConfirmClick(): void {
+  onCancelClick(){
+    this.dataList.forEach(ele=>{
+      ele.checked = false
+    })
+    this.selectedOptions = this.dataList.filter((obj: { checked: boolean; })=> obj.checked == true)
+    this.dialogRef.close([]);
+  }
+onConfirmClick(): void {
     this.dialogRef.close(this.selectedOptions);
 }
   slectAll(){

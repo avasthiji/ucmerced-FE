@@ -41,7 +41,7 @@
                             <span class="badge badge-pill badge-primary" class="chip-content"
                                 *ngFor="let ethnicity of selectedEthnicity">{{ethnicity.name}} <mat-icon
                                     style="cursor: pointer;"
-                                    (click)="removeItem($event,ethnicity,selectedEthnicity)">delete</mat-icon></span>
+                                    (click)="removeItem($event,ethnicity,'ETHNICITY')">delete</mat-icon></span>
                         </div>
                         <div class="right">
                             <div class="arrow"><button class="clearLable point"><img
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-
+                <div *ngIf="ethnicityMsg && selectedEthnicity.length == 0" class="error-msg">{{ethnicityMsg}}</div> 
                 <div class="col-md-12 mb-4" *ngIf="selectedSearch == 1">
                     <label class="label-font-primary mb-1">*Region</label>
                     <div class="outer-container" (click)="openDialog('region')">
@@ -57,14 +57,15 @@
                             <span class="badge badge-pill badge-primary" class="chip-content"
                                 *ngFor="let region of selectedRegions">{{region.name}} <mat-icon
                                     style="cursor: pointer;"
-                                    (click)="removeItem($event,region,selectedRegions,'region')">cancel</mat-icon></span>
+                                    (click)="removeItem($event,region,'REGIONS')">cancel</mat-icon></span>
                         </div>
                         <div class="arrow"><button class="clearLable point"><img
                                     src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>
 
                     </div>
-
+                   
                 </div>
+                <div *ngIf="regionMsg && selectedRegions.length == 0 && selectedSearch == 1" class="error-msg">{{regionMsg}}</div> 
                 <div class="col-md-12 mb-4">
                     <label class="label-font-primary mb-1">*counties</label>
                     <div class="outer-container" (click)="openDialog('counties')">
@@ -72,13 +73,15 @@
                             <span class="badge badge-pill badge-primary" class="chip-content"
                                 *ngFor="let county of selectedCounties">{{county.name}} <mat-icon
                                     style="cursor: pointer;"
-                                    (click)="removeItem($event,county,selectedCounties)">cancel</mat-icon></span>
+                                    (click)="removeItem($event,county,'COUNTIES')">cancel</mat-icon></span>
                         </div>
                         <div class="arrow"><button class="clearLable point"><img
                                     src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>
 
                     </div>
+                   
                 </div>
+                <div *ngIf="countiesMsg && selectedCounties.length == 0" class="error-msg">{{countiesMsg}}</div> 
                 <div class="col-md-12 mb-4">
                     <label class="label-font-primary mb-1">*disease</label>
                     <div class="outer-container" (click)="openDialog('disease')">
@@ -86,12 +89,14 @@
                             <span class="badge badge-pill badge-primary " class="chip-content"
                                 *ngFor="let disease of selectedDiseases">{{disease.name}} <mat-icon
                                     style="cursor: pointer;"
-                                    (click)="removeItem($event,disease,selectedDiseases)">cancel</mat-icon></span>
+                                    (click)="removeItem($event,disease,'DISEASES')">cancel</mat-icon></span>
                         </div>
                         <div class="arrow"><button class="clearLable point"><img
                                     src="../../../assets/images/selectArrows.png" alt="arrow"></button></div>
                     </div>
+                    
                 </div>
+                <div *ngIf="diseaseMsg && selectedDiseases.length == 0" class="error-msg">{{diseaseMsg}}</div> 
                 <div class="row col-md-12 mb-2">
                     <div class="col-md-5 gender-check">
                         <label class="label-font-primary mb-1 label-ender">*Gender</label>
@@ -99,6 +104,8 @@
                             [(ngModel)]="isMaleChecked">Male</mat-checkbox>
                         <mat-checkbox class="gender_check_box gender_2_padding"
                             [(ngModel)]="isFemaleChecked">Female</mat-checkbox>
+
+                            
                     </div>
                     <div class="col-md-7 row ml-2 age-range">
                         <div class="col-sm-3">
@@ -116,7 +123,14 @@
                                     (ngModelChange)="onEndAgeChange($event)">
                             </mat-form-field>
                         </div>
-                    </div>
+                        </div>
+                 <div class="d-flex">
+                    <div *ngIf="genderMsg && !isMaleChecked && !isFemaleChecked" class="col-lg-4 error-msg">{{genderMsg}}</div> 
+                    <div *ngIf="!genderMsg || isMaleChecked || isFemaleChecked" class="col-lg-4 error-msg"></div> 
+                    <div *ngIf="ageMsg && !startAge && !endAge" class="error-msg ml-5">{{ageMsg}}</div>  
+                 </div>
+                       
+                    
                 </div>
                 <button type="submit" (click)="utilityCost()" class="search-btn-one point"
                     *ngIf="selectedSearch == 1">Search</button>
