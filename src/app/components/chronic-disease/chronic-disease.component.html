@@ -112,14 +112,14 @@
                             <label class="label-font-two mb-1">*Age Range</label>
                             <div class="small-text">Start</div>
                             <mat-form-field class="age_box" appearance="fill">
-                                <input matInput type="number" [(ngModel)]="startAge" min="1" max="80"  (input)="onStartAgeChange()">
+                                <input matInput type="number" [(ngModel)]="startAge" min="1" max="80" pattern="0-9"  (input)="onStartAgeChange()">
                             </mat-form-field>
                         </div>
                         <hr class="horizontalRow" style="width: 110px;margin-top: 70px;">
                         <div class="col-sm-3 agebox">
                             <div class="small-text">End</div>
                             <mat-form-field appearance="fill" class="age_box">
-                                <input matInput type="number" [(ngModel)]="endAge" min="1" max="80"
+                                <input matInput type="number" [(ngModel)]="endAge" min="1" max="80" pattern="0-9"
                                     (input)="onEndAgeChange()">
                             </mat-form-field>
                         </div>
@@ -127,7 +127,8 @@
                  <div class="d-flex">
                     <div *ngIf="genderMsg && !isMaleChecked && !isFemaleChecked" class="col-lg-4 error-msg">{{genderMsg}}</div> 
                     <div *ngIf="!genderMsg || isMaleChecked || isFemaleChecked" class="col-lg-4 error-msg"></div> 
-                    <div *ngIf="ageMsg && !startAge && !endAge" class="error-msg ml-5">{{ageMsg}}</div>  
+                    <div *ngIf="ageMsg && !startAge && !endAge" class="error-msg ml-5">{{ageMsg}}</div> 
+                    <div *ngIf="ageLimitMsg" class="error-msg ml-5">{{ageLimitMsg}}</div>  
                  </div>
                        
                     
