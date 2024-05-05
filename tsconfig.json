@@ -27,7 +27,8 @@
         "node_modules/exceljs/dist/exceljs.min"
       ]
     },
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "skipLibCheck": true
   },
   "files": [
     "src/main.ts",
