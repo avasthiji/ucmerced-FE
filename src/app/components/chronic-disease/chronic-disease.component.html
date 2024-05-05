@@ -112,7 +112,7 @@
                             <label class="label-font-two mb-1">*Age Range</label>
                             <div class="small-text">Start</div>
                             <mat-form-field class="age_box" appearance="fill">
-                                <input matInput type="number" [(ngModel)]="startAge" min="1" max="80">
+                                <input matInput type="number" [(ngModel)]="startAge" min="1" max="80"  (input)="onStartAgeChange()">
                             </mat-form-field>
                         </div>
                         <hr class="horizontalRow" style="width: 110px;margin-top: 70px;">
@@ -120,7 +120,7 @@
                             <div class="small-text">End</div>
                             <mat-form-field appearance="fill" class="age_box">
                                 <input matInput type="number" [(ngModel)]="endAge" min="1" max="80"
-                                    (ngModelChange)="onEndAgeChange($event)">
+                                    (input)="onEndAgeChange()">
                             </mat-form-field>
                         </div>
                         </div>

@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CalculatorService {
-  BaseURL:string= 'https://d4ba-2402-e280-2234-1f-d4ef-ab50-83f2-545.ngrok-free.app'
+  BaseURL:string= 'https://ad74-223-233-72-85.ngrok-free.app'
   headers = new HttpHeaders()
   .set('content-type', 'application/json')
   .set('ngrok-skip-browser-warning', 'true')

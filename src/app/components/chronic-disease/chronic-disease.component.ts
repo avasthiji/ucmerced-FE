@@ -159,18 +159,19 @@ export class ChronicDiseaseComponent implements OnInit {
         dialogRef.afterClosed().subscribe((selectedItems: any) => {
             if (messagetype == 'ETHNICITY') {
               
-                this.selectedEthnicity = selectedItems.length === 0 ? this.selectedEthnicity : selectedItems;
+                this.selectedEthnicity = selectedItems.length === 0 ? [] : selectedItems;
                 this.ethnicityList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                    ele['checked'] = false
                     let index = this.selectedEthnicity.find((obj: { id: any; }) => obj.id === ele.id)
                     if (index) {
                         ele['checked'] = true
                     }
                 })
-                console.log("171",this.ethnicityList)
             }
             else if (messagetype == 'REGIONS') {
-                this.selectedRegions = selectedItems.length === 0 ? this.selectedRegions : selectedItems;
+                this.selectedRegions = selectedItems.length === 0 ? [] : selectedItems;
                 this.regionList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                    ele['checked'] = false
                     let index = this.selectedRegions.find((obj: { id: any; }) => obj.id === ele.id)
                     if (index) {
                         ele['checked'] = true
@@ -178,8 +179,9 @@ export class ChronicDiseaseComponent implements OnInit {
                 })
                 this.onRegionSelectionChange(this.selectedRegions)
             } else if (messagetype == 'COUNTIES') {
-                this.selectedCounties = selectedItems.length === 0 ? this.selectedCounties : selectedItems;
+                this.selectedCounties = selectedItems.length === 0 ? [] : selectedItems;
                 this.countiesList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                    ele['checked'] = false
                     let index = this.selectedCounties.find((obj: { id: any; }) => obj.id === ele.id)
                     if (index) {
                         ele['checked'] = true
@@ -187,8 +189,9 @@ export class ChronicDiseaseComponent implements OnInit {
                 })
                 // }
             } else if (messagetype == 'DISEASES') {
-                this.selectedDiseases = selectedItems.length === 0 ? this.selectedDiseases : selectedItems;
+                this.selectedDiseases = selectedItems.length === 0 ? [] : selectedItems;
                 this.diseaseList.forEach((ele: { [x: string]: boolean; id: any; }) => {
+                    ele['checked'] = false
                     let index = this.selectedDiseases.find((obj: { id: any; }) => obj.id === ele.id)
                     if (index) {
                         ele['checked'] = true
@@ -206,7 +209,7 @@ export class ChronicDiseaseComponent implements OnInit {
             this.regionList.forEach((ele: { [x: string]: boolean; id: any; }) => {
                 let index = this.selectedRegions.findIndex((obj: { id: any; }) => obj.id === ele.id)
                 ele['checked'] = false
-                if (index) {
+                if (index > -1) {
                     ele['checked'] = true
                 }
             })
@@ -222,9 +225,7 @@ export class ChronicDiseaseComponent implements OnInit {
                 if (index > -1) {
                     ele['checked'] = true
                 }
-                console.log(this.ethnicityList)
             })
-            console.log(this.ethnicityList)
         } if (arrayName === 'COUNTIES') {
             const index = this.selectedCounties.findIndex((obj: { id: any; })=>obj.id === item.id)
             if (index !== -1) {
@@ -233,7 +234,7 @@ export class ChronicDiseaseComponent implements OnInit {
             this.countiesList.forEach((ele: { [x: string]: boolean; id: any; }) => {
                 let index = this.selectedCounties.findIndex((obj: { id: any; }) => obj.id === ele.id)
                 ele['checked'] = false
-                if (index) {
+                if (index > -1) {
                     ele['checked'] = true
                 }
             })
@@ -245,7 +246,7 @@ export class ChronicDiseaseComponent implements OnInit {
             this.diseaseList.forEach((ele: { [x: string]: boolean; id: any; }) => {
                 let index =this.selectedDiseases.findIndex((obj: { id: any; }) => obj.id === ele.id)
                 ele['checked'] = false
-                if (index) {
+                if (index > -1) {
                     ele['checked'] = true
                 }
             })
@@ -356,7 +357,7 @@ export class ChronicDiseaseComponent implements OnInit {
             count++;
         }
         if (this.selectedRegions.length === 0) {
-            this.regionMsg = 'Diseases are required';
+            this.regionMsg = 'Region is required';
             count++;
         }
        
@@ -457,6 +458,15 @@ export class ChronicDiseaseComponent implements OnInit {
             this.ageMsg = 'Start and End age is required';
             count++;
         }
+        if (this.startAge > 80) {
+            this.ageMsg = `Age can't be greater than 80`
+            count++;
+        }
+        if (this.endAge > 80) {
+            this.ageMsg = `Age can't be greater than 80`
+            count++;
+        }
+       
         if(count > 0){
             return 
         }
@@ -620,11 +630,16 @@ export class ChronicDiseaseComponent implements OnInit {
          this.ethnicityMsg = '';
     }
 
-    onEndAgeChange(value: number) {
-        if (value > 80) {
-            this.endAge = 80;
-        } else {
-            this.endAge = value;
+    onEndAgeChange() {
+        if (this.endAge > 80) {
+            this.ageMsg = `Age can't be greater than 80`
+            return
+        }
+    }
+    onStartAgeChange() {
+        if (this.startAge > 80) {
+            this.ageMsg = `Age can't be greater than 80`
+            return
         }
     }
     nextData(): void {
