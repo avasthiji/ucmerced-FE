@@ -17,7 +17,7 @@ export class ChronicDiseaseComponent implements OnInit {
 
     searchOptions = [
         { key: 1, value: 'Total Cost' },
-        { key: 2, value: 'Roi Calculator' }
+        { key: 2, value: 'ROI Calculator' }
     ]
     activeTab: any = '';
 
