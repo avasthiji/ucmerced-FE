@@ -460,7 +460,6 @@ export class ChronicDiseaseComponent implements OnInit {
             count++;
         }
         if (this.startAge > 80) {
-            console.log("462")
             this.ageLimitMsg = `Age can't be greater than 80`
             count++;
         }
@@ -633,13 +632,14 @@ export class ChronicDiseaseComponent implements OnInit {
     }
 
     onEndAgeChange() {
+        this.ageLimitMsg = '';
         if (this.endAge > 80) {
             this.ageLimitMsg = `Age can't be greater than 80`
             return
         }
     }
     onStartAgeChange() {
-        console.log("this.s",this.startAge)
+        this.ageLimitMsg = '';
         if (this.startAge > 80) {
             this.ageLimitMsg = `Age can't be greater than 80`
             return

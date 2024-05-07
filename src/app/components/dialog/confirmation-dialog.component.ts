@@ -39,7 +39,11 @@ export class ConfirmationDialog {
     }
     else if(this.data.search === 1 && (this.data.message === 'REGIONS')){
       return true
-    }else{
+    }
+    else if(this.data.search === 2 && (this.data.message === 'DISEASES')){
+      return true
+    }
+    else{
       return false
     }
 
