@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASEURL : 'https://ad74-223-233-72-85.ngrok-free.app'
+  BASEURL : 'https://e9e2-223-233-72-85.ngrok-free.app'
 };
 
 /*
