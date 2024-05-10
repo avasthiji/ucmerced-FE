@@ -596,3 +596,19 @@ table {
     margin-left: 8px;
     margin-top: 20px;
   }
+  .input-with-icon {
+    position: relative;
+}
+
+.dollar-sign {
+    position: absolute;
+    left: 10px; 
+    top: 50%;
+    transform: translateY(-50%);
+    color: #002856;
+    pointer-events: none;
+    z-index: 1;
+}
+.costs{
+  padding-left: 24px;
+}
