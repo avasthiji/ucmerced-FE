@@ -592,6 +592,12 @@ table {
     max-height: 38px;
     margin-top: 8px;
   }
+  .prefix-input-discount{
+    max-width: 40%;
+    height: 100%;
+    max-height: 44px;
+    margin-top: 4px;
+  }
   .prefix-txt{
     margin-left: 8px;
     margin-top: 20px;
@@ -611,4 +617,21 @@ table {
 }
 .costs{
   padding-left: 24px;
+}
+.discount-select{
+  background-color: white !important;
+  width: 45%;
+  border-radius: 5px;
+}
+::ng-deep .mat-select-trigger{
+height: 100%;
+}
+::ng-deep .mat-select-arrow-wrapper{
+  margin-right: 10px;
+}
+.mobile-div {
+  text-align: end;
+}
+::ng-deep .mat-select-placeholder {
+  color: rgb(39, 38, 38) !important; /* Change the color to black */
 }

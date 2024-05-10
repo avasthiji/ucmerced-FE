@@ -69,8 +69,8 @@ export class ChronicDiseaseComponent implements OnInit {
     regionMsg: string = '';
     ethnicityMsg: string = '';
     ageLimitMsg: string = '';
-    
-
+    minAge:number = 18
+    maxAge:number = 100
 
     constructor(private fb: FormBuilder, private dialog: MatDialog, private calculatorService: CalculatorService, private csvExportService: CsvExportServiceService) {
         this.roiForm = this.fb.group({
@@ -459,12 +459,20 @@ export class ChronicDiseaseComponent implements OnInit {
             this.ageMsg = 'Start and End age is required';
             count++;
         }
-        if (this.startAge > 80) {
-            this.ageLimitMsg = `Age can't be greater than 80`
+        if (this.startAge > this.maxAge) {
+            this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
             count++;
         }
-        if (this.endAge > 80) {
-            this.ageLimitMsg = `Age can't be greater than 80`
+        if (this.endAge > this.maxAge) {
+            this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
+            count++;
+        }
+        if (this.startAge < this.minAge) {
+            this.ageLimitMsg = `Age can't be lesser than ${this.minAge}`
+            count++;
+        }
+        if (this.endAge < this.minAge) {
+            this.ageLimitMsg = `Age can't be lesser than ${this.minAge}`
             count++;
         }
        
@@ -633,15 +641,23 @@ export class ChronicDiseaseComponent implements OnInit {
 
     onEndAgeChange() {
         this.ageLimitMsg = '';
-        if (this.endAge > 80) {
-            this.ageLimitMsg = `Age can't be greater than 80`
+        if (this.endAge > this.maxAge) {
+            this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
+            return
+        } 
+        if (this.endAge < this.minAge) {
+            this.ageLimitMsg = `Age can't be lesser than ${this.minAge}`
             return
         }
     }
     onStartAgeChange() {
         this.ageLimitMsg = '';
-        if (this.startAge > 80) {
-            this.ageLimitMsg = `Age can't be greater than 80`
+        if (this.startAge > this.maxAge) {
+            this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
+            return
+        }
+        if (this.startAge < this.minAge) {
+            this.ageLimitMsg = `Age can't be lesser than ${this.minAge}`
             return
         }
     }

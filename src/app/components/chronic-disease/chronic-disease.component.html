@@ -112,14 +112,14 @@
                             <label class="label-font-two mb-1">*Age Range</label>
                             <div class="small-text">Start</div>
                             <mat-form-field class="age_box" appearance="fill">
-                                <input matInput type="number" [(ngModel)]="startAge" min="1" max="80" pattern="0-9"  (input)="onStartAgeChange()">
+                                <input matInput type="number" [(ngModel)]="startAge" min=minAge max=maxAge pattern="0-9"  (input)="onStartAgeChange()">
                             </mat-form-field>
                         </div>
                         <hr class="horizontalRow" style="width: 110px;margin-top: 70px;">
                         <div class="col-sm-3 agebox">
                             <div class="small-text">End</div>
                             <mat-form-field appearance="fill" class="age_box">
-                                <input matInput type="number" [(ngModel)]="endAge" min="1" max="80" pattern="0-9"
+                                <input matInput type="number" [(ngModel)]="endAge" min=minAge max=maxAge pattern="0-9"
                                     (input)="onEndAgeChange()">
                             </mat-form-field>
                         </div>
@@ -217,17 +217,21 @@
                                                     </div>
                                             </div>
                                         </div>
-                                        <div class="row margin-row text-end">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
+                                        <div class="row margin-row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 mobile-div ">
                                                 <label class="label-font mb-1 text-end ">Discount rate</label>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 d-flex">
-                                                <input type="text" placeholder="e.g: 20"
-                                                    class="form-control small-input prefix-input" formControlName="discountRate" appAppNumber>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 d-flex prefix-input-discount discount-select-div">
+                                                <!-- <input type="text" placeholder="e.g: 20"
+                                                    class="form-control small-input prefix-input" formControlName="discountRate" appAppNumber> -->
+                                                    <mat-select formControlName="discountRate" class="discount-select" placeholder="e.g: 0">
+                                                        <mat-option [value]="0">0</mat-option>
+                                                        <mat-option [value]="3">3</mat-option>
+                                                      </mat-select>
                                                     <span class="prefix-txt">%</span>   
                                             </div>
                                         </div>
-                                        <div class="row margin-row text-end">
+                                        <div class="row margin-row">
                                             <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
                                                 <label class="label-font mb-1">Program duration</label>
                                             </div>
@@ -237,7 +241,7 @@
                                                     <span class="prefix-txt">Years</span>   
                                             </div>
                                         </div>
-                                        <div class="row margin-row text-end">
+                                        <div class="row margin-row">
                                             <div class="col-lg-6 col-md-6 col-sm-6 mobile-div">
                                                 <label class="label-font mb-1">Value of QALY</label>
                                             </div>
