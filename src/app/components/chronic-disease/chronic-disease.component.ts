@@ -332,6 +332,7 @@ export class ChronicDiseaseComponent implements OnInit {
             arrayOfArrays.push(selectedCounty)
             this.availableCounties = []
             this.availableCounties = [].concat(...arrayOfArrays);
+            this.selectedCounties = []
         })
     }
     utilityCost(isCSV = false) {
@@ -344,6 +345,7 @@ export class ChronicDiseaseComponent implements OnInit {
          this.countiesMsg = '';
          this.regionMsg = '';
          this.ethnicityMsg = '';
+         this.ageLimitMsg = '';
         let count = 0
         if (this.selectedCounties.length === 0) {
             this.countiesMsg = 'Counties are required';
@@ -448,6 +450,7 @@ export class ChronicDiseaseComponent implements OnInit {
          this.countiesMsg = '';
          this.regionMsg = '';
          this.ethnicityMsg = '';
+         this.ageLimitMsg = '';
         let count = 0
         if (this.selectedCounties.length === 0) {
             this.countiesMsg = 'Counties are required';
@@ -654,6 +657,7 @@ export class ChronicDiseaseComponent implements OnInit {
          this.countiesMsg = '';
          this.regionMsg = '';
          this.ethnicityMsg = '';
+         this.ageLimitMsg = '';
     }
 
     onEndAgeChange() {
