@@ -361,6 +361,7 @@ export class ChronicDiseaseComponent implements OnInit {
             this.regionMsg = 'Region is required';
             count++;
         }
+
        
         // this.createUtilityData(this.dummyUtilityCostResult)
         const region = this.selectedRegions.map((obj) => obj.id)
@@ -381,6 +382,22 @@ export class ChronicDiseaseComponent implements OnInit {
         }
         if (!this.startAge && !this.endAge) {
             this.ageMsg = 'Start and End age is required';
+            count++;
+        }
+        if (this.startAge > this.maxAge) {
+            this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
+            count++;
+        }
+        if (this.endAge > this.maxAge) {
+            this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
+            count++;
+        }
+        if (this.startAge < this.minAge) {
+            this.ageLimitMsg = `Age can't be lesser than ${this.minAge}`
+            count++;
+        }
+        if (this.endAge < this.minAge) {
+            this.ageLimitMsg = `Age can't be lesser than ${this.minAge}`
             count++;
         }
         if(count > 0){

@@ -127,8 +127,8 @@
                  <div class="d-flex">
                     <div *ngIf="genderMsg && !isMaleChecked && !isFemaleChecked" class="col-lg-4 error-msg">{{genderMsg}}</div> 
                     <div *ngIf="!genderMsg || isMaleChecked || isFemaleChecked" class="col-lg-4 error-msg"></div> 
-                    <div *ngIf="ageMsg && !startAge && !endAge" class="error-msg ml-5">{{ageMsg}}</div> 
-                    <div *ngIf="ageLimitMsg" class="error-msg ml-5">{{ageLimitMsg}}</div>  
+                    <div *ngIf="ageMsg && !startAge && !endAge && !ageLimitMsg" class="error-msg ml-5">{{ageMsg}}</div> 
+                    <div *ngIf="ageLimitMsg && !ageMsg" class="error-msg ml-5">{{ageLimitMsg}}</div>  
                  </div>
                        
                     
