@@ -78,6 +78,11 @@
     .age-range {
         margin-top: 10px;
     }
+    .dialog {
+      justify-content: start;
+      align-items: end;
+      display: block !important;
+  }
 
 }
 
@@ -400,11 +405,7 @@ img{
   .table tbody tr:nth-of-type(even) td {
     background-color: #EFEFEF;
   }
-  .dialog {
-      justify-content: start;
-      align-items: end;
-      display: flex;
-  }
+ 
 
   .chip-content {
       align-items: center;
@@ -634,4 +635,13 @@ height: 100%;
 }
 ::ng-deep .mat-select-placeholder {
   color: rgb(39, 38, 38) !important; /* Change the color to black */
+}
+.utility-cost{
+  overflow-x: scroll;
+  
+}
+.dialog {
+  justify-content: start;
+  align-items: end;
+  display: flex;
 }

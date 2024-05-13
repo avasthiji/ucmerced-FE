@@ -271,7 +271,7 @@
     </div>
 
 
-    <div *ngIf="showRoi && !showCost" class="mt-5">
+    <div *ngIf="showRoi && !showCost" class="mt-5 utility-cost ">
         <div class="searchClass text-center">{{getHeading(currentIndex)}}</div>
         <app-utility-cost [roiData]="consolidateROIDATA[currentIndex]"
             [costData]="getCostData(currentIndex)"></app-utility-cost>
@@ -283,7 +283,7 @@
                     svgIcon="csv-icon"></mat-icon>Download CSV</button>
         </div>
     </div>
-    <div *ngIf="showCost && !showRoi" class="mt-5">
+    <div *ngIf="showCost && !showRoi" class="mt-5 utility-cost">
         <div>
             <app-utility-cost-result [costs]="totalCostResponse"></app-utility-cost-result>
         </div>
