@@ -6,7 +6,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class CalculatorService {
-  BaseURL: string = 'http://54.147.199.48' //environment.BASEURL
+  //BaseURL: string = 'http://54.147.199.48' //environment.BASEURL
+  BaseURL: string = 'https://54b3-2402-e280-2234-1f-79e2-af6f-1f0a-cf5d.ngrok-free.app'
   headers = new HttpHeaders()
     .set('content-type', 'application/json')
     .set('ngrok-skip-browser-warning', 'true')
