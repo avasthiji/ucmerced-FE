@@ -83,7 +83,7 @@
                 </div>
                 <div *ngIf="countiesMsg && selectedCounties.length == 0" class="error-msg">{{countiesMsg}}</div> 
                 <div class="col-md-12 mb-4">
-                    <label class="label-font-primary mb-1">*disease</label>
+                    <label class="label-font-primary mb-1">*diseases</label>
                     <div class="outer-container" (click)="openDialog('disease')">
                         <div class="dialog">
                             <span class="badge badge-pill badge-primary " class="chip-content"
@@ -127,7 +127,7 @@
                  <div class="d-flex">
                     <div *ngIf="genderMsg && !isMaleChecked && !isFemaleChecked" class="col-lg-4 error-msg">{{genderMsg}}</div> 
                     <div *ngIf="!genderMsg || isMaleChecked || isFemaleChecked" class="col-lg-4 error-msg"></div> 
-                    <div *ngIf="ageMsg && !startAge && !endAge && !ageLimitMsg" class="error-msg ml-5">{{ageMsg}}</div> 
+                    <div *ngIf="ageMsg" class="error-msg ml-5">{{ageMsg}}</div> 
                     <div *ngIf="ageLimitMsg && !ageMsg" class="error-msg ml-5">{{ageLimitMsg}}</div>  
                  </div>
                        

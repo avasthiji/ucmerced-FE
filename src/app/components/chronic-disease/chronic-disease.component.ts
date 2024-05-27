@@ -382,26 +382,28 @@ export class ChronicDiseaseComponent implements OnInit {
             this.genderMsg = 'Gender is required';
             count++;
         }
-        if (!this.startAge && !this.endAge) {
-            this.ageMsg = 'Start and End age is required';
+        if(this.startAge == 0 && this.endAge == 0){
+            this.ageMsg = `Start and End age can't be 0`;
+            count++;
+        }
+      
+        if (this.endAge > this.maxAge) {
+            this.ageLimitMsg = `End Age can't be greater than ${this.maxAge}`
             count++;
         }
         if (this.startAge > this.maxAge) {
-            this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
-            count++;
-        }
-        if (this.endAge > this.maxAge) {
-            this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
-            count++;
-        }
-        if (this.startAge < this.minAge) {
-            this.ageLimitMsg = `Age can't be lesser than ${this.minAge}`
+            this.ageLimitMsg = `Start Age can't be greater than ${this.maxAge}`
             count++;
         }
         if (this.endAge < this.minAge) {
-            this.ageLimitMsg = `Age can't be lesser than ${this.minAge}`
+            this.ageLimitMsg = `End Age can't be lesser than ${this.minAge}`
             count++;
         }
+        if (this.startAge < this.minAge) {
+            this.ageLimitMsg = `Start Age can't be lesser than ${this.minAge}`
+            count++;
+        }
+        
         if(count > 0){
             return 
         }
