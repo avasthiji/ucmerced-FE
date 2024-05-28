@@ -8,6 +8,7 @@ import { CsvExportServiceService } from 'src/app/services/csv-export-service.ser
 
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
     selector: 'app-chronic-disease',
     templateUrl: './chronic-disease.component.html',
@@ -31,8 +32,8 @@ export class ChronicDiseaseComponent implements OnInit {
     selectedCounty: { name: '' } = {
         name: ''
     }
-    endAge:any = 0
-    startAge:any = 0
+    endAge:any = 18
+    startAge:any = 18
 
 
     tabs: any = [];
@@ -72,7 +73,7 @@ export class ChronicDiseaseComponent implements OnInit {
     minAge:number = 18
     maxAge:number = 100
 
-    constructor(private fb: FormBuilder, private dialog: MatDialog, private calculatorService: CalculatorService, private csvExportService: CsvExportServiceService) {
+    constructor(private fb: FormBuilder, private dialog: MatDialog, private calculatorService: CalculatorService, private csvExportService: CsvExportServiceService,private spinner: NgxSpinnerService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
             initialProgramCosts: ['', Validators.required],
@@ -336,6 +337,7 @@ export class ChronicDiseaseComponent implements OnInit {
         })
     }
     utilityCost(isCSV = false) {
+        this.spinner.show()
         this.showRoi = false
         this.showError = ''
         this.showCost = false
@@ -382,7 +384,7 @@ export class ChronicDiseaseComponent implements OnInit {
             this.genderMsg = 'Gender is required';
             count++;
         }
-        if(this.startAge == 0 && this.endAge == 0){
+        if(this.startAge == 0 || this.endAge == 0){
             this.ageMsg = `Start and End age can't be 0`;
             count++;
         }
@@ -403,8 +405,13 @@ export class ChronicDiseaseComponent implements OnInit {
             this.ageLimitMsg = `Start Age can't be lesser than ${this.minAge}`
             count++;
         }
+        if (this.endAge < this.startAge) {
+            this.ageLimitMsg = `End Age should be equal or greater than ${this.startAge}`
+            count++;
+        }
         
         if(count > 0){
+            this.spinner.hide();
             return 
         }
         let data = {
@@ -419,9 +426,11 @@ export class ChronicDiseaseComponent implements OnInit {
 
         } else {
             this.calculatorService.utilityCost(data).subscribe(res => {
+                this.spinner.hide();
                 this.createUtilityData(res)
             }, (err) => {
                 // this.createUtilityData(this.dummyUtilityCostResult)
+                this.spinner.hide();
                 this.showCost = false
                 this.showError = 'No Data Found'
                 this.showRoi = false
@@ -443,6 +452,7 @@ export class ChronicDiseaseComponent implements OnInit {
         return false
     }
     roiCalculator() {
+        this.spinner.show();
         this.showRoi = false
         this.showError = ''
         this.showCost = false
@@ -482,23 +492,28 @@ export class ChronicDiseaseComponent implements OnInit {
             count++;
         }
         if (this.startAge > this.maxAge) {
-            this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
+            this.ageLimitMsg = `Start Age can't be greater than ${this.maxAge}`
             count++;
         }
         if (this.endAge > this.maxAge) {
-            this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
+            this.ageLimitMsg = `End Age can't be greater than ${this.maxAge}`
             count++;
         }
         if (this.startAge < this.minAge) {
-            this.ageLimitMsg = `Age can't be lesser than ${this.minAge}`
+            this.ageLimitMsg = `Start Age can't be lesser than ${this.minAge}`
             count++;
         }
         if (this.endAge < this.minAge) {
-            this.ageLimitMsg = `Age can't be lesser than ${this.minAge}`
+            this.ageLimitMsg = `End Age can't be lesser than ${this.minAge}`
+            count++;
+        }
+        if (this.endAge < this.startAge) {
+            this.ageLimitMsg = `End Age should be equal or greater than ${this.startAge}`
             count++;
         }
        
         if(count > 0){
+            this.spinner.hide();
             return 
         }
         const county = this.selectedCounties.map((obj) => obj.id)
@@ -527,9 +542,11 @@ export class ChronicDiseaseComponent implements OnInit {
         }
 
         this.calculatorService.roiCalcuator(data).subscribe(res => {
+            this.spinner.hide();
             this.resultsData = res
             this.createData(this.resultsData['Total'])
         }, (err) => {
+            this.spinner.hide();
             this.showRoi = false
             this.showError = 'No Data Found'
             this.showCost = false
@@ -633,8 +650,8 @@ export class ChronicDiseaseComponent implements OnInit {
         this.selectedCounties = []
         this.isFemaleChecked = false;
         this.isMaleChecked = false;
-        this.endAge = 0;
-        this.startAge = 0;
+        this.endAge = 18;
+        this.startAge = 18;
         this.roiForm.reset();
         this.showCost = false;
         this.ethnicityList.forEach((ele: { [x: string]: boolean; }) => {
@@ -675,6 +692,7 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     onStartAgeChange() {
         this.ageLimitMsg = '';
+        this.endAge = this.startAge
         if (this.startAge > this.maxAge) {
             this.ageLimitMsg = `Age can't be greater than ${this.maxAge}`
             return

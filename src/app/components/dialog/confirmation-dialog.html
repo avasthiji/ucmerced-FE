@@ -1,8 +1,8 @@
-<h4 class="clearselect point" *ngIf="!isSelectionRadio(data)" (click)="clearAll()">cancel all
+<!-- <h4 class="clearselect point" *ngIf="!isSelectionRadio(data)" (click)="clearAll()">cancel all
 </h4>
 <h4 class="clearselect point" *ngIf="!isSelectionRadio(data)" (click)="slectAll()">
     select all | &nbsp;
-</h4>
+</h4> -->
 <div>
     <h4 class="box_title">
         {{message}}
@@ -18,7 +18,9 @@
             <mat-radio-button *ngIf="isSelectionRadio(data)" [value]="data" [checked]="data.checked" (change)="selectOption(data)">
             </mat-radio-button>
             {{ data.name }}
+          
         </div>
+     
     </div>
 </div>
 <div class="button-actions">
