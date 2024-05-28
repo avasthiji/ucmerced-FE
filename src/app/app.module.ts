@@ -28,7 +28,6 @@ import { UtilityCostComponent } from './components/chronic-disease/utility-cost/
 import { UtilityCostResultComponent } from './components/chronic-disease/utility-cost-result/utility-cost-result.component';
 import { NoDataFoundComponent } from './components/chronic-disease/no-data-found/no-data-found.component';
 import { AppNumberDirective } from './directives/app-number.directive';
-import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -63,7 +62,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     MatDialogModule,
     MatIconModule,
-    NgxSpinnerModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],

@@ -8,7 +8,6 @@ import { CsvExportServiceService } from 'src/app/services/csv-export-service.ser
 
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
-import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
     selector: 'app-chronic-disease',
     templateUrl: './chronic-disease.component.html',
@@ -72,8 +71,9 @@ export class ChronicDiseaseComponent implements OnInit {
     ageLimitMsg: string = '';
     minAge:number = 18
     maxAge:number = 100
+    loading: boolean = false;
 
-    constructor(private fb: FormBuilder, private dialog: MatDialog, private calculatorService: CalculatorService, private csvExportService: CsvExportServiceService,private spinner: NgxSpinnerService) {
+    constructor(private fb: FormBuilder, private dialog: MatDialog, private calculatorService: CalculatorService, private csvExportService: CsvExportServiceService) {
         this.roiForm = this.fb.group({
             sizeOfTargetGroup: ['', Validators.required],
             initialProgramCosts: ['', Validators.required],
@@ -337,7 +337,7 @@ export class ChronicDiseaseComponent implements OnInit {
         })
     }
     utilityCost(isCSV = false) {
-        this.spinner.show()
+        this.loading = true
         this.showRoi = false
         this.showError = ''
         this.showCost = false
@@ -411,7 +411,7 @@ export class ChronicDiseaseComponent implements OnInit {
         }
         
         if(count > 0){
-            this.spinner.hide();
+            this.loading = false;
             return 
         }
         let data = {
@@ -426,11 +426,11 @@ export class ChronicDiseaseComponent implements OnInit {
 
         } else {
             this.calculatorService.utilityCost(data).subscribe(res => {
-                this.spinner.hide();
+                this.loading = false;
                 this.createUtilityData(res)
             }, (err) => {
                 // this.createUtilityData(this.dummyUtilityCostResult)
-                this.spinner.hide();
+                this.loading = false;
                 this.showCost = false
                 this.showError = 'No Data Found'
                 this.showRoi = false
@@ -452,7 +452,7 @@ export class ChronicDiseaseComponent implements OnInit {
         return false
     }
     roiCalculator() {
-        this.spinner.show();
+        this.loading = true;
         this.showRoi = false
         this.showError = ''
         this.showCost = false
@@ -513,7 +513,7 @@ export class ChronicDiseaseComponent implements OnInit {
         }
        
         if(count > 0){
-            this.spinner.hide();
+            this.loading = false;
             return 
         }
         const county = this.selectedCounties.map((obj) => obj.id)
@@ -542,11 +542,11 @@ export class ChronicDiseaseComponent implements OnInit {
         }
 
         this.calculatorService.roiCalcuator(data).subscribe(res => {
-            this.spinner.hide();
+            this.loading = false;
             this.resultsData = res
             this.createData(this.resultsData['Total'])
         }, (err) => {
-            this.spinner.hide();
+            this.loading = false;
             this.showRoi = false
             this.showError = 'No Data Found'
             this.showCost = false

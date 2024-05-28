@@ -290,4 +290,6 @@
     </div>
     <app-no-data-found *ngIf="showError" [msg]="showError"></app-no-data-found>
 </article>
-<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+    <div class="custom-class" *ngIf="loading">
+      <div class="loadingClass">Loading...</div>
+    </div>
