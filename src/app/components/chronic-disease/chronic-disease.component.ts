@@ -652,7 +652,8 @@ export class ChronicDiseaseComponent implements OnInit {
         this.selectedRegions = [];
         this.selectedEthnicity = []
         this.selectedDiseases = []
-        this.selectedCounties = []
+        this.selectedCounties = [];
+        this.availableCounties = this.countiesList
         this.isFemaleChecked = false;
         this.isMaleChecked = false;
         this.endAge = 18;
