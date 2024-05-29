@@ -361,15 +361,17 @@ export class ChronicDiseaseComponent implements OnInit {
             this.diseaseMsg = 'Diseases are required';
             count++;
         }
-        if (this.selectedRegions.length === 0) {
-            this.regionMsg = 'Region is required';
-            count++;
-        }
+        // if (this.selectedRegions.length === 0) {
+        //     this.regionMsg = 'Region is required';
+        //     count++;
+        // }
 
        
         // this.createUtilityData(this.dummyUtilityCostResult)
-        const region = this.selectedRegions.map((obj) => obj.id)
+        let  region = this.selectedCounties.map((obj) => obj.region.id)
+        region = [...new Set(region)]
         const county = this.selectedCounties.map((obj) => obj.id)
+        console.log(this.selectedCounties)
         const ethnicity = this.selectedEthnicity.map((obj: { id: any; }) => obj.id)
         const disease = this.selectedDiseases.map((obj) => obj.id)
 
