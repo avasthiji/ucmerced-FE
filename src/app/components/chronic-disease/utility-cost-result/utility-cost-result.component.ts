@@ -9,7 +9,7 @@ import { CsvExportServiceService } from 'src/app/services/csv-export-service.ser
 export class UtilityCostResultComponent implements OnInit {
   @Input() costs: any={};
   @ViewChild('totalCostTable', { static: false }) totalCostTable!: ElementRef;
-  resultHeading: string[]=['Conditon(s)','County','Cost per case','Utility loss per case','Rates','Cases','Utility Loss','Health Care Costs', 'Total Cost'];
+  resultHeading: string[]=['Conditon(s)','County','Cost per case','Utility loss per case','Rates','Cases','Utility Loss','Total Utility Cost','Health Care Costs', 'Total Cost'];
 
   constructor(private csvExportService : CsvExportServiceService) { }
 

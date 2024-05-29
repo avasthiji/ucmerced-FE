@@ -557,7 +557,7 @@ export class ChronicDiseaseComponent implements OnInit {
         return this.consolidateCOSTDATA[i]
     }
     createData(res: any) {
-
+        res = res
         this.showRoi = true
         this.showError = ''
         this.showCost = false
@@ -634,7 +634,7 @@ export class ChronicDiseaseComponent implements OnInit {
             this.consolidateROIDATA.push(roiData);
 
         }
-
+        this.consolidateROIDATA.reverse()
     }
     getHeading(index: number) {
 
