@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Workbook } from 'exceljs';
 import { CsvExportServiceService } from 'src/app/services/csv-export-service.service';
 import * as fs from 'file-saver';
@@ -12,8 +12,19 @@ export class UtilityCostResultComponent implements OnInit {
   @ViewChild('totalCostTable', { static: false }) totalCostTable!: ElementRef;
   resultHeading: string[]=['Conditon(s)','County','Cost per case','Utility loss per case','Rates','Cases','Utility Loss','Total Utility Cost','Health Care Costs', 'Total Cost'];
 
-  constructor(private csvExportService : CsvExportServiceService) { }
+  constructor(private csvExportService : CsvExportServiceService,private cdRef: ChangeDetectorRef) { 
+   
+  }
+ngAfterViewInit(){
+  setTimeout(() => {
+    this.costs['Counties'].conditions =  this.costs['Counties'].conditions.replace(/,\s*/g, ', ');
+    this.costs['Counties'].county =  this.costs['Counties'].county.replace(/,\s*/g, ', ');
+    this.costs['Totals'].conditions =  this.costs['Totals'].conditions.replace(/,\s*/g, ', ');
+    this.costs['Totals'].county =  this.costs['Totals'].county.replace(/,\s*/g, ', ');
+    this.cdRef.detectChanges();  // Inform Angular to detect changes
+  }, 100);
 
+}
   ngOnInit(): void {
   }
   // downloadCSV() {

@@ -15,7 +15,7 @@ export class CsvExportServiceService {
     const rows = Array.from(table.querySelectorAll('tr'));
     const csvData = rows.map(row => {
       const columns = Array.from(row.querySelectorAll('th, td'));
-      return columns.map(column => column.textContent?.trim()).join(',');
+      return columns.map(column => column.textContent?.trim()).join('');
     });
     return csvData.join('\n');
   }
