@@ -537,31 +537,27 @@ export const countiesList: any = [
   }
 ];
 export const ethnicityList: any = [
-  {
-      "id": 1,
-      "name": "African American"
-  },
-  {
-      "id": 2,
-      "name": "ASIAN"
-  },
-  {
-      "id": 3,
-      "name": "HISPANIC"
-  },
-  {
-      "id": 4,
-      "name": "Other Races"
-  },
-  {
-      "id": 5,
-      "name": "Non-Hispanic White"
-  },
-  {
-      "id": 6,
-      "name": "White/Other"
-  }
-];
+    {
+        "id": 1,
+        "name": "Asian"
+    },
+    {
+        "id": 2,
+        "name": "Black"
+    },
+    {
+        "id": 3,
+        "name": "Hispanic"
+    },
+    {
+        "id": 4,
+        "name": "Other"
+    },
+    {
+        "id": 5,
+        "name": "White"
+    }
+]
 export const roiResultFormat: any = [
     {   
         "Id":"CASES",
