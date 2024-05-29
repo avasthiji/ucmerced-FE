@@ -562,8 +562,9 @@ export class ChronicDiseaseComponent implements OnInit {
         this.showError = ''
         this.showCost = false
         this.consolidateROIDATA = [];
-        this.consolidateCOSTDATA = []
-        let keys = Object.keys(res)
+        this.consolidateCOSTDATA = [];
+        let keys:any  = []
+        keys= Object.keys(res).sort()
         for (let i = 0; i < keys.length; i++) {
 
             let keyName = keys[i]
@@ -630,12 +631,15 @@ export class ChronicDiseaseComponent implements OnInit {
             roiData[7]['without_program'] = "-";
             roiData[7]['With_Program'] = res[keyName]['roidiscounted'];
             roiData[7]['Difference'] = res[keyName]['roidiscounted'];
-
+            console.log(keyName)
             this.consolidateROIDATA.push(roiData);
 
         }
+        
+        console.log(this.consolidateROIDATA)
+        //this.consolidateROIDATA.reverse()
         this.currentIndex = 0
-        this.consolidateROIDATA.reverse()
+        //console.log(this.consolidateROIDATA)
     }
     getHeading(index: number) {
 
