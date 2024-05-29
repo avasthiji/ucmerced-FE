@@ -634,6 +634,7 @@ export class ChronicDiseaseComponent implements OnInit {
             this.consolidateROIDATA.push(roiData);
 
         }
+        this.currentIndex = 0
         this.consolidateROIDATA.reverse()
     }
     getHeading(index: number) {
