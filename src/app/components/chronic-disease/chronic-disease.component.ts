@@ -593,9 +593,9 @@ export class ChronicDiseaseComponent implements OnInit {
             costObj["casesInitial"] = res[keyName]['casesInitial']
             costObj["casesAfterProgram"] = res[keyName]['casesAfterProgram']
             costObj["casesDiff"] = res[keyName]['casesDiff']
-            costObj["utilityLossInitial"] =`$${this.roundOff(res[keyName]['utilityLossInitial'])}`
-            costObj["utilityLossAfterProgram"] = `$${this.roundOff(res[keyName]['utilityLossAfterProgram'])}`
-            costObj["utilityLossDiff"] = `$${this.roundOff(res[keyName]['utilityLossDiff'])}`
+            costObj["utilityLossInitial"] =`${this.roundOff(res[keyName]['utilityLossInitial'])}`
+            costObj["utilityLossAfterProgram"] = `${this.roundOff(res[keyName]['utilityLossAfterProgram'])}`
+            costObj["utilityLossDiff"] = `${this.roundOff(res[keyName]['utilityLossDiff'])}`
             costObj["healthCareCostInitial"] = `$${this.roundOff(res[keyName]['healthCareCostInitial'])}`
             costObj["healthCareCostAfterProgram"] = `$${this.roundOff(res[keyName]['healthCareCostAfterProgram'])}`
             costObj["healthCareCostDiff"] =`$${this.roundOff(res[keyName]['healthCareCostDiff'])}`
