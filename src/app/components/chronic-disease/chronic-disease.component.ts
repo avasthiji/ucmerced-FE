@@ -558,6 +558,11 @@ export class ChronicDiseaseComponent implements OnInit {
     getCostData(i: number) {
         return this.consolidateCOSTDATA[i]
     }
+    roundOff(value, decimalPlaces=0) {
+        value = Number(value)
+        const factor = Math.pow(10, decimalPlaces);
+        return Math.round(value * factor) / factor;
+      }
     createData(res: any) {
         res = res
         this.showRoi = true
@@ -573,31 +578,30 @@ export class ChronicDiseaseComponent implements OnInit {
 
             let costObj: any = {}
             costObj["county"] = res[keyName]['county'],
-                costObj["costPerCaseInitial"] = res[keyName]['costPerCaseInitial'],
-                costObj["costPerCaseAfterProgram"] = res[keyName]['costPerCaseAfterProgram']
-            costObj["costPerCaseDiff"] = res[keyName]['costPerCaseDiff']
-            costObj["utilityLossPerCaseInitial"] = res[keyName]['utilityLossPerCaseInitial']
-            costObj["utilityLossPerCaseAfterProgram"] = res[keyName]['utilityLossPerCaseAfterProgram']
-            costObj["utilityLossPerCaseDiff"] = res[keyName]['utilityLossPerCaseDiff']
-            costObj["ratesInitial"] = res[keyName]['ratesInitial']
-            costObj["ratesAfterProgram"] = res[keyName]['ratesAfterProgram']
-            costObj["ratesDiff"] = res[keyName]['ratesDiff']
+            costObj["costPerCaseInitial"] = `$${this.roundOff(res[keyName]['costPerCaseInitial'])}`
+            costObj["costPerCaseAfterProgram"] = `$${this.roundOff(res[keyName]['costPerCaseAfterProgram'])}`
+            costObj["costPerCaseDiff"] = `$${this.roundOff(res[keyName]['costPerCaseDiff'])}`
+            costObj["utilityLossPerCaseInitial"] = this.roundOff(res[keyName]['utilityLossPerCaseInitial'],2)
+            costObj["utilityLossPerCaseAfterProgram"] = this.roundOff(res[keyName]['utilityLossPerCaseAfterProgram'],2)
+            costObj["utilityLossPerCaseDiff"] = this.roundOff(res[keyName]['utilityLossPerCaseDiff'],2)
+            costObj["ratesInitial"] = Number(res[keyName]['ratesInitial'])*100+'%'
+            costObj["ratesAfterProgram"] = Number(res[keyName]['ratesAfterProgram'])*100+'%'
+            costObj["ratesDiff"] = Number(res[keyName]['ratesDiff'])*100+'%'
             costObj["populationInitial"] = res[keyName]['populationInitial']
             costObj["populationAfterProgram"] = res[keyName]['populationAfterProgram']
             costObj["populationDiff"] = res[keyName]['populationDiff']
             costObj["casesInitial"] = res[keyName]['casesInitial']
             costObj["casesAfterProgram"] = res[keyName]['casesAfterProgram']
             costObj["casesDiff"] = res[keyName]['casesDiff']
-            costObj["utilityLossInitial"] = res[keyName]['utilityLossInitial']
-            costObj["utilityLossAfterProgram"] = res[keyName]['utilityLossAfterProgram']
-            costObj["utilityLossDiff"] = res[keyName]['utilityLossDiff']
-            costObj["healthCareCostInitial"] = res[keyName]['healthCareCostInitial']
-            costObj["healthCareCostAfterProgram"] = res[keyName]['healthCareCostAfterProgram']
-            costObj["healthCareCostDiff"] = res[keyName]['healthCareCostDiff']
-            costObj["totalCostInitial"] = res[keyName]['totalCostInitial']
-            costObj["totalCostAfterProgram"] = res[keyName]['totalCostAfterProgram']
-            costObj["totalCostDiff"] = res[keyName]['totalCostDiff']
-
+            costObj["utilityLossInitial"] =`$${this.roundOff(res[keyName]['utilityLossInitial'])}`
+            costObj["utilityLossAfterProgram"] = `$${this.roundOff(res[keyName]['utilityLossAfterProgram'])}`
+            costObj["utilityLossDiff"] = `$${this.roundOff(res[keyName]['utilityLossDiff'])}`
+            costObj["healthCareCostInitial"] = `$${this.roundOff(res[keyName]['healthCareCostInitial'])}`
+            costObj["healthCareCostAfterProgram"] = `$${this.roundOff(res[keyName]['healthCareCostAfterProgram'])}`
+            costObj["healthCareCostDiff"] =`$${this.roundOff(res[keyName]['healthCareCostDiff'])}`
+            costObj["totalCostInitial"] = `$${this.roundOff(res[keyName]['totalCostInitial'])}`
+            costObj["totalCostAfterProgram"] = `$${this.roundOff(res[keyName]['totalCostAfterProgram'])}`
+            costObj["totalCostDiff"] = `$${this.roundOff(res[keyName]['totalCostDiff'])}`
             this.consolidateCOSTDATA.push(costObj)
             let roiData = [...this.ROIDATA.map(obj => ({ ...obj }))]; // Make a copy of this.ROIDATA
 
@@ -606,33 +610,33 @@ export class ChronicDiseaseComponent implements OnInit {
             roiData[0]['Difference'] = res[keyName]['totalCasesDiff'];
             roiData[0]['title'] = keyName;
 
-            roiData[1]['without_program'] = res[keyName]['totalCostWithoutQalyWithoutProgram'];
-            roiData[1]['With_Program'] = res[keyName]['totalCostWithoutQalyWithProgram'];
-            roiData[1]['Difference'] = res[keyName]['totalCostWithoutQalyDiff'];
+            roiData[1]['without_program'] = `$${this.roundOff(res[keyName]['totalCostWithoutQalyWithoutProgram'])}`;
+            roiData[1]['With_Program'] = `$${this.roundOff(res[keyName]['totalCostWithoutQalyWithProgram'])}`;
+            roiData[1]['Difference'] = `$${this.roundOff(res[keyName]['totalCostWithoutQalyDiff'])}`;
 
-            roiData[2]['without_program'] = res[keyName]['totalCostWithQalyWithoutProgram'];
-            roiData[2]['With_Program'] = res[keyName]['totalCostWithQalyWithProgram'];
-            roiData[2]['Difference'] = res[keyName]['totalCostWithQalyDiff'];
+            roiData[2]['without_program'] = `$${this.roundOff(res[keyName]['totalCostWithQalyWithoutProgram'])}`;
+            roiData[2]['With_Program'] = `$${this.roundOff(res[keyName]['totalCostWithQalyWithProgram'])}`;
+            roiData[2]['Difference'] = `$${this.roundOff(res[keyName]['totalCostWithQalyDiff'])}`;
 
-            roiData[3]['without_program'] = res[keyName]['totalQaLYWithoutProgram'];
-            roiData[3]['With_Program'] = res[keyName]['totalQalyWithProgram'];
-            roiData[3]['Difference'] = res[keyName]['totalQalyDiff'];
+            roiData[3]['without_program'] =  `${this.roundOff(res[keyName]['totalQaLYWithoutProgram'])}`;
+            roiData[3]['With_Program'] = `${this.roundOff(res[keyName]['totalQalyWithProgram'])}`;
+            roiData[3]['Difference'] = `${this.roundOff(res[keyName]['totalQalyDiff'])}`;
 
             roiData[4]['without_program'] = res[keyName]['investmentWithoutProgram'];
-            roiData[4]['With_Program'] = res[keyName]['investmentWithProgram'];
-            roiData[4]['Difference'] = res[keyName]['investmentDiff'];
+            roiData[4]['With_Program'] = `$${res[keyName]['investmentWithProgram']}`;
+            roiData[4]['Difference'] = `$${res[keyName]['investmentDiff']}`;
 
             roiData[5]['without_program'] = "-";
-            roiData[5]['With_Program'] = res[keyName]['roiwithoutQaly'];
-            roiData[5]['Difference'] = res[keyName]['roiwithoutQaly'];
+            roiData[5]['With_Program'] = `${this.roundOff(res[keyName]['roiwithoutQaly'])}`;
+            roiData[5]['Difference'] = `${this.roundOff(res[keyName]['roiwithoutQaly'])}`;
 
             roiData[6]['without_program'] = "-";
-            roiData[6]['With_Program'] = res[keyName]['roiwithQaly'];
-            roiData[6]['Difference'] = res[keyName]['roiwithQaly'];
+            roiData[6]['With_Program'] = `${this.roundOff(res[keyName]['roiwithQaly'])}`;
+            roiData[6]['Difference'] = `${this.roundOff(res[keyName]['roiwithQaly'])}`;
 
             roiData[7]['without_program'] = "-";
-            roiData[7]['With_Program'] = res[keyName]['roidiscounted'];
-            roiData[7]['Difference'] = res[keyName]['roidiscounted'];
+            roiData[7]['With_Program'] = `${this.roundOff(res[keyName]['roidiscounted'])}`;
+            roiData[7]['Difference'] = `${this.roundOff(res[keyName]['roidiscounted'])}`;
             console.log(keyName)
             this.consolidateROIDATA.push(roiData);
 
