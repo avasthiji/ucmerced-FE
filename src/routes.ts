@@ -8,17 +8,18 @@ export const appRoutes: Routes = [
     {
         path: '', component: ChronicDiseaseComponent
     },
-    {
-        path: 'home', component: HomeComponent
-    },
-    {
-        path: 'start', component: BeforeYouBeginComponent
-    },
-    {
-        path: 'faq', component: FaqComponent
-    },
+    // {
+    //     path: 'home', component: HomeComponent
+    // },
+    // {
+    //     path: 'start', component: BeforeYouBeginComponent
+    // },
+    // {
+    //     path: 'faq', component: FaqComponent
+    // },
     {
         path: 'app', component: ChronicDiseaseComponent
     }
+    
 
 ]

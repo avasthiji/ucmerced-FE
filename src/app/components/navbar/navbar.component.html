@@ -4,13 +4,11 @@
         <div class="mobileNavBarLogo" style="width: 80%; height:aut"><a class="titleImage" href="http://www.ucmerced.edu/" target="_blank" id="homeLink">
             <img src="../../../assets/images/logo.png" alt="UC Merced" width="100%px" height="100%">
         </a></div>
-        <div class="actions">
+        <!-- <div class="actions">
             <div class="headerActions"><a href="/home" [ngClass]="{'active': checkActiveRoute('/home')}">Home</a>
             </div>
             <div class="headerActions"><a href="/start" [ngClass]="{'active': checkActiveRoute('/start')}">Before you
                     Begin</a></div>
-            <!-- <div class="headerActions" onclick="myFunction()"><a class="link" href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">
-            Data Portal</a></div> -->
             <div class="headerActions"><a style="display: flex;align-items: center;" >Data Portal <div
                         class="flexDir arrows">
                         <p class="arrow1"></p>
@@ -23,7 +21,7 @@
                 <a href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">Health Care Access</a>
             </div>
             <div class="headerActions"><a class="link" href="/faq" [ngClass]="{'active': checkActiveRoute('/faq')}">FAQ</a></div>
-        </div>
+        </div> -->
     </div>
 </div>
 <header class="headerMobile">
@@ -32,11 +30,11 @@
             <img src="../../../assets/images/logo.png" alt="UC Merced" width="206px" height="58px">
         </a>
     </div>
-    <div class="headerMobile_right" (click)="showMobileNavBar()">
+    <!-- <div class="headerMobile_right" (click)="showMobileNavBar()">
         <div class="navAction navAction1"></div>
         <div class="navAction navAction2"></div>
         <div class="navAction navAction3"></div>
-    </div>
+    </div> -->
 
 </header>
 <header class="headerDesktop">
@@ -45,11 +43,10 @@
             <img src="../../../assets/images/logo.png" alt="UC Merced" width="206px" height="58px">
         </a>
         <div class="actions">
-            <div class="headerActions"><a href="/home" [ngClass]="{'active': checkActiveRoute('/home')}">Home</a>
+            <!-- <div class="headerActions"><a href="/home" [ngClass]="{'active': checkActiveRoute('/home')}">Home</a>
             </div>
             <div class="headerActions"><a href="/start" [ngClass]="{'active': checkActiveRoute('/start')}">Before you Begin</a></div>
-            <!-- <div class="headerActions" onclick="myFunction()"><a class="link" href="/app" th:class="${currentPage == 'app' ? 'active' : ''}">
-                Data Portal</a></div> -->
+           
             <div class="dropdown headerActions" style="cursor: pointer" (click)="div1Function()">
                 <a class="headerActions dropbtn flexDir">
                     Data Portal <div class="flexDir">
@@ -64,7 +61,7 @@
                     <a href="/app">Health Care Access</a>
                 </div>
             </div>
-            <div class="headerActions"><a href="/faq" [ngClass]="{'active': checkActiveRoute('/faq')}">FAQ</a></div>
+            <div class="headerActions"><a href="/faq" [ngClass]="{'active': checkActiveRoute('/faq')}">FAQ</a></div> -->
             <div class=" rightImg"><img class="imgLogo" src="../../../assets/images/hsri.png"
                     alt="UC Merced Health Sciences Reseach Institute"></div>
 

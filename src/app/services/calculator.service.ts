@@ -7,11 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CalculatorService {
   //BaseURL: string = 'http://54.147.199.48' //environment.BASEURL
-  BaseURL: string = 'http://34.228.190.15:5000'
-  headers = new HttpHeaders()
-    .set('content-type', 'application/json')
-    .set('ngrok-skip-browser-warning', 'true')
-    .set('Access-Control-Allow-Origin', '*');
+  BaseURL: string = 'https://calc.behavioralhealtheconph.org'
   constructor(private http: HttpClient,) { }
 
   roiCalcuator(data: {}) {
@@ -26,7 +22,7 @@ export class CalculatorService {
     Object.keys(data).forEach(key => {
       params = params.append(key, data[key]);
     });
-    return this.http.get(`${this.BaseURL}/api/utilityCost`, { params: params, headers: this.headers });
+    return this.http.get(`${this.BaseURL}/api/utilityCost`, { params: params });
   }
   exportTotalCostData(data: any) {
     let params = new HttpParams();
@@ -34,23 +30,23 @@ export class CalculatorService {
       params = params.append(key, data[key]);
     });
     const headers = new HttpHeaders()
-    return this.http.get(`${this.BaseURL}/api/exportData`, { params: params, headers: headers })
+    return this.http.get(`${this.BaseURL}/api/exportData`, { params: params })
   }
 
   getEthnicity() {
-    return this.http.get(`${this.BaseURL}/api/ethnicity`, { headers: this.headers })
+    return this.http.get(`${this.BaseURL}/api/ethnicity`)
   }
   getAgegroup() {
-    return this.http.get(`${this.BaseURL}/api/agegroup`, { headers: this.headers })
+    return this.http.get(`${this.BaseURL}/api/agegroup`)
   }
   getCounties() {
-    return this.http.get(`${this.BaseURL}/api/counties`, { headers: this.headers })
+    return this.http.get(`${this.BaseURL}/api/counties`)
   }
   getDiseases() {
-    return this.http.get(`${this.BaseURL}/api/diseases`, { headers: this.headers })
+    return this.http.get(`${this.BaseURL}/api/diseases`)
   }
   getRegions() {
-    return this.http.get(`${this.BaseURL}/api/regions`, { headers: this.headers })
+    return this.http.get(`${this.BaseURL}/api/regions`)
   }
 
 
