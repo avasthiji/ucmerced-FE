@@ -108,8 +108,8 @@
                             
                     </div>
                     <div class="col-md-7 row ml-2 age-range">
-                        <div class="col-sm-3">
-                            <label class="label-font-two mb-1">*Age Range</label>
+                        <div class="col-sm-3 age-block">
+                            <label class="label-font-two mb-1 age-label" >*Age Range (Max age is {{maxAge}} includes all people over the age of {{maxAge}})</label>
                             <div class="small-text">Start</div>
                             <mat-form-field class="age_box" appearance="fill">
                                 <input matInput type="number" [(ngModel)]="startAge" min=minAge max=maxAge pattern="0-9"  (input)="onStartAgeChange()">

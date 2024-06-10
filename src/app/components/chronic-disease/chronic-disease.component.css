@@ -83,7 +83,13 @@
       align-items: end;
       display: block !important;
   }
-
+.age-label{
+  width: 100%;
+  word-wrap: break-word;
+}
+.age-block{
+  padding-left: none !important;
+}
 }
 
 
@@ -305,7 +311,9 @@ img{
   .proram-costt{
     margin-left: 21px;
   }
-
+.age-label{
+  width: 500px;
+}
   .size-margin{
     margin-left: -6px;
   }

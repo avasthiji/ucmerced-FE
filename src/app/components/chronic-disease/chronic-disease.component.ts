@@ -70,7 +70,7 @@ export class ChronicDiseaseComponent implements OnInit {
     ethnicityMsg: string = '';
     ageLimitMsg: string = '';
     minAge:number = 18
-    maxAge:number = 100
+    maxAge:number = 80
     loading: boolean = false;
 
     constructor(private fb: FormBuilder, private dialog: MatDialog, private calculatorService: CalculatorService, private csvExportService: CsvExportServiceService) {

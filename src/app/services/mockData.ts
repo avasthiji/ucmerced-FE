@@ -561,7 +561,7 @@ export const ethnicityList: any = [
 export const roiResultFormat: any = [
     {   
         "Id":"CASES",
-        "Heading": "Cases in 10 years",
+        "Heading": "Cases in X years",
     
         "Description": "The number of cases of the chronic disease(s) that your target group will have in 'X' years with and without the program",
     },
