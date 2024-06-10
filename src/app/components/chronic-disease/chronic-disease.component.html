@@ -275,9 +275,10 @@
         <div class="searchClass text-center">{{getHeading(currentIndex)}}</div>
         <app-utility-cost [roiData]="consolidateROIDATA[currentIndex]"
             [costData]="getCostData(currentIndex)"></app-utility-cost>
-        <button (click)="previousData()" [disabled]="currentIndex === 0">Previous</button>
-        <button (click)="nextData()" [disabled]="currentIndex === consolidateROIDATA.length - 1">Next</button>
-
+            <div class="d-flex">
+        <button (click)="previousData()" class="csv-button point mt-1" [disabled]="currentIndex === 0">Previous</button>
+        <button (click)="nextData()" class="csv-button point mt-1 ml-3" [disabled]="currentIndex === consolidateROIDATA.length - 1">Next</button>
+</div>
         <div class="table-buttons">
             <button type="submit" (click)="exportToExcel()" class="csv-button point mt-1"><mat-icon
                     svgIcon="csv-icon"></mat-icon>Download CSV</button>

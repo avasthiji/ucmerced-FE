@@ -10,7 +10,7 @@ import * as fs from 'file-saver';
 export class UtilityCostResultComponent implements OnInit {
   @Input() costs: any={};
   @ViewChild('totalCostTable', { static: false }) totalCostTable!: ElementRef;
-  resultHeading: string[]=['Conditon(s)','County','Population','Cost per case','Utility loss per case','Rates','Cases','Utility Loss','Total Utility Cost','Health Care Costs', 'Total Cost'];
+  resultHeading: string[]=['Condition(s)','County','Population','Cost per case','Utility loss per case','Rates','Cases','Utility Loss','Total Utility Cost','Health Care Costs', 'Total Cost'];
 
   constructor(private csvExportService : CsvExportServiceService,private cdRef: ChangeDetectorRef) { 
    
@@ -38,7 +38,7 @@ ngAfterViewInit(){
     downloadCSV(): void {
       let workbook = new Workbook();
           const worksheet = workbook.addWorksheet('Total Cost');
-          worksheet.addRow(['Conditon(s)','County','Cost per case','Utility loss per case','Rates','Cases','Utility Loss','Total Utility Cost','Health Care Costs', 'Total Cost']);
+          worksheet.addRow(['Condition(s)','County','Cost per case','Utility loss per case','Rates','Cases','Utility Loss','Total Utility Cost','Health Care Costs', 'Total Cost']);
 
           worksheet.addRow([
           this.costs['Counties'].conditions,

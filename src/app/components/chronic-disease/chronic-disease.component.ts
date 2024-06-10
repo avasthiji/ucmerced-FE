@@ -731,7 +731,7 @@ export class ChronicDiseaseComponent implements OnInit {
         let workbook = new Workbook();
         for (let i = 0; i < this.consolidateROIDATA.length; i++) {
             const worksheet = workbook.addWorksheet(this.consolidateROIDATA[i][0]['title']);
-            worksheet.addRow(['Conditon(s)', 'County', 'Cost per case', 'Utility loss per case', 'Rates', 'Population', 'Cases', 'Utility Loss', 'Health Care Costs', 'Total Cost']);
+            worksheet.addRow(['Condition(s)', 'County', 'Cost per case', 'Utility loss per case', 'Rates', 'Population', 'Cases', 'Utility Loss', 'Health Care Costs', 'Total Cost']);
             const getTable1 = this.getCostData(i)
             worksheet.addRow(['Initial',
                 getTable1.county,
