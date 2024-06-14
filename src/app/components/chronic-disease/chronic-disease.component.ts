@@ -72,6 +72,7 @@ export class ChronicDiseaseComponent implements OnInit {
     minAge:number = 18
     maxAge:number = 80
     loading: boolean = false;
+    csvFormData: any = {};
 
     constructor(private fb: FormBuilder, private dialog: MatDialog, private calculatorService: CalculatorService, private csvExportService: CsvExportServiceService) {
         this.roiForm = this.fb.group({
@@ -371,7 +372,6 @@ export class ChronicDiseaseComponent implements OnInit {
         let  region = this.selectedCounties.map((obj) => obj.region.id)
         region = [...new Set(region)]
         const county = this.selectedCounties.map((obj) => obj.id)
-        console.log(this.selectedCounties)
         const ethnicity = this.selectedEthnicity.map((obj: { id: any; }) => obj.id)
         const disease = this.selectedDiseases.map((obj) => obj.id)
 
@@ -519,12 +519,21 @@ export class ChronicDiseaseComponent implements OnInit {
             return 
         }
         const county = this.selectedCounties.map((obj) => obj.id)
+        const countyName = this.selectedCounties.map((obj) => obj.name)
         const countyRegion = this.countiesList.find((obj: { id: any; }) => obj.id === county[0])
         const region = [countyRegion.region.id]
+         const regionName = [countyRegion.region.name]
         const ethnicity = this.selectedEthnicity.map((obj: { id: any; }) => obj.id)
+        const ethnicityName = this.selectedEthnicity.map((obj: { id: any, name: any }) => obj.name)
         const disease = this.selectedDiseases.map((obj) => obj.id)
+        const diseaseName = this.selectedDiseases.map((obj) => obj.name)
 
-       
+        this.csvFormData = {
+            'ethnicityName' : ethnicityName.join(","),
+            'countyName' : countyName.join(","),
+            'diseaseName' : diseaseName.join(","),
+            'regionName' : regionName.join(",")
+        }
         let data = {
             "county": county.join(","),
             "region": region.join(","),
@@ -542,11 +551,11 @@ export class ChronicDiseaseComponent implements OnInit {
             "discountRate": this.roiForm.value.discountRate,
             "valueOfQaly": this.roiForm.value.valueOfQALY
         }
-
         this.calculatorService.roiCalcuator(data).subscribe(res => {
             this.loading = false;
-            this.resultsData = res
-            this.createData(this.resultsData['Total'])
+            this.resultsData = res['Total']
+            this.resultsData['Summary'] = res['Summary']
+            this.createData(this.resultsData)
         }, (err) => {
             this.loading = false;
             this.showRoi = false
@@ -593,9 +602,15 @@ export class ChronicDiseaseComponent implements OnInit {
             costObj["casesInitial"] = res[keyName]['casesInitial']
             costObj["casesAfterProgram"] = res[keyName]['casesAfterProgram']
             costObj["casesDiff"] = res[keyName]['casesDiff']
-            costObj["utilityLossInitial"] =`${this.roundOff(res[keyName]['utilityLossInitial'])}`
-            costObj["utilityLossAfterProgram"] = `${this.roundOff(res[keyName]['utilityLossAfterProgram'])}`
-            costObj["utilityLossDiff"] = `${this.roundOff(res[keyName]['utilityLossDiff'])}`
+            costObj["utilityLossInitial"] =`${res[keyName]['utilityLossInitial']}`
+            costObj["utilityLossAfterProgram"] = `${res[keyName]['utilityLossAfterProgram']}`
+            costObj["utilityLossDiff"] = `${res[keyName]['utilityLossDiff']}`
+            
+            costObj["utilityCostInitial"] =`${res[keyName]['utilityCostInitial']}`
+            costObj["utilityCostAfterProgram"] = `${res[keyName]['utilityCostAfterProgram']}`
+            costObj["utilityCostDiff"] = `${res[keyName]['utilityCostDiff']}`
+            
+
             costObj["healthCareCostInitial"] = `$${this.roundOff(res[keyName]['healthCareCostInitial'])}`
             costObj["healthCareCostAfterProgram"] = `$${this.roundOff(res[keyName]['healthCareCostAfterProgram'])}`
             costObj["healthCareCostDiff"] =`$${this.roundOff(res[keyName]['healthCareCostDiff'])}`
@@ -610,39 +625,37 @@ export class ChronicDiseaseComponent implements OnInit {
             roiData[0]['Difference'] = res[keyName]['totalCasesDiff'];
             roiData[0]['title'] = keyName;
 
-            roiData[1]['without_program'] = `$${this.roundOff(res[keyName]['totalCostWithoutQalyWithoutProgram'])}`;
-            roiData[1]['With_Program'] = `$${this.roundOff(res[keyName]['totalCostWithoutQalyWithProgram'])}`;
-            roiData[1]['Difference'] = `$${this.roundOff(res[keyName]['totalCostWithoutQalyDiff'])}`;
+            roiData[1]['without_program'] = `${res[keyName]['totalQaLYWithoutProgram']}`;
+            roiData[1]['With_Program'] = `$${res[keyName]['totalQalyWithProgram']}`;
+            roiData[1]['Difference'] = `$${res[keyName]['totalQalyDiff']}`;
 
-            roiData[2]['without_program'] = `$${this.roundOff(res[keyName]['totalCostWithQalyWithoutProgram'])}`;
-            roiData[2]['With_Program'] = `$${this.roundOff(res[keyName]['totalCostWithQalyWithProgram'])}`;
-            roiData[2]['Difference'] = `$${this.roundOff(res[keyName]['totalCostWithQalyDiff'])}`;
+            roiData[2]['without_program'] = `$${res[keyName]['healthCareCostInitial']}`;
+            roiData[2]['With_Program'] = `$${res[keyName]['healthCareCostAfterProgram']}`;
+            roiData[2]['Difference'] = `$${res[keyName]['healthCareCostDiff']}`;
 
-            roiData[3]['without_program'] =  `${this.roundOff(res[keyName]['totalQaLYWithoutProgram'])}`;
-            roiData[3]['With_Program'] = `${this.roundOff(res[keyName]['totalQalyWithProgram'])}`;
-            roiData[3]['Difference'] = `${this.roundOff(res[keyName]['totalQalyDiff'])}`;
+            roiData[3]['without_program'] =  `$${res[keyName]['utilityCostInitial']}`;
+            roiData[3]['With_Program'] = `$${res[keyName]['utilityCostAfterProgram']}`;
+            roiData[3]['Difference'] = `$${res[keyName]['utilityCostDiff']}`;
 
-            roiData[4]['without_program'] = res[keyName]['investmentWithoutProgram'];
-            roiData[4]['With_Program'] = `$${res[keyName]['investmentWithProgram']}`;
-            roiData[4]['Difference'] = `$${res[keyName]['investmentDiff']}`;
+            roiData[4]['without_program'] = `$${res[keyName]['totalCostWithQalyWithoutProgram']}`;
+            roiData[4]['With_Program'] = `$${res[keyName]['totalCostWithQalyWithProgram']}`;
+            roiData[4]['Difference'] = `$${res[keyName]['totalCostWithQalyDiff']}`;
 
-            roiData[5]['without_program'] = "-";
-            roiData[5]['With_Program'] = `${this.roundOff(res[keyName]['roiwithoutQaly'])}`;
-            roiData[5]['Difference'] = `${this.roundOff(res[keyName]['roiwithoutQaly'])}`;
+            roiData[5]['without_program'] = `$${res[keyName]['investmentWithoutProgram']}`;
+            roiData[5]['With_Program'] = `$${res[keyName]['investmentWithProgram']}`;
+            roiData[5]['Difference'] = `$${res[keyName]['investmentDiff']}`;
 
             roiData[6]['without_program'] = "-";
-            roiData[6]['With_Program'] = `${this.roundOff(res[keyName]['roiwithQaly'])}`;
-            roiData[6]['Difference'] = `${this.roundOff(res[keyName]['roiwithQaly'])}`;
+            roiData[6]['With_Program'] = ``;
+            roiData[6]['Difference'] = `$${this.roundOff(res[keyName]['roiwithoutQaly'])}`;
 
             roiData[7]['without_program'] = "-";
-            roiData[7]['With_Program'] = `${this.roundOff(res[keyName]['roidiscounted'])}`;
-            roiData[7]['Difference'] = `${this.roundOff(res[keyName]['roidiscounted'])}`;
-            console.log(keyName)
+            roiData[7]['With_Program'] = ``;
+            roiData[7]['Difference'] = `$${this.roundOff(res[keyName]['roiwithQaly'])}`;
+            
             this.consolidateROIDATA.push(roiData);
 
         }
-        
-        console.log(this.consolidateROIDATA)
         //this.consolidateROIDATA.reverse()
         this.currentIndex = 0
         //console.log(this.consolidateROIDATA)
@@ -728,10 +741,11 @@ export class ChronicDiseaseComponent implements OnInit {
     }
     
     exportToExcel(): void {
+
         let workbook = new Workbook();
         for (let i = 0; i < this.consolidateROIDATA.length; i++) {
             const worksheet = workbook.addWorksheet(this.consolidateROIDATA[i][0]['title']);
-            worksheet.addRow(['Condition(s)', 'County', 'Cost per case', 'Utility loss per case', 'Rates', 'Population', 'Cases', 'Utility Loss', 'Health Care Costs', 'Total Cost']);
+            worksheet.addRow(['Condition(s)', 'County', 'Cost per case', 'Utility loss per case', 'Rates', 'Population', 'Cases', 'Utility Loss','Utility cost', 'Health Care Costs', 'Total Cost']);
             const getTable1 = this.getCostData(i)
             worksheet.addRow(['Initial',
                 getTable1.county,
@@ -741,6 +755,7 @@ export class ChronicDiseaseComponent implements OnInit {
                 getTable1.populationInitial,
                 getTable1.casesInitial,
                 getTable1.utilityLossInitial,
+                getTable1.utilityCostInitial,
                 getTable1.healthCareCostInitial,
                 getTable1.totalCostInitial,
             ])
@@ -752,6 +767,7 @@ export class ChronicDiseaseComponent implements OnInit {
                 getTable1.populationAfterProgram,
                 getTable1.casesAfterProgram,
                 getTable1.utilityLossAfterProgram,
+                 getTable1.utilityCostAfterProgram,
                 getTable1.healthCareCostAfterProgram,
                 getTable1.totalCostAfterProgram,
             ])
@@ -763,6 +779,7 @@ export class ChronicDiseaseComponent implements OnInit {
                 getTable1.populationDiff,
                 getTable1.casesDiff,
                 getTable1.utilityLossDiff,
+                getTable1.utilityCostDiff,
                 getTable1.healthCareCostDiff,
                 getTable1.totalCostDiff,
             ])
@@ -783,6 +800,38 @@ export class ChronicDiseaseComponent implements OnInit {
             }
 
         }
+        const worksheetSummary = workbook.addWorksheet('ROI Choices');
+        let investment =Number(this.roiForm.value.initialProgramCosts) + Number(this.roiForm.value.ongoingProgramCosts) 
+        let totalInvestment = 0
+        if(Number(this.roiForm.value.expectedTimeframesForROI) < Number(this.roiForm.value.programDuration)){
+            totalInvestment = investment * Number(this.roiForm.value.expectedTimeframesForROI)
+        }else{
+            totalInvestment = investment * Number(this.roiForm.value.programDuration)
+        }
+        worksheetSummary.addRow([])
+        worksheetSummary.addRow([])
+        worksheetSummary.addRow([])
+        worksheetSummary.addRow([])
+        worksheetSummary.addRow(['ETHNICITIES', this.csvFormData.ethnicityName])
+        worksheetSummary.addRow(['COUNTY',this.csvFormData.countyName])
+        worksheetSummary.addRow(['CONDITION', this.csvFormData.diseaseName])
+        worksheetSummary.addRow(['GENDER(S)',this.roiForm.value.ge])
+        worksheetSummary.addRow(['AGE(S)', 'First','Last'])
+        worksheetSummary.addRow(['', this.startAge,this.endAge])
+        worksheetSummary.addRow(['DISCOUNT RATE', this.roiForm.value.discountRate+'%'])
+        worksheetSummary.addRow(['SIZE OF TARGET GROUP PER AGE','Per age group','Total' ])
+        worksheetSummary.addRow(['',this.roiForm.value.sizeOfTargetGroup,this.roiForm.value.sizeOfTargetGroup * this.roiForm.value.programDuration ])
+        worksheetSummary.addRow(['ANTICIPATED EFFECTIVENESS OF PROGRAM',this.roiForm.value.anticipatedEffectivenessOfProgram+'%'])
+        worksheetSummary.addRow(['EXPECTED TIMEFRAME FOR RESULTS',this.roiForm.value.expectedTimeframesForResults+'year'])
+        worksheetSummary.addRow(['EXPECTED TIMEFRAME FOR ROI',this.roiForm.value.expectedTimeframesForROI+'years'])
+        worksheetSummary.addRow(['INITIAL PROGRAM COSTS','$'+this.roiForm.value.initialProgramCosts]) 
+        worksheetSummary.addRow(['ONGOING PROGRAM COSTS','$'+this.roiForm.value.ongoingProgramCosts+'per year']) 
+        worksheetSummary.addRow(['INVESTMENT COST','Per age group', 'Total']) 
+        worksheetSummary.addRow(['','$'+investment,'$'+ totalInvestment ]) 
+        worksheetSummary.addRow(['PROGRAM DURATION',this.roiForm.value.programDuration+'years']) 
+        worksheetSummary.addRow(['VALUE OF QALY','$'+this.roiForm.value.valueOfQALY]) 
+
+
         workbook.xlsx.writeBuffer().then((data) => {
             let blob = new Blob([data], {
               type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',

@@ -561,54 +561,54 @@ export const ethnicityList: any = [
 export const roiResultFormat: any = [
     {   
         "Id":"CASES",
-        "Heading": "Cases in X years",
+        "Heading": "Cases with and without program",
     
-        "Description": "The number of cases of the chronic disease(s) that your target group will have in 'X' years with and without the program",
+        "Description": "Difference between cases without and with the program",
     },
     {
         "Id":"COSTS_WITHOUT_QALYS",
-        "Heading": "Total costs over 10 years (without QALYs)",
+        "Heading": "QALYs with and without program",
     
-        "Description": "Total cost of the chronic disease(s) for your target group with and without the program.",
+        "Description": "QALY savings = Difference between QALY loss without and with the program",
     },
     {
         "Id":"COSTS_QALYS",
-        "Heading": "Total costs over 'X' years (with QALYs)",
+        "Heading": "Healthcare costs",
 
-        "Description": "",
+        "Description": "Healthcare cost savings = Difference between healthcare costs without and with the program",
     },
     {
         "Id":"QALYS",
-        "Heading": "Total QALYs over 'X' years",
+        "Heading": "Utility Costs",
  
-        "Description": "Total QALYs for your target group with and without the program.",
+        "Description": "",
     },
     {
         "Id":"INVESTMENT",
-        "Heading": "Total Investment",
+        "Heading": "Total costs (Healthcare plus QALYs)",
 
-        "Description": "Initial cost of your program + Ongoing cost of your program",
+        "Description": "Total cost savings = Difference between total costs without and with the program",
     },
     {
         "Id":"ROI_WITHOUT_QALYS",
-        "Heading": "Return on investment (without QALYs)",
+        "Heading": "Investment Cost",
         "Without_Program": "-",
   
-        "Description": "(Total Cost without Program - Total Cost with Program)/Investment",
+        "Description": "Investment Cost Initial cost of your program + Ongoing cost of your program",
     },
     {
         "Id":"ROI_QALYS",
-        "Heading": "Return on investment (with QALYs)",
+        "Heading": "Return on investment (Healthcare costs savings only)",
         "Without_Program": "-",
   
-        "Description": "[(Total Cost without Program - Total Cost with Program)+(Total utility loss without program - Total utility loss with program) X Value of QALY]/Investment",
+        "Description": "ROI (Healthcare) = (Healthcare cost savings - Investment)/Investment",
     },
     {
         "Id":"ROI_DISCOUNT",
-        "Heading": "Return on investment (with Discounting)",
+        "Heading": "Return on investment (with total cost savings)",
         "Without_Program": "-",
    
-        "Description": "Return on investment with the QALYs but with all future cost savings and utility savings discounted at the rate of 3%",
+        "Description": "ROI (Total) = (Total cost savings - Investment)/Investment",
     },
 ]
 export const resultData = [
