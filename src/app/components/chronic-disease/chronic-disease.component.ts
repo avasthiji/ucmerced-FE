@@ -626,8 +626,8 @@ export class ChronicDiseaseComponent implements OnInit {
             roiData[0]['title'] = keyName;
 
             roiData[1]['without_program'] = `${res[keyName]['totalQaLYWithoutProgram']}`;
-            roiData[1]['With_Program'] = `$${res[keyName]['totalQalyWithProgram']}`;
-            roiData[1]['Difference'] = `$${res[keyName]['totalQalyDiff']}`;
+            roiData[1]['With_Program'] = `${res[keyName]['totalQalyWithProgram']}`;
+            roiData[1]['Difference'] = `${res[keyName]['totalQalyDiff']}`;
 
             roiData[2]['without_program'] = `$${res[keyName]['healthCareCostInitial']}`;
             roiData[2]['With_Program'] = `$${res[keyName]['healthCareCostAfterProgram']}`;
@@ -647,11 +647,11 @@ export class ChronicDiseaseComponent implements OnInit {
 
             roiData[6]['without_program'] = "-";
             roiData[6]['With_Program'] = ``;
-            roiData[6]['Difference'] = `$${this.roundOff(res[keyName]['roiwithoutQaly'])}`;
+            roiData[6]['Difference'] = `$${res[keyName]['roiwithoutQaly']}`;
 
             roiData[7]['without_program'] = "-";
             roiData[7]['With_Program'] = ``;
-            roiData[7]['Difference'] = `$${this.roundOff(res[keyName]['roiwithQaly'])}`;
+            roiData[7]['Difference'] = `$${res[keyName]['roiwithQaly']}`;
             
             this.consolidateROIDATA.push(roiData);
 
@@ -801,12 +801,12 @@ export class ChronicDiseaseComponent implements OnInit {
 
         }
         const worksheetSummary = workbook.addWorksheet('ROI Choices');
-        let investment =Number(this.roiForm.value.initialProgramCosts) + Number(this.roiForm.value.ongoingProgramCosts) 
+        let investment = Number(this.roiForm.value.initialProgramCosts) + Number(this.roiForm.value.ongoingProgramCosts) 
         let totalInvestment = 0
         if(Number(this.roiForm.value.expectedTimeframesForROI) < Number(this.roiForm.value.programDuration)){
-            totalInvestment = investment * Number(this.roiForm.value.expectedTimeframesForROI)
+            totalInvestment = Number(this.roiForm.value.initialProgramCosts) + (Number(this.roiForm.value.ongoingProgramCosts) * Number(this.roiForm.value.expectedTimeframesForROI))
         }else{
-            totalInvestment = investment * Number(this.roiForm.value.programDuration)
+            totalInvestment = Number(this.roiForm.value.initialProgramCosts) + (Number(this.roiForm.value.ongoingProgramCosts) * Number(this.roiForm.value.programDuration))
         }
         worksheetSummary.addRow([])
         worksheetSummary.addRow([])
@@ -822,13 +822,13 @@ export class ChronicDiseaseComponent implements OnInit {
         worksheetSummary.addRow(['SIZE OF TARGET GROUP PER AGE','Per age group','Total' ])
         worksheetSummary.addRow(['',this.roiForm.value.sizeOfTargetGroup,this.roiForm.value.sizeOfTargetGroup * this.roiForm.value.programDuration ])
         worksheetSummary.addRow(['ANTICIPATED EFFECTIVENESS OF PROGRAM',this.roiForm.value.anticipatedEffectivenessOfProgram+'%'])
-        worksheetSummary.addRow(['EXPECTED TIMEFRAME FOR RESULTS',this.roiForm.value.expectedTimeframesForResults+'year'])
-        worksheetSummary.addRow(['EXPECTED TIMEFRAME FOR ROI',this.roiForm.value.expectedTimeframesForROI+'years'])
+        worksheetSummary.addRow(['EXPECTED TIMEFRAME FOR RESULTS',this.roiForm.value.expectedTimeframesForResults+' year'])
+        worksheetSummary.addRow(['EXPECTED TIMEFRAME FOR ROI',this.roiForm.value.expectedTimeframesForROI+' years'])
         worksheetSummary.addRow(['INITIAL PROGRAM COSTS','$'+this.roiForm.value.initialProgramCosts]) 
-        worksheetSummary.addRow(['ONGOING PROGRAM COSTS','$'+this.roiForm.value.ongoingProgramCosts+'per year']) 
+        worksheetSummary.addRow(['ONGOING PROGRAM COSTS','$'+this.roiForm.value.ongoingProgramCosts+' per year']) 
         worksheetSummary.addRow(['INVESTMENT COST','Per age group', 'Total']) 
         worksheetSummary.addRow(['','$'+investment,'$'+ totalInvestment ]) 
-        worksheetSummary.addRow(['PROGRAM DURATION',this.roiForm.value.programDuration+'years']) 
+        worksheetSummary.addRow(['PROGRAM DURATION',this.roiForm.value.programDuration+' years']) 
         worksheetSummary.addRow(['VALUE OF QALY','$'+this.roiForm.value.valueOfQALY]) 
 
 
